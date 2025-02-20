@@ -1,0 +1,70 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./data.db"
+}
+
+model User {
+  id       Int    @id @default(autoincrement())
+  password String
+}
+
+model Account {
+  id         Int      @id @default(autoincrement())
+  owner      String?
+  email      String?
+  username   String?
+  password   String?
+  provider   String?
+  additional String? //JSON-like
+  createdAt  DateTime @default(now())
+}
+
+model Note {
+  id         Int      @id @default(autoincrement())
+  title      String?
+  content    String?
+  additional String? //JSON-like
+  createdAt  DateTime @default(now())
+}
+
+model Journal {
+  id        Int      @id @default(autoincrement())
+  content   String?
+  createdAt DateTime @default(now())
+}
+
+model Todo {
+  id           Int       @id @default(autoincrement())
+  title        String
+  shouldRepeat Boolean   @default(false)
+  repeatType   String? // days, intervals (i.e. every third day)
+  repeat       String?
+  isPaused     Boolean   @default(false)
+  icon         Int       @default(0) // hard-coded icons
+  date         DateTime  @default(now())
+  todoLog      TodoLog[]
+}
+
+model TodoLog {
+  id        Int      @id @default(autoincrement())
+  details   String?
+  completed Boolean  @default(false)
+  createdAt DateTime @default(now())
+  todo      Todo     @relation(fields: [todoId], references: [id], onDelete: Cascade)
+  todoId    Int
+}
+
+// model Date{
+//   id Int @id @default(autoincrement())
+
+// }
