@@ -15,6 +15,26 @@ export default {
         input_bg: "#4B4F58",
         input_prefix_bg: "#3F424D",
       },
+      keyframes: {
+        popIn: {
+          "0%": { scale: "0%" },
+          "50%": { scale: "110%" },
+          "100%": { scale: "100%" },
+        },
+        wiggle: {
+          "0%, 100%": { transform: "rotate(-10deg)" },
+          "50%": { transform: "rotate(10deg)" },
+        },
+        rotate: {
+          "0%": { transform: "rotate(0deg)" },
+          "100%": { transform: "rotate(360deg)" },
+        },
+      },
+      animation: {
+        popIn: "popIn 0.3s linear ",
+        wiggle: "wiggle 1s ease-in-out infinite",
+        rotate: "rotate 1s ease-in-out forwards",
+      },
     },
   },
   plugins: [],

@@ -1,4 +1,5 @@
 import { serialize } from "cookie";
+import cookieName from "../_constants/cookieName";
 
 export function successLoginResponse(tokenObject) {
   return new Response(
@@ -7,7 +8,7 @@ export function successLoginResponse(tokenObject) {
     }),
     {
       headers: {
-        "Set-Cookie": serialize("authToken", tokenObject.token, {
+        "Set-Cookie": serialize(cookieName, tokenObject.token, {
           secure: true,
           domain: "localhost",
           path: "/",
@@ -25,7 +26,7 @@ export function successLogoutResponse() {
     }),
     {
       headers: {
-        "Set-Cookie": serialize("authToken", "", {
+        "Set-Cookie": serialize(cookieName, "", {
           secure: true,
           domain: "localhost",
           path: "/",
