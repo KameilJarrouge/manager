@@ -4,6 +4,9 @@ import "./_customCSS/Calendar.css";
 import "react-tooltip/dist/react-tooltip.css";
 import ToolTipInitializer from "./_components/ToolTipInitializer";
 import { ToastContainer } from "react-toastify";
+import UserSection from "./_sections/UserSection";
+import SearchSection from "./_sections/SearchSection";
+import NavigationSection from "./_sections/NavigationSection";
 
 export const metadata = {
   title: "Manager",
@@ -23,8 +26,16 @@ export default async function RootLayout({ children }) {
           toastClassName={"bg-input_prefix_bg"}
           progressClassName={"bg-accent"}
         />
-
-        {children}
+        <div className="w-full h-full flex flex-col ">
+          <div className="w-full flex flex-col h-[20%]  items-center justify-center">
+            <UserSection />
+            <SearchSection />
+          </div>
+          <div className="w-full flex h-[80%] ">
+            <NavigationSection />
+            <div className="w-full h-full p-2">{children}</div>
+          </div>
+        </div>
       </body>
     </html>
   );

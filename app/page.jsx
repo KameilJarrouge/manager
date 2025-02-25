@@ -1,10 +1,9 @@
 "use client";
 
-import UserSection from "./_components/UserSection";
 export default function Home() {
   return (
-    <div className="w-full h-screen  flex relative">
-      <UserSection />
+    <div className="w-full h-full  flex flex-col relative">
+      <div className="h-full w-full">asdasd</div>
     </div>
   );
 }

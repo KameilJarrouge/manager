@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import api from "../_lib/api";
 import { toast } from "react-toastify";
 import { MdLogout, MdPassword } from "react-icons/md";
-import UpdatePasswordModal from "./Modals/UpdatePasswordModal";
+import UpdatePasswordModal from "../_components/Modals/UpdatePasswordModal";
 
 function UserSection() {
   const router = useRouter();
@@ -18,7 +18,7 @@ function UserSection() {
     }
   };
   return (
-    <div className="absolute top-4 right-4 flex gap-2 z-10 ">
+    <div className="w-full flex gap-2 justify-end items-center p-4 ">
       <UpdatePasswordModal
         isOpen={updateModalIsOpen}
         close={() => setUpdateModalIsOpen(false)}
