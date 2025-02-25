@@ -42,7 +42,7 @@ export default function Auth() {
       return;
     }
     setPassword("");
-    toast(`Successfully ${isLogin ? "Logged In" : "Signed Up"}`);
+    toast(`${isLogin ? "Logged In" : "Registered New User"}`);
     // useStore.setState({
     //   isLoggedIn: true,
     // });

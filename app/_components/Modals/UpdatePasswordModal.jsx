@@ -29,7 +29,7 @@ function UpdatePasswordModal({ isOpen, close }) {
     }
     setOldPassword("");
     setNewPassword("");
-    toast(`Successfully Updated Password`);
+    toast(`Updated Password`);
     close();
   };
 
