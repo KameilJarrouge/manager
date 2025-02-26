@@ -12,6 +12,9 @@ function SearchField({ state, setState, ...props }) {
         onChange={(e) => {
           setState(e.target.value);
         }}
+        onFocus={(e) => {
+          e.target.select(0, e.target.value.length);
+        }}
         {...props}
       />
     </div>
