@@ -19,10 +19,12 @@ function NavigationSection() {
         data-tooltip-id="my-tooltip"
         data-tooltip-content="Home"
         data-tooltip-place="top-start"
-        href={"#"}
+        href={"/"}
         className={`${
-          pathname === "/" && "bg-secondary border-l-4 border-l-accent"
-        } rounded-r-full w-full py-2 px-4 hover:bg-secondary transition-colors`}
+          pathname === "/"
+            ? "bg-secondary border-l-accent"
+            : " hover:border-secondary "
+        } rounded-r-full w-full py-2 px-4 hover:bg-secondary transition-colors border-l-4 border-transparent `}
       >
         <MdOutlineHome className="w-[1.8rem] h-fit " />
       </Link>
@@ -32,8 +34,10 @@ function NavigationSection() {
         data-tooltip-place="top-start"
         href={"#"}
         className={`${
-          pathname === "#" && "bg-secondary"
-        } rounded-r-full w-full py-2 px-4 hover:bg-secondary transition-colors`}
+          pathname === "#"
+            ? "bg-secondary border-l-accent"
+            : " hover:border-secondary "
+        } rounded-r-full w-full py-2 px-4 hover:bg-secondary transition-colors border-l-4 border-transparent `}
       >
         <MdOutlineCheckCircle className="w-[1.8rem] h-fit " />
       </Link>
@@ -43,8 +47,10 @@ function NavigationSection() {
         data-tooltip-place="top-start"
         href={"#"}
         className={`${
-          pathname === "#" && "bg-secondary"
-        } rounded-r-full w-full py-2 px-4 hover:bg-secondary transition-colors`}
+          pathname === "#"
+            ? "bg-secondary border-l-accent"
+            : " hover:border-secondary "
+        } rounded-r-full w-full py-2 px-4 hover:bg-secondary transition-colors border-l-4 border-transparent `}
       >
         <MdOutlineAccountBox className="w-[1.8rem] h-fit " />
       </Link>
@@ -54,8 +60,10 @@ function NavigationSection() {
         data-tooltip-place="top-start"
         href={"#"}
         className={`${
-          pathname === "#" && "bg-secondary"
-        } rounded-r-full w-full py-2 px-4 hover:bg-secondary transition-colors`}
+          pathname === "#"
+            ? "bg-secondary border-l-accent"
+            : " hover:border-secondary "
+        } rounded-r-full w-full py-2 px-4 hover:bg-secondary transition-colors border-l-4 border-transparent `}
       >
         <MdOutlineNote className="w-[1.8rem] h-fit " />
       </Link>
@@ -65,8 +73,10 @@ function NavigationSection() {
         data-tooltip-place="top-start"
         href={"#"}
         className={`${
-          pathname === "#" && "bg-secondary"
-        } rounded-r-full w-full py-2 px-4 hover:bg-secondary transition-colors`}
+          pathname === "#"
+            ? "bg-secondary border-l-accent"
+            : " hover:border-secondary "
+        } rounded-r-full w-full py-2 px-4 hover:bg-secondary transition-colors border-l-4 border-transparent `}
       >
         <MdOutlineBook className="w-[1.8rem] h-fit " />
       </Link>
@@ -76,8 +86,10 @@ function NavigationSection() {
         data-tooltip-place="top-start"
         href={"#"}
         className={`${
-          pathname === "#" && "bg-secondary"
-        } rounded-r-full w-full py-2 px-4 hover:bg-secondary transition-colors`}
+          pathname === "#"
+            ? "bg-secondary border-l-accent"
+            : " hover:border-secondary "
+        } rounded-r-full w-full py-2 px-4 hover:bg-secondary transition-colors border-l-4 border-transparent `}
       >
         <MdOutlineDateRange className="w-[1.8rem] h-fit " />
       </Link>

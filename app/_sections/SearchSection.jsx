@@ -1,10 +1,10 @@
 import React from "react";
-import TextField from "../_components/Input/TextField";
+import SearchField from "../_components/Input/SearchField";
 
 function SearchSection() {
   return (
     <div className="py-2">
-      <TextField placeholder={"Search"} />
+      <SearchField />
     </div>
   );
 }
