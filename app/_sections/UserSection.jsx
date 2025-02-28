@@ -27,7 +27,7 @@ function UserSection() {
         data-tooltip-id="my-tooltip"
         data-tooltip-content="Change Password"
         data-tooltip-place="bottom"
-        className="w-fit h-fit rounded-full border-2 p-1 border-foreground group hover:bg-foreground transition-colors"
+        className="w-fit h-fit rounded-full p-1 group hover:bg-foreground transition-colors"
         onClick={() => setUpdateModalIsOpen(true)}
       >
         <MdPassword className="w-[1.5rem] h-fit text-foreground group-hover:text-secondary transition-colors" />
@@ -36,7 +36,7 @@ function UserSection() {
         data-tooltip-id="my-tooltip"
         data-tooltip-content="Logout"
         data-tooltip-place="bottom-start"
-        className="w-fit h-fit rounded-full border-2 p-1 border-foreground group hover:bg-foreground transition-colors"
+        className="w-fit h-fit rounded-full p-1 group hover:bg-foreground transition-colors"
         onClick={handleLogout}
       >
         <MdLogout className="w-[1.5rem] h-fit text-foreground group-hover:text-secondary transition-colors" />

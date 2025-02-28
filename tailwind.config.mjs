@@ -21,6 +21,14 @@ export default {
           "50%": { scale: "110%" },
           "100%": { scale: "100%" },
         },
+        expand: {
+          "0%": { transform: "scaleX(0%)" },
+          "100%": { transform: "scaleX(100%)" },
+        },
+        collapse: {
+          "0%": { transform: "scaleX(100%)" },
+          "100%": { transform: "scaleX(0%)" },
+        },
         wiggle: {
           "0%, 100%": { transform: "rotate(-10deg)" },
           "50%": { transform: "rotate(10deg)" },
@@ -32,6 +40,8 @@ export default {
       },
       animation: {
         popIn: "popIn 0.3s linear ",
+        expand: "expand 0.2s ease-in-out ",
+        collapse: "collapse 0.2s ease-in-out ",
         wiggle: "wiggle 1s ease-in-out infinite",
         rotate: "rotate 1s ease-in-out forwards",
       },

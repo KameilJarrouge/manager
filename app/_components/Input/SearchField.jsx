@@ -12,6 +12,7 @@ function SearchField({ state, setState, ...props }) {
         onChange={(e) => {
           setState(e.target.value);
         }}
+        autoComplete="off"
         onFocus={(e) => {
           e.target.select(0, e.target.value.length);
         }}

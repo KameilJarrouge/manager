@@ -30,13 +30,13 @@ export default async function RootLayout({ children }) {
           progressClassName={"bg-accent"}
         />
         <div className="w-full h-full flex flex-col ">
-          <div className="w-full flex flex-col h-[20%]  items-center justify-center">
+          <div className="w-full flex flex-col h-fit  items-center justify-start">
             <UserSection />
             <SearchSection />
           </div>
-          <div className="w-full flex h-[80%] ">
+          <div className="w-full flex h-full pt-4 2xl:pt-8 ">
             <NavigationSection />
-            <div className="w-full h-full p-2">{children}</div>
+            <div className="w-full h-full pl-2 pt-2">{children}</div>
           </div>
         </div>
       </body>
