@@ -84,7 +84,7 @@ function SearchSection() {
           SearchResultsOpen ? "absolute" : "hidden"
         } ${
           isCollapsing ? "animate-collapse" : "animate-expand"
-        } bg-secondary h-[30rem] 2xl:h-[40rem] w-[80%] origin-center rounded py-2 px-4 text-justify`}
+        } bg-secondary h-[30rem] 2xl:h-[40rem] w-[80%] origin-center rounded py-2 px-4 text-justify  shadow shadow-black`}
       ></div>
     </div>
   );
