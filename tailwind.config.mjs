@@ -29,10 +29,6 @@ export default {
           "0%": { transform: "scaleX(100%)" },
           "100%": { transform: "scaleX(0%)" },
         },
-        slideIn: {
-          "0%": { width: "0%" },
-          "100%": { width: "100%" },
-        },
         wiggle: {
           "0%, 100%": { transform: "rotate(-10deg)" },
           "50%": { transform: "rotate(10deg)" },
@@ -41,11 +37,15 @@ export default {
           "0%": { transform: "rotate(0deg)" },
           "100%": { transform: "rotate(360deg)" },
         },
+        fadeInOut: {
+          "0%, 100%": { opacity: 1 },
+          "50%": { opacity: 0.2 },
+        },
       },
       animation: {
         popIn: "popIn 0.3s linear ",
+        fadeInOut: "fadeInOut 0.8s infinite ",
         expand: "expand 0.2s ease-in-out ",
-        slideIn: "slideIn 0.2s ease-in-out ",
         collapse: "collapse 0.2s ease-in-out ",
         wiggle: "wiggle 1s ease-in-out infinite",
         rotate: "rotate 1s ease-in-out forwards",
