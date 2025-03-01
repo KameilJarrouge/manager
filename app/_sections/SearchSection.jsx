@@ -34,7 +34,7 @@ function SearchSection() {
     const menu = document.getElementById("search-result-menu");
     const searchInput = document.getElementById("search-input");
     if (!menu.contains(e.target) && !searchInput.contains(e.target)) {
-      closeMenu(false);
+      closeMenu();
     }
   };
   useEffect(() => {
@@ -53,6 +53,7 @@ function SearchSection() {
     <div
       tabIndex={"-1"}
       onKeyDown={(e) => {
+        if (e.key === "Tab") return;
         if (e.key === "Escape") {
           closeMenu();
         } else {
@@ -69,6 +70,7 @@ function SearchSection() {
           }
         }}
         onKeyDown={(e) => {
+          if (e.key === "Tab") return;
           if (e.key === "Escape") {
             closeMenu();
           } else {

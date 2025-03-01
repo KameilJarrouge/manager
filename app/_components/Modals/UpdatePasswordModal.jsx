@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import { errorMessages } from "../../_constants/constants.js";
 import TextField from "../Input/TextField.jsx";
 import SubmitButton from "../Input/SubmitButton.jsx";
+import LoadingComponent from "../LoadingComponent.jsx";
 function UpdatePasswordModal({ isOpen, close }) {
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
@@ -44,9 +45,10 @@ function UpdatePasswordModal({ isOpen, close }) {
       }}
       title={"Update Password"}
       onEnter={handleSubmitAndClose}
-      className={"gap-4"}
+      className={"gap-4 relative"}
     >
-      <div className="flex flex-col gap-2 items-center">
+      {isLoading && <LoadingComponent />}
+      <div className="flex flex-col gap-2 items-center ">
         <TextField
           state={oldPassword}
           placeholder={"Old Password"}

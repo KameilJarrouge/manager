@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import TextField from "@/app/_components/Input/TextField";
 import { errorMessages } from "@/app/_constants/constants";
 import SubmitButton from "@/app/_components/Input/SubmitButton";
+import LoadingComponent from "@/app/_components/LoadingComponent";
 
 export default function Auth() {
   const [isLogin, setIsLogin] = useState(false);
@@ -16,10 +17,12 @@ export default function Auth() {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleLoginOrSignUp = async () => {
+    setIsLoading(true);
     let result = await api.get("/auth/user-exists");
     if (result.data.success) {
       setIsLogin(result.data.result);
     }
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -53,8 +56,9 @@ export default function Auth() {
   return (
     <div
       onKeyDown={handleSubmitAndClose}
-      className="flex flex-col items-center gap-4 p-2 bg-primary"
+      className="flex flex-col items-center gap-4 p-2 bg-primary relative"
     >
+      {isLoading && <LoadingComponent />}
       <span className="mx-[2rem] font-semibold text-lg">
         {isLogin ? "Login" : "New User"}
       </span>
