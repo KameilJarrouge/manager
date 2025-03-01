@@ -33,13 +33,10 @@ function SideMenu({ openState, setOpenState = (f) => f, id, children }) {
       {/* Bar */}
       <div
         onClick={() => {
-          if (openState) {
-            setOpenState(false);
-          } else {
-            setOpenState(true);
-          }
+          setOpenState(false);
         }}
         className="flex items-center w-fit h-full group"
+        onMouseEnter={() => setOpenState(true)}
       >
         <div className=" flex justify-center items-center bg-transparent  group-hover:text-secondary  group-hover:bg-foreground/90 rounded-lg transition-colors translate-x-[2rem]">
           <MdChevronLeft
@@ -48,7 +45,7 @@ function SideMenu({ openState, setOpenState = (f) => f, id, children }) {
             } transition-transform`}
           />
         </div>
-        <div className="w-[2rem] h-full bg-secondary bg-[radial-gradient(#eeeeee22_1px,transparent_1px)] bg-[size:5px_5px] rounded-l"></div>
+        <div className="w-[2rem] h-full bg-secondary bg-[radial-gradient(#eeeeee22_1px,transparent_1px)] bg-[size:5px_5px] rounded-l" />
       </div>
       {/* Content */}
       <div
@@ -56,6 +53,7 @@ function SideMenu({ openState, setOpenState = (f) => f, id, children }) {
       >
         {children}
       </div>
+      <div className="w-[1rem] h-full bg-secondary bg-[radial-gradient(#eeeeee22_1px,transparent_1px)] bg-[size:5px_5px] rounded-l" />
     </div>
   );
 }

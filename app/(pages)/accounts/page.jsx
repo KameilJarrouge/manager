@@ -13,7 +13,15 @@ function Accounts() {
         openState={isSideMenuOpen}
         setOpenState={setIsSideMenuOpen}
         id={"accounts"}
-      ></SideMenu>
+      >
+        <p className="text-justify w-[60ch]">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime
+          facilis eligendi quisquam cumque explicabo doloremque odit quidem vero
+          natus cum dolorem vitae non iste distinctio ducimus quaerat a tenetur,
+          nam obcaecati! Magni vel veritatis maiores porro quisquam et quibusdam
+          ipsum.
+        </p>
+      </SideMenu>
     </div>
   );
 }
