@@ -6,15 +6,18 @@ import React, { useState } from "react";
 
 function TextField({ state, setState, placeholder, hidden, ...props }) {
   const [isHidden, setIsHidden] = useState(hidden);
-
+  const [showTitle, setShowTitle] = useState(false);
   return (
     <div className="flex w-fit group relative ">
-      <div
-        data-tooltip-id="my-tooltip"
-        data-tooltip-content={placeholder}
-        data-tooltip-place="left"
-        className="w-fit flex items-center  bg-input_prefix_bg group-focus-within:bg-accent transition-colors rounded-l"
-      >
+      {showTitle && (
+        <div
+          onMouseLeave={() => setShowTitle(false)}
+          className="absolute top-0 right-0 bg-input_prefix_bg py-1 px-2 text-foreground/70"
+        >
+          {placeholder}
+        </div>
+      )}
+      <div className="w-fit flex items-center  bg-input_prefix_bg group-focus-within:bg-accent transition-colors rounded-l">
         <MdChevronRight className="text-foreground" />
       </div>
       <input
@@ -28,6 +31,9 @@ function TextField({ state, setState, placeholder, hidden, ...props }) {
         {...props}
       />
       <div
+        onMouseEnter={() => {
+          if (!hidden) setShowTitle(true);
+        }}
         className={` bg-input_bg flex items-center bg-[radial-gradient(#eeeeee33_1px,transparent_1px)] bg-[size:5px_5px]`}
       >
         <button
