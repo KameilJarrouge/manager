@@ -27,25 +27,24 @@ function SideMenu({ openState, setOpenState = (f) => f, id, children }) {
     <div
       id={"side-menu" + id}
       className={`absolute  ${
-        !openState ? "translate-x-[calc(100%-4rem)]" : ""
+        !openState ? "translate-x-[calc(100%-2rem)]" : ""
       } w-fit h-full top-0 right-0 flex items-center   z-10 transition-all duration-200`}
     >
       {/* Bar */}
       <div
+        onMouseEnter={() => setOpenState(true)}
         onClick={() => {
           setOpenState(false);
         }}
-        className="flex items-center w-fit h-full group"
-        onMouseEnter={() => setOpenState(true)}
+        className="w-[2rem] h-full bg-secondary bg-[radial-gradient(#eeeeee22_1px,transparent_1px)] bg-[size:5px_5px] rounded-l flex items-center group"
       >
-        <div className=" flex justify-center items-center bg-transparent  group-hover:text-secondary  group-hover:bg-foreground/90 rounded-lg transition-colors translate-x-[2rem]">
+        <div className=" flex justify-center items-center bg-transparent  group-hover:text-secondary  group-hover:bg-foreground/90 rounded-lg transition-colors">
           <MdChevronLeft
             className={`w-[2rem] h-fit ${
               openState && "rotate-180"
             } transition-transform`}
           />
         </div>
-        <div className="w-[2rem] h-full bg-secondary bg-[radial-gradient(#eeeeee22_1px,transparent_1px)] bg-[size:5px_5px] rounded-l" />
       </div>
       {/* Content */}
       <div

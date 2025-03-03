@@ -27,14 +27,18 @@ function TextField({ state, setState, placeholder, hidden, ...props }) {
         }}
         {...props}
       />
-      {hidden && (
+      <div
+        className={` bg-input_bg flex items-center bg-[radial-gradient(#eeeeee33_1px,transparent_1px)] bg-[size:5px_5px]`}
+      >
         <button
           onClick={() => setIsHidden((isHidden) => !isHidden)}
-          className="bg-input_bg flex items-center px-1 hover:text-white "
+          className={`${
+            !hidden ? "invisible" : "visible"
+          }  flex items-center px-1 hover:text-white `}
         >
           {isHidden ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
         </button>
-      )}
+      </div>
     </div>
   );
 }
