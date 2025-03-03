@@ -11,8 +11,9 @@ import { updateAccount } from "../../../../../_controllers/accountsController";
  */
 export async function PUT(request, { params }) {
   let body = await request.json();
+  const paramsSync = await params;
   let result = await updateAccount({
-    id: Number(await params.id),
+    id: Number(await paramsSync.id),
     ...body,
   });
   if (!result.success) {
