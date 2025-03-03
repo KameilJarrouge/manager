@@ -70,7 +70,7 @@ function Accounts() {
               />
             </button>
           </div>
-          <div className="w-[1px] h-full bg-slate-500" />
+          <div className="w-[1px] h-full bg-input_bg" />
           {/* New Button */}
           <button
             onClick={() => {
