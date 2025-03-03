@@ -32,9 +32,9 @@ function SideMenu({ openState, setOpenState = (f) => f, id, children }) {
     >
       {/* Bar */}
       <div
-        onMouseEnter={() => setOpenState(true)}
+        // onMouseEnter={() => setOpenState(true)}
         onClick={() => {
-          setOpenState(false);
+          setOpenState(!openState);
         }}
         className="w-[2rem] h-full bg-secondary bg-[radial-gradient(#eeeeee22_1px,transparent_1px)] bg-[size:5px_5px] rounded-l flex items-center group"
       >

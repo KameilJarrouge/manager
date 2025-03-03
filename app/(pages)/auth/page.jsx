@@ -49,7 +49,6 @@ export default function Auth() {
     // useStore.setState({
     //   isLoggedIn: true,
     // });
-    console.log("Submit");
 
     router.push("/");
   };

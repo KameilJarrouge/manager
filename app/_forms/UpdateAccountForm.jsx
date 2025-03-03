@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TextField from "../_components/Input/TextField";
 import api from "../_lib/api";
 import { toast } from "react-toastify";
@@ -7,6 +7,7 @@ import KeyValueInput from "../_components/Input/KeyValueInput";
 import SubmitButton from "../_components/Input/SubmitButton";
 import { GoPlus } from "react-icons/go";
 import LoadingComponent from "../_components/LoadingComponent";
+import { MdRestore } from "react-icons/md";
 
 function UpdateAccountForm({ account, afterSubmit = (f) => f }) {
   const [owner, setOwner] = useState(account.owner);
@@ -16,7 +17,7 @@ function UpdateAccountForm({ account, afterSubmit = (f) => f }) {
   const [provider, setProvider] = useState(account.provider);
   const [createdAt, setCreatedAt] = useState(account.createdAt);
   const [additionalInfo, setAdditionalInfo] = useState(
-    JSON.parse(account.additionalInfo)
+    JSON.parse(account.additional)
   );
   const [isLoading, setIsLoading] = useState(false);
 
@@ -37,7 +38,7 @@ function UpdateAccountForm({ account, afterSubmit = (f) => f }) {
     setPassword(account.password);
     setProvider(account.provider);
     setCreatedAt(account.createdAt);
-    setAdditionalInfo(JSON.parse(account.additionalInfo));
+    setAdditionalInfo(JSON.parse(account.additional));
   };
 
   const handleUpdateAccount = async () => {
@@ -78,6 +79,11 @@ function UpdateAccountForm({ account, afterSubmit = (f) => f }) {
     );
     setAdditionalInfo(updatedFields);
   };
+
+  useEffect(() => {
+    restore();
+  }, [account]);
+
   return (
     <div className="flex flex-col items-center w-full h-full py-2 px-2 relative">
       {isLoading && <LoadingComponent />}
@@ -105,6 +111,14 @@ function UpdateAccountForm({ account, afterSubmit = (f) => f }) {
             placeholder={"Provider"}
           />
           <DateField state={createdAt} setState={setCreatedAt} />
+          <div className="w-full flex justify-center">
+            <button
+              onClick={restore}
+              className="p-1 hover:bg-accent rounded transition-colors"
+            >
+              <MdRestore className="w-[1.5rem] h-fit" />
+            </button>
+          </div>
         </div>
         <div className="h-full w-[1px] bg-input_bg"></div>
 
@@ -138,7 +152,9 @@ function UpdateAccountForm({ account, afterSubmit = (f) => f }) {
           </button>
         </div>
       </div>
-      <SubmitButton title="Update" onSubmit={handleUpdateAccount} />
+      <div className="w-full flex gap-4 justify-center ">
+        <SubmitButton title="Update" onSubmit={handleUpdateAccount} />
+      </div>
     </div>
   );
 }

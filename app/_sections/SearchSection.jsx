@@ -52,14 +52,14 @@ function SearchSection() {
   return (
     <div
       tabIndex={"-1"}
-      onKeyDown={(e) => {
-        if (e.key === "Tab") return;
-        if (e.key === "Escape") {
-          closeMenu();
-        } else {
-          openMenu();
-        }
-      }}
+      // onKeyDown={(e) => {
+      //   if (e.key === "Tab" || e.key === "CTRL" || e.key === "Alt") return;
+      //   if (e.key === "Escape") {
+      //     closeMenu();
+      //   } else {
+      //     openMenu();
+      //   }
+      // }}
       className="py-2 w-full flex justify-center relative outline-none"
     >
       <SearchField
@@ -70,7 +70,13 @@ function SearchSection() {
           }
         }}
         onKeyDown={(e) => {
-          if (e.key === "Tab") return;
+          if (
+            e.key === "Tab" ||
+            e.key === "Control" ||
+            e.key === "Alt" ||
+            e.key === "Shift"
+          )
+            return;
           if (e.key === "Escape") {
             closeMenu();
           } else {

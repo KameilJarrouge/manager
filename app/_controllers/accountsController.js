@@ -83,13 +83,13 @@ export async function searchAccounts(searchKey) {
         { additional: { contains: searchKey } },
       ],
     },
-    select: {
-      id: true,
-      email: true,
-      provider: true,
-      username: true,
-      owner: true,
-    },
+    // select: {
+    //   id: true,
+    //   email: true,
+    //   provider: true,
+    //   username: true,
+    //   owner: true,
+    // },
   });
   return successReturn(result);
 }

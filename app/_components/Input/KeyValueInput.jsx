@@ -29,18 +29,14 @@ function KeyValueInput({ setRow, removeKeyValue, row }) {
         <button onClick={() => setRow({ ...row, hidden: !row.hidden })}>
           <IoMdEyeOff
             className={`cursor-pointer ${
-              row.hidden
-                ? "text-blue-400"
-                : " text-dark_text hover:text-light_text"
+              row.hidden ? "text-accent" : " text-foreground"
             }`}
           />
         </button>
         <button onClick={() => setRow({ ...row, canCopy: !row.canCopy })}>
           <LuClipboardCheck
             className={`cursor-pointer ${
-              row.canCopy
-                ? "text-green-400"
-                : "text-dark_text hover:text-light_text"
+              row.canCopy ? "text-accent" : "text-foreground"
             }`}
           />
         </button>

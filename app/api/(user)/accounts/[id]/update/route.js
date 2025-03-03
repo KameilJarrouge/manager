@@ -12,7 +12,7 @@ import { updateAccount } from "../../../../../_controllers/accountsController";
 export async function PUT(request, { params }) {
   let body = await request.json();
   let result = await updateAccount({
-    id: Number(params.id),
+    id: Number(await params.id),
     ...body,
   });
   if (!result.success) {
