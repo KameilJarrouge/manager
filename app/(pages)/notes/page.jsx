@@ -1,43 +1,45 @@
 "use client";
-import SubmitButton from "@/app/_components/Input/SubmitButton";
 import TextField from "@/app/_components/Input/TextField";
 import LoadingComponent from "@/app/_components/LoadingComponent";
 import SideMenu from "@/app/_components/SideMenu";
-import AccountsList from "@/app/_displayLists/AccountsList";
+import NotesList from "@/app/_displayLists/NotesList";
 import CreateAccountForm from "@/app/_forms/CreateAccountForm";
+import CreateNoteForm from "@/app/_forms/CreateNoteForm";
 import UpdateAccountForm from "@/app/_forms/UpdateAccountForm";
+import UpdateNoteForm from "@/app/_forms/UpdateNoteForm";
 import api from "@/app/_lib/api";
 import React, { useEffect, useState } from "react";
 import { GoPlus } from "react-icons/go";
 import { MdSearch } from "react-icons/md";
 
-function Accounts() {
+function Notes() {
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
-  const [selectedAccount, setSelectedAccount] = useState(undefined);
+  const [selectedNote, setSelectedNote] = useState(undefined);
   const [searchKey, setSearchKey] = useState("");
-  const [accounts, setAccounts] = useState([]);
+  const [notes, setNotes] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const getAccounts = async () => {
-    setSelectedAccount(undefined);
+  const getNotes = async () => {
+    setSelectedNote(undefined);
+
     setIsLoading(true);
-    let result = await api.get("/accounts");
+    let result = await api.get("/notes");
     if (result.data.success) {
-      setAccounts(result.data.result);
+      setNotes(result.data.result);
     }
     setIsLoading(false);
   };
 
-  const searchAccounts = async () => {
-    setSelectedAccount(undefined);
+  const searchNotes = async () => {
+    setSelectedNote(undefined);
     if (!searchKey) return;
     setIsLoading(true);
-    let result = await api.get(`/accounts/search?searchKey=${searchKey}`);
+    let result = await api.get(`/notes/search?searchKey=${searchKey}`);
     setIsLoading(false);
-    if (result.data.success) setAccounts(result.data.result);
+    if (result.data.success) setNotes(result.data.result);
   };
 
   useEffect(() => {
-    getAccounts();
+    getNotes();
   }, []);
 
   return (
@@ -54,7 +56,7 @@ function Accounts() {
               setState={setSearchKey}
             />
             <button
-              onClick={searchAccounts}
+              onClick={searchNotes}
               className="p-1 hover:bg-green-600 rounded transition-colors"
             >
               <MdSearch className="w-[1.5rem] h-fit" />
@@ -62,7 +64,7 @@ function Accounts() {
             <button
               onClick={() => {
                 setSearchKey("");
-                getAccounts();
+                getNotes();
               }}
               className="p-1 hover:bg-red-600  rounded transition-colors"
             >
@@ -76,7 +78,7 @@ function Accounts() {
           {/* New Button */}
           <button
             onClick={() => {
-              setSelectedAccount(undefined);
+              setSelectedNote(undefined);
               setIsSideMenuOpen(true);
             }}
             className="p-1 hover:bg-accent rounded transition-colors"
@@ -88,11 +90,11 @@ function Accounts() {
         {/* Content */}
         <div className=" w-full h-full relative">
           {isLoading && <LoadingComponent />}
-          <AccountsList
-            accounts={accounts}
-            selectedAccount={selectedAccount}
-            onAccountSelect={(selectedAccount, openMenu) => {
-              setSelectedAccount(selectedAccount);
+          <NotesList
+            notes={[...notes, ...notes, ...notes, ...notes]}
+            selectedNote={selectedNote}
+            onNoteSelect={(selectedNote, openMenu) => {
+              setSelectedNote(selectedNote);
               if (openMenu) setIsSideMenuOpen(true);
             }}
           />
@@ -101,18 +103,23 @@ function Accounts() {
       <SideMenu
         openState={isSideMenuOpen}
         setOpenState={setIsSideMenuOpen}
-        id={"accounts"}
+        id={"notes"}
       >
-        {!selectedAccount ? (
-          <CreateAccountForm afterSubmit={() => setIsSideMenuOpen(false)} />
-        ) : (
-          <UpdateAccountForm
+        {!selectedNote ? (
+          <CreateNoteForm
             afterSubmit={() => {
-              setSelectedAccount(undefined);
               setIsSideMenuOpen(false);
-              getAccounts();
+              getNotes();
             }}
-            account={selectedAccount}
+          />
+        ) : (
+          <UpdateNoteForm
+            afterSubmit={() => {
+              setSelectedNote(undefined);
+              setIsSideMenuOpen(false);
+              getNotes();
+            }}
+            note={selectedNote}
           />
         )}
       </SideMenu>
@@ -120,4 +127,4 @@ function Accounts() {
   );
 }
 
-export default Accounts;
+export default Notes;

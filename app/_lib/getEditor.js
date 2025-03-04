@@ -2,26 +2,30 @@ import { useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import moment from "moment";
 
-export default function getEditor() {
+export default function getEditor(withTimeStamp = true, editable = true) {
   return useEditor({
     extensions: [
       StarterKit.configure({
         paragraph: {
           HTMLAttributes: {
             class:
-              "text-justify bg-[repeating-linear-gradient(to_bottom,_transparent,_transparent_27px,_#B2B2B278_28px)] bg-local leading-7",
+              "text-justify bg-[repeating-linear-gradient(to_bottom,_transparent,_transparent_27px,_#B2B2B278_28px)] leading-7",
           },
         },
       }),
     ],
-    editable: true,
+    editable: editable,
     editorProps: {
       attributes: {
         class:
-          "rounded-md px-4 py-5 outline-none h-[calc(100vh-9.25rem)] overflow-y-auto",
+          "rounded-md  outline-none h-fit  w-full overflow-y-auto text-justified",
       },
     },
-
-    content: `<< ${moment(new Date()).format("hh:mm a")} >> <p></p>`,
+    //
+    content: `${
+      withTimeStamp
+        ? `<< ${moment(new Date()).format("hh:mm a")} >> <p></p>`
+        : ""
+    }`,
   });
 }

@@ -61,9 +61,9 @@ function NavigationSection() {
         data-tooltip-id="my-tooltip"
         data-tooltip-content="Notes"
         data-tooltip-place="top-start"
-        href={"#"}
+        href={"/notes"}
         className={`${
-          pathname === "#"
+          pathname === "/notes"
             ? "bg-secondary border-l-accent"
             : " hover:border-secondary "
         } rounded-r-full w-full py-2 px-4 hover:bg-secondary transition-colors border-l-4 border-transparent `}
