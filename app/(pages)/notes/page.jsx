@@ -91,7 +91,7 @@ function Notes() {
         <div className=" w-full h-full relative">
           {isLoading && <LoadingComponent />}
           <NotesList
-            notes={[...notes, ...notes, ...notes, ...notes]}
+            notes={notes}
             selectedNote={selectedNote}
             onNoteSelect={(selectedNote, openMenu) => {
               setSelectedNote(selectedNote);

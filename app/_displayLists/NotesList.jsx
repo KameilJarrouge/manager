@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { MdChevronRight, MdInfoOutline } from "react-icons/md";
+import { MdChevronRight } from "react-icons/md";
 import getEditor from "../_lib/getEditor";
 import TipTap from "../_components/Input/TipTap";
 
@@ -28,20 +28,17 @@ function NotesList({ notes, onNoteSelect = (f) => f, selectedNote }) {
                 (selectedNote?.id || -1) === note.id && "bg-input_bg"
               }`}
             >
-              <span className="truncate text-wrap w-[90%] pl-1">
+              <button
+                onClick={() => onNoteSelect(note, false)}
+                className="truncate text-wrap w-[95%] pl-1 text-start"
+              >
                 {note.title}
-              </span>
+              </button>
 
-              <div className="w-[10%] flex justify-center items-center gap-2">
-                <button
-                  onClick={() => onNoteSelect(note, false)}
-                  className="truncate text-wrap  hover:text-green-400 flex justify-center "
-                >
-                  <MdInfoOutline className="w-[1.1rem] h-fit" />
-                </button>
+              <div className="w-[5%] flex justify-end items-center ">
                 <button
                   onClick={() => onNoteSelect(note, true)}
-                  className="truncate text-wrap  hover:text-green-400 flex justify-center "
+                  className="truncate text-wrap hover:text-green-400 flex justify-center "
                 >
                   <MdChevronRight className="w-[1.5rem] h-fit" />
                 </button>

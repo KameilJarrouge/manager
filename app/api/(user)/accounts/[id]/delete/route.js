@@ -1,16 +1,15 @@
+import { deleteAccount } from "@/app/_controllers/accountsController";
+import { errorResponse, successResponse } from "@/app/_lib/responseGenerator";
 import { NextRequest } from "next/server";
-import {
-  errorResponse,
-  successResponse,
-} from "../../../../../_lib/responseGenerator";
-import { deleteAccount } from "../../../../../_controllers/accountsController";
 /**
  *
  * @param {NextRequest} request
  * @returns
  */
 export async function DELETE(request, { params }) {
-  let result = await deleteAccount(Number(params.id));
+  const paramsSync = await params;
+
+  let result = await deleteAccount(Number(paramsSync.id));
   if (!result.success) {
     return errorResponse(result.errorCode);
   }

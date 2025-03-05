@@ -69,7 +69,7 @@ function CreateAccountForm({ afterSubmit = (f) => f }) {
   return (
     <div className="flex flex-col items-center w-full h-full py-2 px-2 relative">
       {isLoading && <LoadingComponent />}
-      <span className="w-full text-center font-semibold text-lg h-[10%]">
+      <span className="w-full text-center font-semibold text-lg h-[10%] flex items-center justify-center">
         New Account
       </span>
       <div className="flex gap-4  py-4 h-[80%]">

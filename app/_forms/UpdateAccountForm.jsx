@@ -7,7 +7,7 @@ import KeyValueInput from "../_components/Input/KeyValueInput";
 import SubmitButton from "../_components/Input/SubmitButton";
 import { GoPlus } from "react-icons/go";
 import LoadingComponent from "../_components/LoadingComponent";
-import { MdRestore } from "react-icons/md";
+import { MdDelete, MdRestore } from "react-icons/md";
 
 function UpdateAccountForm({ account, afterSubmit = (f) => f }) {
   const [owner, setOwner] = useState(account.owner);
@@ -55,9 +55,9 @@ function UpdateAccountForm({ account, afterSubmit = (f) => f }) {
     setIsLoading(false);
     if (result.data.success) {
       toast("Updated Account!");
+      clearForm();
+      afterSubmit();
     }
-    clearForm();
-    afterSubmit();
   };
 
   const handleAddingAdditionalInfo = () => {
@@ -80,6 +80,18 @@ function UpdateAccountForm({ account, afterSubmit = (f) => f }) {
     setAdditionalInfo(updatedFields);
   };
 
+  const handleDeleteAccount = async () => {
+    if (!confirm(`do you wish to delete this account?`)) return;
+    setIsLoading(true);
+    let result = await api.delete(`/accounts/${account.id}/delete`);
+    setIsLoading(false);
+    if (result.data.success) {
+      toast("Deleted Account!");
+      clearForm();
+      afterSubmit();
+    }
+  };
+
   useEffect(() => {
     restore();
   }, [account]);
@@ -87,8 +99,14 @@ function UpdateAccountForm({ account, afterSubmit = (f) => f }) {
   return (
     <div className="flex flex-col items-center w-full h-full py-2 px-2 relative">
       {isLoading && <LoadingComponent />}
-      <span className="w-full text-center font-semibold text-lg h-[10%]">
+      <span className="w-full text-center font-semibold text-lg h-[10%] relative flex items-center justify-center">
         Update Account
+        <button
+          onClick={handleDeleteAccount}
+          className="absolute top-0 bottom-0 right-2 my-auto  h-fit p-1 hover:bg-red-600 rounded transition-colors"
+        >
+          <MdDelete className="w-[1.2rem] h-fit" />
+        </button>{" "}
       </span>
       <div className="flex gap-4  py-4 h-[80%]">
         <div className="flex flex-col gap-4 items-center">
