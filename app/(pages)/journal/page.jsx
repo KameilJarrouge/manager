@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import { GoDotFill, GoPlus } from "react-icons/go";
 import {
   MdChevronRight,
+  MdOutlineBook,
   MdOutlineSave,
   MdRestore,
   MdSave,
@@ -156,10 +157,16 @@ function Journal() {
           </div>
         </div>
         <div className=" w-fit h-full relative ">
-          <div className="w-[40ch] 2xl:w-[50ch] h-[65vh] 2xl:h-[75vh] overflow-y-auto flex flex-col gap-2">
+          <div className="w-[40ch] 2xl:w-[50ch] h-[65vh] 2xl:h-[75vh] overflow-y-auto flex flex-col gap-1">
             {monthContainsNewEntry && (
-              <div className="flex w-full  gap-5 items-center ">
-                <GoDotFill className={`w-[0.8rem] h-fit text-blue-400`} />
+              <div
+                className={`flex w-fit  gap-5 items-center p-1 ${
+                  selectedEntry &&
+                  !selectedEntry.hasOwnProperty("id") &&
+                  "bg-input_bg text-white"
+                } `}
+              >
+                <MdOutlineBook className={`w-[1.2rem] h-fit text-blue-400`} />
                 <button
                   onClick={() =>
                     setSelectedEntry({
@@ -169,11 +176,7 @@ function Journal() {
                       ),
                     })
                   }
-                  className={`flex items-center gap-3 p-1 ${
-                    selectedEntry &&
-                    !selectedEntry.hasOwnProperty("id") &&
-                    "bg-input_bg text-white"
-                  }`}
+                  className={`flex items-center gap-3 `}
                 >
                   <div>{moment(new Date()).format("YYYY/MM/DD")}</div>
                   <div className="w-[1px] h-[1rem] bg-foreground"></div>
@@ -186,13 +189,16 @@ function Journal() {
             )}
 
             {entries.map((entry, index) => (
-              <div key={index} className="flex w-full  gap-5 items-center ">
-                <GoDotFill className={`w-[0.8rem] h-fit text-foreground`} />
+              <div
+                key={index}
+                className={`flex w-fit  gap-5 items-center p-1 ${
+                  (selectedEntry?.id || -1) === entry.id && "bg-input_bg"
+                }`}
+              >
+                <MdOutlineBook className={`w-[1.2rem] h-fit text-foreground`} />
                 <button
                   onClick={() => setSelectedEntry(entry)}
-                  className={`flex items-center gap-3 p-1 ${
-                    (selectedEntry?.id || -1) === entry.id && "bg-input_bg"
-                  }`}
+                  className={`flex items-center gap-3 `}
                 >
                   <div>{moment(entry.createdAt).format("YYYY/MM/DD")}</div>
                   <div className="w-[1px] h-[1rem] bg-foreground"></div>

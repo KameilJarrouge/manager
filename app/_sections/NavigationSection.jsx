@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   MdOutlineAccountBox,
   MdOutlineBook,
@@ -11,10 +11,23 @@ import {
   MdOutlineNote,
 } from "react-icons/md";
 import { GoDotFill } from "react-icons/go";
+import api from "../_lib/api";
 
 function NavigationSection() {
   const pathname = usePathname();
   const [wroteInJournalToday, setWroteInJournalToday] = useState(false);
+
+  const checkIfWroteInJournalToday = async () => {
+    const result = await api.get("/journal/today-status");
+    if (result.data.success) {
+      setWroteInJournalToday(result.data.result);
+    }
+  };
+
+  useEffect(() => {
+    checkIfWroteInJournalToday();
+  }, [pathname]);
+
   return (
     <div className="h-full flex flex-col gap-6  py-2">
       <Link
