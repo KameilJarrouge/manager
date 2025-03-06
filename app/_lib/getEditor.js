@@ -27,5 +27,6 @@ export default function getEditor(withTimeStamp = true, editable = true) {
         ? `<< ${moment(new Date()).format("hh:mm a")} >> <p></p>`
         : ""
     }`,
+    immediatelyRender: false,
   });
 }

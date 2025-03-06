@@ -2,8 +2,8 @@
 
 import { EditorContent } from "@tiptap/react";
 
-const TipTap = ({ editor }) => {
-  return <EditorContent id="editor" editor={editor} />;
+const TipTap = ({ editor, ...props }) => {
+  return <EditorContent id="editor" editor={editor} {...props} />;
 };
 
 export default TipTap;
