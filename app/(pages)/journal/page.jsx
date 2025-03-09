@@ -100,7 +100,7 @@ function Journal() {
   }, [selectedEntry, editor]);
 
   return (
-    <div className="flex  w-full h-full justify-between px-[2rem] relative">
+    <div className="flex  w-full h-full justify-between px-[2rem]  relative">
       {isLoading && <LoadingComponent />}
 
       <div className="w-fit h-full flex flex-col gap-4">
@@ -108,10 +108,10 @@ function Journal() {
         <div className="w-full  flex gap-2 pt-0.5 items-center">
           {/* Search */}
           <div className="flex gap-2 items-center h-fit ">
-            <div className="w-fit py-0.5 px-2 font-semibold flex items-center gap-2">
+            <div className="w-fit py-0.5  font-semibold flex items-center gap-2">
               <button
                 onClick={() => changeDate(-1, false)}
-                className="p-1 hover:bg-blue-600  rounded transition-colors"
+                className="p-1 hover:bg-foreground hover:text-secondary  rounded transition-colors"
               >
                 <FiChevronsLeft className="w-[1.2rem] h-fit" />
               </button>
@@ -120,13 +120,13 @@ function Journal() {
               </span>
               <button
                 onClick={() => changeDate(1, false)}
-                className="p-1 hover:bg-blue-600  rounded transition-colors"
+                className="p-1 hover:bg-foreground hover:text-secondary  rounded transition-colors"
               >
                 <FiChevronsRight className="w-[1.2rem] h-fit" />
               </button>
               <button
                 onClick={() => changeDate(-1, true)}
-                className="p-1 hover:bg-blue-600  rounded transition-colors"
+                className="p-1 hover:bg-foreground hover:text-secondary  rounded transition-colors"
               >
                 <FiChevronLeft className="w-[1.2rem] h-fit" />
               </button>
@@ -135,7 +135,7 @@ function Journal() {
               </span>
               <button
                 onClick={() => changeDate(1, true)}
-                className="p-1 hover:bg-blue-600  rounded transition-colors"
+                className="p-1 hover:bg-foreground hover:text-secondary  rounded transition-colors"
               >
                 <FiChevronRight className="w-[1.2rem] h-fit" />
               </button>

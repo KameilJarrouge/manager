@@ -16,13 +16,13 @@
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #cccccc;
+  background: #797878;
   border-radius: 5px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #ffffff;
+  background: #eeeeee;
 }
 /* For Webkit-based browsers (Chrome, Safari and Opera) */
 .scrollbar-hide::-webkit-scrollbar {

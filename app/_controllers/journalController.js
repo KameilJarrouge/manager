@@ -38,7 +38,7 @@ export async function browseJournal(startDate, endDate) {
     },
     take: 30,
     orderBy: {
-      id: "desc",
+      createdAt: "desc",
     },
   });
   return successReturn(result);

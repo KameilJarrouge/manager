@@ -64,7 +64,9 @@ model TodoLog {
   todoId    Int
 }
 
-// model Date{
-//   id Int @id @default(autoincrement())
-
-// }
+model Date {
+  id    Int     @id @default(autoincrement())
+  title String?
+  month Int
+  day   Int
+}
