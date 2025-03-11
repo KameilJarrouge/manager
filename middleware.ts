@@ -20,7 +20,10 @@ export async function middleware(request: NextRequest) {
 
     if (result.success) return NextResponse.next();
 
-    return NextResponse.json({ message: "unauthenticated" }, { status: 401 });
+    const url = request.nextUrl.clone();
+    url.pathname = "/auth";
+    return NextResponse.redirect(url);
+    // return NextResponse.json({ message: "unauthenticated" }, { status: 401 });
   } else {
     // << routing middleware >>
 
