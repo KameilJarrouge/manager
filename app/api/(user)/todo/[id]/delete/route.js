@@ -1,9 +1,6 @@
+import { deleteTodo } from "@/app/_controllers/todoController";
+import { errorResponse, successResponse } from "@/app/_lib/responseGenerator";
 import { NextRequest } from "next/server";
-import {
-  errorResponse,
-  successResponse,
-} from "../../../../../_lib/responseGenerator";
-import { deleteTodo } from "../../../../../_controllers/todoController";
 /**
  *
  * @param {NextRequest} request
