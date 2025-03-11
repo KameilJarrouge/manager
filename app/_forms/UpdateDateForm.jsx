@@ -71,7 +71,7 @@ function UpdateDateForm({ afterSubmit = (f) => f, dateObject }) {
         </button>
       </span>
       <div className="flex gap-4  py-4 h-[80%]">
-        <div className="flex flex-col gap-4 items-start">
+        <div className="flex flex-col gap-4 items-center">
           <TextField state={title} setState={setTitle} placeholder={"Title"} />
           <SelectMonthAndDay
             monthState={month}
