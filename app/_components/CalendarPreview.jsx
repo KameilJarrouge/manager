@@ -5,12 +5,7 @@ import getMonthDays from "../_lib/getMonthDays";
 
 const daysOfTheWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-function CalendarPreview({
-  initialDate,
-  accentFunc = (f) => false,
-  selectable = true,
-  onSelect = (f) => f,
-}) {
+function CalendarPreview({ initialDate, accentFunc = (f) => false }) {
   const [date, setDate] = useState(initialDate);
   const [calendar, setCalendar] = useState([]);
 
@@ -108,37 +103,19 @@ function CalendarPreview({
             className="flex gap-3  items-center justify-between text-text "
           >
             {/* Decide to put buttons or divs */}
-            {selectable ? (
-              <>
-                {row.map((item, index) => {
-                  return (
-                    <button
-                      key={index}
-                      className={`w-[3ch] h-fit  text-center p-1 rounded-lg  ${getStyles(
-                        item
-                      )} border border-transparent hover:border-input_bg`}
-                    >
-                      {moment(item.date).get("D")}
-                    </button>
-                  );
-                })}
-              </>
-            ) : (
-              <>
-                {row.map((item, index) => {
-                  return (
-                    <div
-                      key={index}
-                      className={`w-[3ch] h-fit  text-center p-1 rounded-lg  ${getStyles(
-                        item
-                      )}`}
-                    >
-                      {moment(item.date).get("D")}
-                    </div>
-                  );
-                })}
-              </>
-            )}
+
+            {row.map((item, index) => {
+              return (
+                <div
+                  key={index}
+                  className={`w-[3ch] h-fit  text-center p-1 rounded-lg  ${getStyles(
+                    item
+                  )}`}
+                >
+                  {moment(item.date).get("D")}
+                </div>
+              );
+            })}
           </div>
         );
       })}
