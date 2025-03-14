@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import moment from "moment";
 import { MdChevronLeft, MdChevronRight, MdRestore } from "react-icons/md";
 import getMonthDays from "../_lib/getMonthDays";
+import { GoDotFill } from "react-icons/go";
 
 const daysOfTheWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
@@ -16,6 +17,9 @@ function CalendarPreview({ initialDate, accentFunc = (f) => false }) {
 
   const handleMonthChange = (value) => {
     setDate(moment(date).add(value, "months").toDate());
+  };
+  const handleRestoreCurrentMonth = () => {
+    setDate(new Date());
   };
 
   const getStyles = (item) => {
@@ -45,7 +49,7 @@ function CalendarPreview({ initialDate, accentFunc = (f) => false }) {
         ? "bg-accent/40"
         : "bg-transparent"
     }`;
-    if (moment(initialDate).isSame(moment(item.date), "day"))
+    if (moment(new Date()).isSame(moment(item.date), "day"))
       style += " underline underline-offset-2";
     return style;
   };
@@ -64,27 +68,28 @@ function CalendarPreview({ initialDate, accentFunc = (f) => false }) {
     <div className="flex flex-col gap-[3px] h-[18rem]">
       <div className="flex justify-between items-center pb-2 h-fit ">
         <div className="w-[80%] flex justify-between items-center h-fit">
-          <button>
-            <MdChevronLeft
-              onClick={() => handleMonthChange(-1)}
-              className="w-[1.5rem] h-fit hover:bg-light_primary/40 hover:text-light_text text-text rounded cursor-pointer"
-            />
+          <button
+            onClick={() => handleMonthChange(-1)}
+            className="text-foreground hover:text-white"
+          >
+            <MdChevronLeft className="w-[1.5rem] h-fit " />
           </button>
           <span className="font-semibold text-text flex items-center gap-4">
             {moment(date).format("yyyy  MMMM")}
           </span>
-          <button>
-            <MdChevronRight
-              onClick={() => handleMonthChange(1)}
-              className="w-[1.5rem] h-fit hover:bg-light_primary/40 hover:text-light_text text-text rounded cursor-pointer"
-            />
+          <button
+            onClick={() => handleMonthChange(1)}
+            className="text-foreground hover:text-white"
+          >
+            <MdChevronRight className="w-[1.5rem] h-fit " />
           </button>
         </div>
-        <button>
-          <MdRestore
-            onClick={handleRestoreOriginalMonth}
-            className="w-[1.5rem] h-fit hover:bg-light_primary/40 hover:text-light_text text-text rounded cursor-pointer"
-          />
+        <button
+          onDoubleClick={handleRestoreCurrentMonth}
+          onClick={handleRestoreOriginalMonth}
+          className="text-foreground hover:text-white"
+        >
+          <MdRestore className="w-[1.5rem] h-fit " />
         </button>
       </div>
       <div className="w-full h-[1px] bg-input_bg" />
@@ -108,11 +113,14 @@ function CalendarPreview({ initialDate, accentFunc = (f) => false }) {
               return (
                 <div
                   key={index}
-                  className={`w-[3ch] h-fit  text-center p-1 rounded-lg  ${getStyles(
+                  className={`w-[3ch] h-fit  text-center p-1 rounded-lg  relative ${getStyles(
                     item
                   )}`}
                 >
                   {moment(item.date).get("D")}
+                  {moment(item.date).isSame(new Date(), "day") && (
+                    <GoDotFill className="absolute top-[2px] right-[2px] w-[0.6rem] h-fit" />
+                  )}
                 </div>
               );
             })}

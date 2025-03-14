@@ -85,26 +85,6 @@ function NavigationSection() {
       </Link>
       <Link
         data-tooltip-id="my-tooltip"
-        data-tooltip-content="Journal"
-        data-tooltip-place="top-start"
-        href={"/journal"}
-        className={`${
-          pathname === "/journal"
-            ? "bg-secondary border-l-accent"
-            : " hover:border-secondary "
-        } rounded-r-full w-full py-2 px-4 hover:bg-secondary transition-colors border-l-4 border-transparent relative`}
-      >
-        <MdOutlineBook className="w-[1.8rem] h-fit " />
-        <span className="absolute top-0 right-2 h-full flex justify-center items-center">
-          <GoDotFill
-            className={`w-[0.5rem] h-fit ${
-              wroteInJournalToday ? "text-green-400" : "text-red-400"
-            }`}
-          />
-        </span>
-      </Link>
-      <Link
-        data-tooltip-id="my-tooltip"
         data-tooltip-content="Dates"
         data-tooltip-place="top-start"
         href={"/dates"}
@@ -115,6 +95,26 @@ function NavigationSection() {
         } rounded-r-full w-full py-2 px-4 hover:bg-secondary transition-colors border-l-4 border-transparent `}
       >
         <MdOutlineDateRange className="w-[1.8rem] h-fit " />
+      </Link>
+      <Link
+        data-tooltip-id="my-tooltip"
+        data-tooltip-content="Journal"
+        data-tooltip-place="top-start"
+        href={"/journal"}
+        className={`${
+          pathname === "/journal"
+            ? "bg-secondary border-l-accent"
+            : " hover:border-secondary "
+        } rounded-r-full w-full py-2 px-4 hover:bg-secondary transition-colors border-l-4 border-transparent z-10 relative`}
+      >
+        <MdOutlineBook className="w-[1.8rem] h-fit  " />
+        <span className="absolute  top-0 right-2 h-full flex justify-center items-center">
+          <GoDotFill
+            className={`w-[0.5rem] h-fit ${
+              wroteInJournalToday ? "text-green-400" : "text-red-400"
+            }`}
+          />
+        </span>
       </Link>
     </div>
   );

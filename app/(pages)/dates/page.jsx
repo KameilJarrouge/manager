@@ -33,7 +33,6 @@ function Dates() {
         return prev;
       }, {});
       setDates(groupedByMonth);
-      console.log(groupedByMonth);
     }
     setIsLoading(false);
   };

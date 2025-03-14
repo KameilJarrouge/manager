@@ -7,7 +7,9 @@ import { NextRequest } from "next/server";
  * @returns
  */
 export async function DELETE(request, { params }) {
-  let result = await deleteTodo(Number(params.id));
+  const paramsSync = await params;
+
+  let result = await deleteTodo(Number(paramsSync.id));
   if (!result.success) {
     return errorResponse(result.errorCode);
   }

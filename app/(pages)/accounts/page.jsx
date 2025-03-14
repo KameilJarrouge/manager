@@ -104,7 +104,12 @@ function Accounts() {
         id={"accounts"}
       >
         {!selectedAccount ? (
-          <CreateAccountForm afterSubmit={() => setIsSideMenuOpen(false)} />
+          <CreateAccountForm
+            afterSubmit={() => {
+              setIsSideMenuOpen(false);
+              getAccounts();
+            }}
+          />
         ) : (
           <UpdateAccountForm
             afterSubmit={() => {

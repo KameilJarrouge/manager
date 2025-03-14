@@ -4,7 +4,14 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
 import React, { useState } from "react";
 
-function TextField({ state, setState, placeholder, hidden, ...props }) {
+function TextField({
+  state,
+  setState,
+  placeholder,
+  hidden,
+  className,
+  ...props
+}) {
   const [isHidden, setIsHidden] = useState(hidden);
   const [showTitle, setShowTitle] = useState(false);
   return (
@@ -22,7 +29,7 @@ function TextField({ state, setState, placeholder, hidden, ...props }) {
       </div>
       <input
         type={!isHidden ? "text" : "password"}
-        className="outline-none bg-input_bg py-1 px-2 w-[25ch]  "
+        className={`outline-none bg-input_bg py-1 px-2 w-[25ch] ${className}  `}
         placeholder={placeholder}
         value={state}
         onChange={(e) => {

@@ -2,13 +2,11 @@
 
 import moment from "moment";
 import React, { useEffect, useState } from "react";
-import { GoDotFill, GoPlus } from "react-icons/go";
 import {
   MdChevronRight,
   MdOutlineBook,
   MdOutlineSave,
   MdRestore,
-  MdSave,
   MdSearch,
 } from "react-icons/md";
 import {
@@ -22,6 +20,7 @@ import LoadingComponent from "@/app/_components/LoadingComponent";
 import getEditor from "@/app/_lib/getEditor";
 import TipTap from "@/app/_components/Input/TipTap";
 import { toast } from "react-toastify";
+import { TbRowInsertBottom } from "react-icons/tb";
 
 function Journal() {
   const [selectedEntry, setSelectedEntry] = useState(null);
@@ -222,6 +221,18 @@ function Journal() {
               </span>
               <div className="flex gap-2 items-center">
                 <button
+                  onClick={() =>
+                    editor.commands.insertContent(
+                      `${!editor.isEmpty ? "\n" : ""}<< ${moment(
+                        new Date()
+                      ).format("hh:mm a")} >> <p></p>`
+                    )
+                  }
+                  className="  mt-4 p-1 hover:bg-blue-600  rounded transition-colors"
+                >
+                  <TbRowInsertBottom className="w-[1.5rem] h-fit text-foreground" />
+                </button>
+                <button
                   onClick={restore}
                   className="  mt-4 p-1 hover:bg-blue-600  rounded transition-colors"
                 >
@@ -238,14 +249,14 @@ function Journal() {
             <div className="h-[65vh] 2xl:h-[75vh] overflow-y-auto py-2 px-8 ">
               <TipTap
                 editor={editor}
-                onContextMenu={(e) => {
-                  e.preventDefault();
-                  editor.commands.insertContent(
-                    `${!editor.isEmpty ? "\n" : ""}<< ${moment(
-                      new Date()
-                    ).format("hh:mm a")} >> <p></p>`
-                  );
-                }}
+                // onContextMenu={(e) => {
+                //   e.preventDefault();
+                //   editor.commands.insertContent(
+                //     `${!editor.isEmpty ? "\n" : ""}<< ${moment(
+                //       new Date()
+                //     ).format("hh:mm a")} >> <p></p>`
+                //   );
+                // }}
               />
             </div>
           </>

@@ -19,7 +19,7 @@ export default async function RootLayout({ children }) {
       {/* <StoreInitializer isLoggedIn={!!(await cookies()).get(cookieName)} /> */}
       <body
         id="body"
-        className="h-screen w-full bg-primary  bg-[radial-gradient(#4B4F58aa_1px,transparent_1px)] bg-[size:1rem_1rem] text-foreground"
+        className="h-screen w-full bg-primary  bg-[radial-gradient(#4B4F58aa_1px,transparent_1px)] bg-[size:1rem_1rem] text-foreground overflow-hidden"
       >
         <ToolTipInitializer />
         <ToastContainer

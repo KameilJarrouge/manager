@@ -8,7 +8,9 @@ import { getTodo } from "@/app/_controllers/todoController";
  * @returns
  */
 export async function GET(request, { params }) {
-  let result = await getTodo(Number(params.id));
+  const paramsSync = await params;
+
+  let result = await getTodo(Number(paramsSync.id));
   if (!result.success) {
     return errorResponse(result.errorCode);
   }

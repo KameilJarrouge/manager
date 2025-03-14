@@ -4,7 +4,13 @@ import { toast } from "react-toastify";
 import api from "../_lib/api";
 import LoadingComponent from "../_components/LoadingComponent";
 import TextField from "../_components/Input/TextField";
-import { MdPause, MdPlayArrow, MdRepeat, MdRepeatOn } from "react-icons/md";
+import {
+  MdDelete,
+  MdPause,
+  MdPlayArrow,
+  MdRepeat,
+  MdRepeatOn,
+} from "react-icons/md";
 import ToggleInput from "../_components/Input/ToggleInput";
 import DaysRepeatInput from "../_components/Input/DaysRepeatInput";
 import IntervalRepeatInput from "../_components/Input/IntervalRepeatInput";
@@ -14,7 +20,7 @@ import CalendarPreview from "../_components/CalendarPreview";
 import moment from "moment";
 import { IoMdEyeOff } from "react-icons/io";
 
-function CreateTodoForm({ afterSubmit = (f) => f }) {
+function UpdateTodoForm({ todo, afterSubmit = (f) => f }) {
   const [title, setTitle] = useState("");
   const [shouldRepeat, setShouldRepeat] = useState(false);
   const [createdAt, setCreatedAt] = useState(new Date());
@@ -34,7 +40,7 @@ function CreateTodoForm({ afterSubmit = (f) => f }) {
     setIsPaused(false);
   };
 
-  const handleCreateTodo = async () => {
+  const handleUpdateTodo = async () => {
     if (title === "") {
       toast.warn("Title Missing!");
       return;
@@ -50,20 +56,32 @@ function CreateTodoForm({ afterSubmit = (f) => f }) {
         : String(repeatInterval)
       : undefined;
 
-    let result = await api.post("/todo/create", {
+    let result = await api.put(`/todo/${todo.id}/update`, {
       title,
       shouldRepeat,
       repeatType,
       repeat,
       date: createdAt || new Date(),
-      isPaused: isPaused,
+      isPaused: isPaused === "Paused",
     });
 
     setIsLoading(false);
     if (result.data.success) {
-      toast("Created Todo!");
-      afterSubmit();
+      toast("Updated Todo!");
       clearForm();
+      afterSubmit();
+    }
+  };
+
+  const handleDeleteTodo = async () => {
+    if (!confirm(`do you wish to delete this todo?`)) return;
+
+    setIsLoading(true);
+    const result = await api.delete(`/todo/${todo.id}/delete`);
+    if (result.data.success) {
+      toast("Deleted Todo!");
+      clearForm();
+      afterSubmit();
     }
   };
 
@@ -82,15 +100,29 @@ function CreateTodoForm({ afterSubmit = (f) => f }) {
   };
 
   useEffect(() => {
-    if (shouldRepeat) setRepeatType("Days");
-    else setRepeatType(undefined);
-  }, [shouldRepeat]);
+    setTitle(todo.title);
+    setShouldRepeat(todo.shouldRepeat);
+    setCreatedAt(todo.date);
+    setRepeatType(todo.repeatType);
+    if (todo.repeatType === "Days") {
+      setRepeatDays(JSON.parse(todo.repeat));
+    } else {
+      setRepeatInterval(Number(JSON.parse(todo.repeat)));
+    }
+    setIsPaused(todo.isPaused ? "Paused" : "Running");
+  }, [todo]);
 
   return (
     <div className="flex flex-col items-center w-full h-full py-2 px-2 relative">
       {isLoading && <LoadingComponent />}
-      <span className="w-full text-center font-semibold text-lg h-[10%] flex items-center justify-center">
-        New Todo
+      <span className="w-full text-center font-semibold text-lg h-[10%] flex items-center justify-center relative">
+        Update Todo
+        <button
+          onClick={handleDeleteTodo}
+          className="absolute top-0 bottom-0 right-2 my-auto  h-fit p-1 hover:bg-red-600 rounded transition-colors"
+        >
+          <MdDelete className="w-[1.2rem] h-fit" />
+        </button>
       </span>
       <div className="w-full h-[80%] py-4 flex gap-2">
         <div className="w-fit h-full flex flex-col gap-4">
@@ -166,9 +198,9 @@ function CreateTodoForm({ afterSubmit = (f) => f }) {
           />
         </div>
       </div>
-      <SubmitButton title="Create" onSubmit={handleCreateTodo} />
+      <SubmitButton title="Update" onSubmit={handleUpdateTodo} />
     </div>
   );
 }
 
-export default CreateTodoForm;
+export default UpdateTodoForm;

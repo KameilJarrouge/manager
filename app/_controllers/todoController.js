@@ -85,7 +85,7 @@ function preProcessTodo(todo) {
 
         if (todoItem.repeatType === "Days") {
           // check if today is in this repeating days
-          const day = moment(new Date()).format("dddd");
+          const day = moment(new Date()).format("ddd");
           if (!repeat.includes(day)) include = false;
         } else {
           // check if today happens to be an interval of this repeat cycle
@@ -132,6 +132,8 @@ export async function getTodo(id) {
 }
 
 export async function allTodo() {
-  const result = await prisma.todo.findMany();
+  const result = await prisma.todo.findMany({
+    orderBy: { isPaused: "asc" },
+  });
   return successReturn(result);
 }

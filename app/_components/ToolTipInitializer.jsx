@@ -10,7 +10,7 @@ function ToolTipInitializer() {
       delayShow={500}
       opacity={1}
       render={({ content }) => (
-        <div className=" text-wrap max-w-[40ch] z-50 ">{content}</div>
+        <div className=" text-wrap max-w-[40ch] ">{content}</div>
       )}
     />
   );

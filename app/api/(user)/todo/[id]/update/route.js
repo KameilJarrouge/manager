@@ -9,7 +9,9 @@ import { updateTodo } from "@/app/_controllers/todoController";
  */
 export async function PUT(request, { params }) {
   let body = await request.json();
-  let result = await updateTodo(Number(params.id), body);
+  const paramsSync = await params;
+
+  let result = await updateTodo(Number(paramsSync.id), body);
   if (!result.success) {
     return errorResponse(result.errorCode);
   }
