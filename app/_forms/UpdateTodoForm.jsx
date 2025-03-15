@@ -10,6 +10,7 @@ import {
   MdPlayArrow,
   MdRepeat,
   MdRepeatOn,
+  MdRestore,
 } from "react-icons/md";
 import ToggleInput from "../_components/Input/ToggleInput";
 import DaysRepeatInput from "../_components/Input/DaysRepeatInput";
@@ -99,7 +100,7 @@ function UpdateTodoForm({ todo, afterSubmit = (f) => f }) {
     }
   };
 
-  useEffect(() => {
+  const restore = () => {
     setTitle(todo.title);
     setShouldRepeat(todo.shouldRepeat);
     setCreatedAt(todo.date);
@@ -110,6 +111,10 @@ function UpdateTodoForm({ todo, afterSubmit = (f) => f }) {
       setRepeatInterval(Number(JSON.parse(todo.repeat)));
     }
     setIsPaused(todo.isPaused);
+  };
+
+  useEffect(() => {
+    restore();
   }, [todo]);
 
   return (
@@ -184,6 +189,12 @@ function UpdateTodoForm({ todo, afterSubmit = (f) => f }) {
               )}
             </div>
           )}
+          <button
+            onClick={restore}
+            className="p-1 w-fit hover:bg-accent rounded transition-colors"
+          >
+            <MdRestore className="w-[1.5rem] h-fit" />
+          </button>
         </div>
         <div className="w-[1px] h-full bg-input_bg" />
         <div className="w-fit h-full flex flex-col gap-2 relative">
