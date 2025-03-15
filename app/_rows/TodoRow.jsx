@@ -22,13 +22,13 @@ function TodoRow({ todoItem, selectedTodo, onTodoSelect, shouldDim = false }) {
         className="w-[95%] flex items-center gap-2 "
       >
         {shouldDim ? (
-          <GoPlus className="text-red-600 rotate-45" />
+          <GoPlus className="text-red-400 rotate-45" />
         ) : (
           <>
             {todoItem.isPaused ? (
-              <MdPause className="text-yellow-600" />
+              <MdPause className="text-yellow-400" />
             ) : (
-              <MdPlayArrow className="text-green-600" />
+              <MdPlayArrow className="text-green-400" />
             )}
           </>
         )}

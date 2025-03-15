@@ -62,7 +62,7 @@ function UpdateTodoForm({ todo, afterSubmit = (f) => f }) {
       repeatType,
       repeat,
       date: createdAt || new Date(),
-      isPaused: isPaused === "Paused",
+      isPaused: isPaused,
     });
 
     setIsLoading(false);
@@ -109,7 +109,7 @@ function UpdateTodoForm({ todo, afterSubmit = (f) => f }) {
     } else {
       setRepeatInterval(Number(JSON.parse(todo.repeat)));
     }
-    setIsPaused(todo.isPaused ? "Paused" : "Running");
+    setIsPaused(todo.isPaused);
   }, [todo]);
 
   return (
