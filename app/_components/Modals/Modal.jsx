@@ -1,6 +1,14 @@
 "use client";
 import React, { useEffect } from "react";
-function Modal({ isOpen, close, title, children, onEnter, className }) {
+function Modal({
+  isOpen,
+  close,
+  title,
+  children,
+  onEnter,
+  className,
+  id = "",
+}) {
   const handleOutsideClick = (event) => {
     const content = document.getElementById("content");
     if (!content) {
@@ -20,7 +28,7 @@ function Modal({ isOpen, close, title, children, onEnter, className }) {
   useEffect(() => {
     if (!isOpen) return;
 
-    const modalContainer = document.getElementById("modal-container");
+    const modalContainer = document.getElementById("modal-container-" + id);
     if (!modalContainer) {
       return;
     }
@@ -33,7 +41,11 @@ function Modal({ isOpen, close, title, children, onEnter, className }) {
   }, [isOpen]);
 
   return (
-    <div id="modal-container" tabIndex={"0"} onKeyDown={handleEnterPress}>
+    <div
+      id={"modal-container-" + id}
+      tabIndex={"0"}
+      onKeyDown={handleEnterPress}
+    >
       {isOpen && (
         <div className="fixed left-0 top-0 w-full h-full  bg-black bg-opacity-30 z-50 overflow-auto backdrop-blur flex flex-col justify-center items-center ">
           <div id="content" className="m-auto flex flex-col justify-start ">

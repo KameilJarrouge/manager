@@ -37,6 +37,7 @@ function UpdatePasswordModal({ isOpen, close }) {
   return (
     <Modal
       key={"Update_Password"}
+      id={"Update_Password"}
       isOpen={isOpen}
       close={() => {
         setOldPassword("");

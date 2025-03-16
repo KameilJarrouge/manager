@@ -107,7 +107,7 @@ function Journal() {
         <div className="w-full  flex gap-2 pt-0.5 items-center">
           {/* Search */}
           <div className="flex gap-2 items-center h-fit ">
-            <div className="w-fit py-0.5  font-semibold flex items-center gap-2">
+            <div className="w-fit py-0.5 flex items-center gap-2">
               <button
                 onClick={() => changeDate(-1, false)}
                 className="p-1 hover:bg-foreground hover:text-secondary  rounded transition-colors"

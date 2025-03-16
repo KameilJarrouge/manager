@@ -36,9 +36,11 @@ function TodoList({
       "
       >
         <div className="w-full flex flex-col gap-1  overflow-y-auto h-[60vh] 2xl:h-[75vh] ">
-          <span className="font-semibold border-b border-b-foreground/50 w-full text-start my-2">
-            Days Repeat
-          </span>
+          {(sectionKey === "All" || sectionKey === "Days") && (
+            <span className="font-semibold border-b border-b-foreground/50 w-full text-start my-2">
+              Days Repeat
+            </span>
+          )}
           {(sectionKey === "All" || sectionKey === "Days") &&
             todo.Days.filter((todoItem) =>
               todoItem.title.includes(filterKey)
@@ -50,10 +52,11 @@ function TodoList({
                 key={todoItem.id}
               />
             ))}
-
-          <span className="font-semibold border-b border-b-foreground/50 w-full text-start my-2">
-            Interval Repeat
-          </span>
+          {(sectionKey === "All" || sectionKey === "Intervals") && (
+            <span className="font-semibold border-b border-b-foreground/50 w-full text-start my-2">
+              Interval Repeat
+            </span>
+          )}
 
           {(sectionKey === "All" || sectionKey === "Intervals") &&
             todo.Intervals.filter((todoItem) =>
@@ -66,10 +69,11 @@ function TodoList({
                 key={todoItem.id}
               />
             ))}
-
-          <span className="font-semibold border-b border-b-foreground/50 w-full text-start my-2">
-            No Repeat Upcoming
-          </span>
+          {(sectionKey === "All" || sectionKey === "No Repeat Upcoming") && (
+            <span className="font-semibold border-b border-b-foreground/50 w-full text-start my-2">
+              No Repeat Upcoming
+            </span>
+          )}
           {(sectionKey === "All" || sectionKey === "No Repeat Upcoming") &&
             todo.NonRepeatingUpcoming.filter((todoItem) =>
               todoItem.title.includes(filterKey)
@@ -81,9 +85,11 @@ function TodoList({
                 key={todoItem.id}
               />
             ))}
-          <span className="font-semibold border-b border-b-foreground/50 w-full text-start my-2">
-            No Repeat Passed
-          </span>
+          {(sectionKey === "All" || sectionKey === "No Repeat Passed") && (
+            <span className="font-semibold border-b border-b-foreground/50 w-full text-start my-2">
+              No Repeat Passed
+            </span>
+          )}
           {(sectionKey === "All" || sectionKey === "No Repeat Passed") &&
             todo.NonRepeatingPassed.filter((todoItem) =>
               todoItem.title.includes(filterKey)

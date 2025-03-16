@@ -130,7 +130,7 @@ function UpdateTodoForm({ todo, afterSubmit = (f) => f }) {
         </button>
       </span>
       <div className="w-full h-[80%] py-4 flex gap-2">
-        <div className="w-fit h-full flex flex-col gap-4">
+        <div className="w-fit h-full flex flex-col gap-4 items-center">
           <TextField
             state={title}
             setState={setTitle}

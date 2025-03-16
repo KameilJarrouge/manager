@@ -1,6 +1,7 @@
 "use client";
 import TextField from "@/app/_components/Input/TextField";
 import LoadingComponent from "@/app/_components/LoadingComponent";
+import TodoLogModal from "@/app/_components/Modals/TodoLogModal";
 import SideMenu from "@/app/_components/SideMenu";
 import TodoList from "@/app/_displayLists/TodoList";
 import CreateTodoForm from "@/app/_forms/CreateTodoForm";
@@ -9,6 +10,7 @@ import api from "@/app/_lib/api";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { GoPlus } from "react-icons/go";
+import { LuLogs } from "react-icons/lu";
 import { TbRepeat, TbRepeatOff } from "react-icons/tb";
 
 function Todo() {
@@ -23,6 +25,7 @@ function Todo() {
     NonRepeatingUpcoming: [],
   });
   const [isLoading, setIsLoading] = useState(false);
+  const [isTodoLogModalOpen, setIsTodoLogModalOpen] = useState(false);
 
   const preProcessTodo = (todo) => {
     return todo.reduce(
@@ -71,6 +74,11 @@ function Todo() {
 
   return (
     <div className="w-full h-full relative pr-[4rem]  pl-[2rem]  overflow-x-hidden">
+      <TodoLogModal
+        isOpen={isTodoLogModalOpen}
+        close={() => setIsTodoLogModalOpen(false)}
+        id={"todo-page"}
+      />
       {/* Main */}
       <div className="w-full  h-full  flex flex-col gap-4">
         {/* Header */}
@@ -91,7 +99,7 @@ function Todo() {
               } rounded transition-colors flex gap-1`}
             >
               <TbRepeat className="w-[1.5rem] h-fit" />
-              <span className="font-semibold">D</span>
+              <span className="">D</span>
             </button>
             <button
               onClick={() => {
@@ -102,7 +110,7 @@ function Todo() {
               } rounded transition-colors flex gap-1`}
             >
               <TbRepeat className="w-[1.5rem] h-fit" />
-              <span className="font-semibold">I</span>
+              <span className="">I</span>
             </button>
             <button
               onClick={() => {
@@ -113,7 +121,7 @@ function Todo() {
               } rounded transition-colors flex gap-1`}
             >
               <TbRepeatOff className="w-[1.5rem] h-fit" />
-              <span className="font-semibold">NRU</span>
+              <span className="">NRU</span>
             </button>
             <button
               onClick={() => {
@@ -124,8 +132,9 @@ function Todo() {
               } rounded transition-colors flex gap-1`}
             >
               <TbRepeatOff className="w-[1.5rem] h-fit" />
-              <span className="font-semibold">NRP</span>
+              <span className="">NRP</span>
             </button>
+
             <button
               onClick={() => {
                 setFilterKey("");
@@ -140,7 +149,14 @@ function Todo() {
             </button>
           </div>
           <div className="w-[1px] h-full bg-input_bg" />
-          {/* New Button */}
+          <button
+            onClick={() => {
+              setIsTodoLogModalOpen(true);
+            }}
+            className="p-1 hover:bg-blue-600 text-foreground  rounded transition-colors"
+          >
+            <LuLogs className="w-[1.5rem] h-fit " />
+          </button>
           <button
             onClick={() => {
               setSelectedTodo(undefined);
