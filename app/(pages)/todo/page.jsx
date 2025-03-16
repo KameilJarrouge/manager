@@ -106,14 +106,25 @@ function Todo() {
             </button>
             <button
               onClick={() => {
-                setSectionKey("No Repeat");
+                setSectionKey("No Repeat Upcoming");
               }}
               className={`p-1 hover:bg-foreground/10 text-foreground ${
-                sectionKey === "No Repeat" && "bg-foreground/10"
+                sectionKey === "No Repeat Upcoming" && "bg-foreground/10"
               } rounded transition-colors flex gap-1`}
             >
               <TbRepeatOff className="w-[1.5rem] h-fit" />
-              <span className="font-semibold">NR</span>
+              <span className="font-semibold">NRU</span>
+            </button>
+            <button
+              onClick={() => {
+                setSectionKey("No Repeat Passed");
+              }}
+              className={`p-1 hover:bg-foreground/10 text-foreground ${
+                sectionKey === "No Repeat Passed" && "bg-foreground/10"
+              } rounded transition-colors flex gap-1`}
+            >
+              <TbRepeatOff className="w-[1.5rem] h-fit" />
+              <span className="font-semibold">NRP</span>
             </button>
             <button
               onClick={() => {

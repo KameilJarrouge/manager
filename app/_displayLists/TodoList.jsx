@@ -68,9 +68,9 @@ function TodoList({
             ))}
 
           <span className="font-semibold border-b border-b-foreground/50 w-full text-start my-2">
-            No Repeat
+            No Repeat Upcoming
           </span>
-          {(sectionKey === "All" || sectionKey === "No Repeat") &&
+          {(sectionKey === "All" || sectionKey === "No Repeat Upcoming") &&
             todo.NonRepeatingUpcoming.filter((todoItem) =>
               todoItem.title.includes(filterKey)
             ).map((todoItem) => (
@@ -81,7 +81,10 @@ function TodoList({
                 key={todoItem.id}
               />
             ))}
-          {(sectionKey === "All" || sectionKey === "No Repeat") &&
+          <span className="font-semibold border-b border-b-foreground/50 w-full text-start my-2">
+            No Repeat Passed
+          </span>
+          {(sectionKey === "All" || sectionKey === "No Repeat Passed") &&
             todo.NonRepeatingPassed.filter((todoItem) =>
               todoItem.title.includes(filterKey)
             ).map((todoItem) => (
