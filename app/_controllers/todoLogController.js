@@ -6,6 +6,7 @@ export async function createTodoLogEntry(data) {
     data: {
       title: data.title,
       completed: data.completed,
+      todoId: data.todoId,
     },
   });
   return successReturn();

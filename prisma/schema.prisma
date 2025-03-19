@@ -44,14 +44,15 @@ model Journal {
 }
 
 model Todo {
-  id           Int      @id @default(autoincrement())
+  id           Int       @id @default(autoincrement())
   title        String
-  shouldRepeat Boolean  @default(false)
+  shouldRepeat Boolean   @default(false)
   repeatType   String? // days, intervals (i.e. every third day)
   repeat       String?
-  isPaused     Boolean  @default(false)
-  icon         Int      @default(0) // hard-coded icons
-  date         DateTime @default(now())
+  isPaused     Boolean   @default(false)
+  icon         Int       @default(0) // hard-coded icons
+  date         DateTime  @default(now())
+  TodoLog      TodoLog[]
 }
 
 model TodoLog {
@@ -59,6 +60,8 @@ model TodoLog {
   title     String
   completed Boolean  @default(false)
   createdAt DateTime @default(now())
+  todo      Todo?    @relation(fields: [todoId], references: [id], onDelete: SetNull)
+  todoId    Int?
 }
 
 model Date {

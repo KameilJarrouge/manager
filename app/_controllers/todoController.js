@@ -46,8 +46,7 @@ export async function deleteTodo(id) {
   return successReturn();
 }
 
-export async function todayTodoList() {
-  const [startOfDay, endOfDay] = getDayBoundaries();
+export async function todayTodoList(startOfDay, endOfDay) {
   const result = await prisma.todo.findMany({
     where: {
       AND: [
@@ -57,24 +56,25 @@ export async function todayTodoList() {
             { shouldRepeat: true }, // get all repeated todo
             {
               // only today's non repeated todo
-              AND: [{ date: { gte: startOfDay, lte: endOfDay } }],
+
+              date: { gte: new Date(startOfDay), lte: new Date(endOfDay) },
             },
           ],
         },
       ],
     },
     include: {
-      todoLog: {
+      TodoLog: {
         where: {
-          createdAt: { gte: startOfDay, lte: endOfDay },
+          createdAt: { gte: new Date(startOfDay), lte: new Date(endOfDay) },
         },
       },
     },
   });
-  return successReturn(preProcessTodo(result));
+  return successReturn(preProcessTodo(result, startOfDay));
 }
 
-function preProcessTodo(todo) {
+function preProcessTodo(todo, startOfDay) {
   const result = todo.reduce(
     (currentValue, todoItem) => {
       let include = true;
@@ -85,11 +85,11 @@ function preProcessTodo(todo) {
 
         if (todoItem.repeatType === "Days") {
           // check if today is in this repeating days
-          const day = moment(new Date()).format("ddd");
+          const day = moment(new Date(startOfDay)).format("ddd");
           if (!repeat.includes(day)) include = false;
         } else {
           // check if today happens to be an interval of this repeat cycle
-          const difference = moment(new Date())
+          const difference = moment(new Date(startOfDay))
             .startOf("day")
             .diff(moment(todoItem.date).startOf("day"), "days", false);
           if (difference % Number(repeat) !== 0) {
@@ -98,25 +98,25 @@ function preProcessTodo(todo) {
         }
       }
 
-      // sort the todo in [pending, completed and notCompleted]
+      // sort the todo in {todo, completed and failed}
       if (include) {
-        if (todoItem.todoLog.length === 0) {
-          currentValue.pending.push(todoItem);
+        if (todoItem.TodoLog.length === 0) {
+          currentValue.todo.push(todoItem);
           return currentValue;
         }
-        if (todoItem.todoLog[0].completed) {
+        if (todoItem.TodoLog[0].completed) {
           currentValue.completed.push(todoItem);
           return currentValue;
         }
-        currentValue.notCompleted.push(todoItem);
+        currentValue.failed.push(todoItem);
         return currentValue;
       }
       return currentValue;
     },
     {
-      pending: [],
+      todo: [],
       completed: [],
-      notCompleted: [],
+      failed: [],
     }
   );
   return result;

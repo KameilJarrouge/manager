@@ -12,6 +12,8 @@ import TextField from "../Input/TextField";
 import api from "@/app/_lib/api";
 import LoadingComponent from "../LoadingComponent";
 import { MdCheck, MdDelete, MdRestore, MdSearch } from "react-icons/md";
+import { toast } from "react-toastify";
+import { GoPlus } from "react-icons/go";
 
 function TodoLogModal({ isOpen, close, id }) {
   const [isLoading, setIsLoading] = useState(false);
@@ -22,20 +24,19 @@ function TodoLogModal({ isOpen, close, id }) {
   const getTodoLog = async () => {
     setIsLoading(true);
     const result = await api.get(
-      `/todoLog?startDate=${selectedDate.startOf(
+      `/todo-log?startDate=${selectedDate.startOf(
         "month"
       )}&endDate=${selectedDate.endOf("month")}`
     );
     if (result.data.success) {
       setTodoLog(result.data.result);
-      console.log(result.data.result);
     }
     setIsLoading(false);
   };
 
   const handleUpdate = async (id, completed) => {
     setIsLoading(true);
-    let result = await api.put(`/todoLog/${id}/update`, {
+    let result = await api.put(`/todo-log/${id}/update`, {
       completed: completed,
     });
     setIsLoading(false);
@@ -47,9 +48,9 @@ function TodoLogModal({ isOpen, close, id }) {
   };
 
   const handleDelete = async (id) => {
-    if (!confirm(`do you wish to delete this note?`)) return;
+    if (!confirm(`do you wish to delete this todo?`)) return;
     setIsLoading(true);
-    let result = await api.delete(`/todoLog/${note.id}/delete`);
+    let result = await api.delete(`/todo-log/${id}/delete`);
     setIsLoading(false);
     if (result.data.success) {
       toast("Deleted Entry!");
@@ -88,7 +89,7 @@ function TodoLogModal({ isOpen, close, id }) {
       className={"gap-4 relative"}
     >
       {isLoading && <LoadingComponent />}
-      <div className="flex flex-col gap-4 w-[110ch] 2xl:w-[120ch]  h-[30rem] 2xl:h-[50rem]">
+      <div className="flex flex-col gap-4 w-[110ch] 2xl:w-[130ch]  h-[30rem] 2xl:h-[50rem]">
         {/* Year and Month Control */}
         <div className=" py-0.5   flex items-center gap-2 border-b border-b-input_bg w-full pb-1">
           <button
@@ -159,8 +160,11 @@ function TodoLogModal({ isOpen, close, id }) {
                     }
                     className="w-fit p-1 flex "
                   >
-                    <MdCheck className="w-[1.2rem] h-fit text-green-400 " />
-                    {/* <GoPlus className="w-[1.2rem] h-fit text-red-400 rotate-45" /> */}
+                    {logEntry.completed ? (
+                      <MdCheck className="w-[1.2rem] h-fit text-green-400 " />
+                    ) : (
+                      <GoPlus className="w-[1.2rem] h-fit text-red-400 rotate-45" />
+                    )}
                   </button>
                   <span className="text-sm">
                     {moment(logEntry.createdAt).format("DD ddd")}

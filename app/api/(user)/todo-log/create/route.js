@@ -1,17 +1,15 @@
 import { NextRequest } from "next/server";
 import { errorResponse, successResponse } from "@/app/_lib/responseGenerator";
-import { todayTodoList } from "@/app/_controllers/todoController";
+import { createTodoLogEntry } from "@/app/_controllers/todoLogController";
 
 /**
  *
  * @param {NextRequest} request
  * @returns
  */
-export async function GET(request) {
-  let result = await todayTodoList(
-    request.nextUrl.searchParams.get("startOfDay"),
-    request.nextUrl.searchParams.get("endOfDay")
-  );
+export async function POST(request) {
+  let body = await request.json();
+  let result = await createTodoLogEntry(body);
   if (!result.success) {
     return errorResponse(result.errorCode);
   }
