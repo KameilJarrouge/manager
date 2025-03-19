@@ -38,10 +38,10 @@ function TextField({
         {...props}
       />
       <div
-        onMouseEnter={() => {
+        onClick={() => {
           if (!hidden) setShowTitle(true);
         }}
-        className={` bg-input_bg flex items-center bg-[radial-gradient(#eeeeee33_1px,transparent_1px)] bg-[size:5px_5px]`}
+        className={` bg-input_bg flex items-center bg-[radial-gradient(#eeeeee33_1px,transparent_1px)] hover:bg-[radial-gradient(#eeeeee88_1px,transparent_1px)] bg-[size:5px_5px]`}
       >
         <button
           onClick={() => setIsHidden((isHidden) => !isHidden)}

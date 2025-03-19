@@ -102,7 +102,7 @@ function TodoHomeSection() {
   }, [todoViewingDate]);
 
   return (
-    <div className="flex flex-col gap-4 relative w-[65ch] 2xl:w-[80ch] ">
+    <div className="relative w-[65ch] 2xl:w-[80ch] ">
       <TodoLogModal
         isOpen={isTodoLogModalOpen}
         close={() => {
@@ -112,130 +112,141 @@ function TodoHomeSection() {
         id={"home-page"}
       />
       {isLoading && <LoadingComponent />}
-
-      {/* New Todo */}
-      <div className="flex gap-4 items-center">
-        <TextField
-          state={newTodoTitle}
-          setState={setNewTodoTitle}
-          placeholder={"New Todo"}
-          className={"w-[50ch]"}
-        />
-        <SubmitButton title="Create" onSubmit={handleCreateSimpleTodo} />
-      </div>
-      {/* Log and Day View Control */}
-      <div className="flex gap-4 items-center">
-        <DateField
-          state={todoViewingDate}
-          setState={(date) => setTodoViewingDate(moment(date))}
-          placeholder="Viewing Day"
-          position="bottom"
-        />
-        <div className="w-[1px] h-full bg-input_bg" />
-        <button
-          onClick={() => {
-            setIsTodoLogModalOpen(true);
-          }}
-          className="p-1 hover:bg-blue-600 text-foreground  rounded transition-colors"
-        >
-          <LuLogs className="w-[1.5rem] h-fit " />
-        </button>
-      </div>
-      {/* List of Todos */}
-      <div className="flex flex-col gap- h-[60vh] 2xl:h-[73vh] overflow-y-auto">
-        <div className="border-b border-b-foreground/50 w-full my-2 flex gap-2 items-center">
-          <MdCheck className="w-[1.2rem] h-fit " />
-          <span className="font-semibold text-start">Todo</span>
+      <div className="flex flex-col gap-4 ">
+        {/* New Todo */}
+        <div className="flex gap-4 items-center">
+          <TextField
+            state={newTodoTitle}
+            setState={setNewTodoTitle}
+            placeholder={"New Todo"}
+            className={"w-[50ch]"}
+          />
+          <SubmitButton title="Create" onSubmit={handleCreateSimpleTodo} />
         </div>
-        <div className="pl-2">
-          {/* TODO Section */}
-          {todo.todo.map((todoItem, index, arr) => (
-            <div
-              key={todoItem.id}
-              className={`w-fit flex items-center justify-between gap-2 hover:bg-foreground/10 px-2 border-b border-b-input_bg `}
-            >
-              <GoDotFill className="w-[0.6rem] h-fit " />
-
-              <span className="w-[55ch] 2xl:w-[70ch] text-start">
-                {todoItem.title}
-              </span>
-              <button
-                className="hover:text-green-400"
-                onClick={() =>
-                  handleCreateTodoLog(true, todoItem.id, todoItem.title)
-                }
+        {/* Log and Day View Control */}
+        <div className="flex gap-2 items-center">
+          <DateField
+            state={todoViewingDate}
+            setState={(date) => setTodoViewingDate(moment(date))}
+            placeholder="Viewing Day"
+            position="bottom"
+          />
+          <div className="w-[1px] h-full bg-input_bg" />
+          <button
+            onClick={() => setTodoViewingDate(moment())}
+            className="p-1 hover:bg-blue-600 rounded transition-colors"
+          >
+            <MdRestore className="w-[1.5rem] h-fit" />
+          </button>
+          <button
+            onClick={() => {
+              setIsTodoLogModalOpen(true);
+            }}
+            className="p-1 hover:bg-blue-600 text-foreground  rounded transition-colors"
+          >
+            <LuLogs className="w-[1.5rem] h-fit " />
+          </button>
+        </div>
+        {/* List of Todos */}
+        <div className="flex flex-col gap- h-[60vh] 2xl:h-[73vh] overflow-y-auto">
+          <div className="border-b border-b-foreground/50 w-full my-2 flex gap-2 items-center">
+            <MdCheck className="w-[1.2rem] h-fit " />
+            <span className="font-semibold text-start">Todo</span>
+          </div>
+          <div className="pl-2">
+            {/* TODO Section */}
+            {todo.todo.map((todoItem, index, arr) => (
+              <div
+                key={todoItem.id}
+                className={`w-fit flex items-center justify-between gap-2 hover:bg-foreground/10 px-2 border-b border-b-input_bg `}
               >
-                <MdCheck className="w-[1.2rem] h-fit  " />
-              </button>
-              <button
-                className="hover:text-red-400 rotate-45"
-                onClick={() =>
-                  handleCreateTodoLog(false, todoItem.id, todoItem.title)
-                }
-              >
-                <GoPlus className="w-[1.2rem] h-fit  " />
-              </button>
-            </div>
-          ))}
-        </div>
-        <div className="border-b border-b-foreground/50 w-full my-2 flex gap-2 items-center">
-          <MdCheck className="w-[1.2rem] h-fit text-green-400" />
-          <span className="font-semibold text-start">Completed</span>
-        </div>
-        <div className="pl-2">
-          {/* COMPLETED Section */}
-          {todo.completed.map((todoItem) => (
-            <div
-              key={todoItem.id}
-              className="w-fit flex items-center justify-between gap-2 hover:bg-foreground/10 px-2 group border-b border-b-input_bg "
-            >
-              <GoDotFill className="w-[0.6rem] h-fit text-green-400" />
+                <GoDotFill className="w-[0.6rem] h-fit " />
 
-              <span className="w-[55ch] 2xl:w-[70ch] text-start">
-                {todoItem.title}
-              </span>
-              <button onClick={() => handleRestoreTodo(todoItem.TodoLog[0].id)}>
-                <MdRestore className="group-hover:visible invisible w-[1.2rem] h-fit  hover:text-blue-400" />
-              </button>
-              <button
-                onClick={() =>
-                  handleChangeCompleteStatus(todoItem.TodoLog[0].id, false)
-                }
+                <span className="w-[55ch] 2xl:w-[70ch] text-start">
+                  {todoItem.title}
+                </span>
+                <button
+                  className="hover:text-green-400"
+                  onClick={() =>
+                    handleCreateTodoLog(true, todoItem.id, todoItem.title)
+                  }
+                >
+                  <MdCheck className="w-[1.2rem] h-fit  " />
+                </button>
+                <button
+                  className="hover:text-red-400 rotate-45"
+                  onClick={() =>
+                    handleCreateTodoLog(false, todoItem.id, todoItem.title)
+                  }
+                >
+                  <GoPlus className="w-[1.2rem] h-fit  " />
+                </button>
+              </div>
+            ))}
+          </div>
+          <div className="border-b border-b-foreground/50 w-full my-2 flex gap-2 items-center">
+            <MdCheck className="w-[1.2rem] h-fit text-green-400" />
+            <span className="font-semibold text-start">Completed</span>
+          </div>
+          <div className="pl-2">
+            {/* COMPLETED Section */}
+            {todo.completed.map((todoItem) => (
+              <div
+                key={todoItem.id}
+                className="w-fit flex items-center justify-between gap-2 hover:bg-foreground/10 px-2 group border-b border-b-input_bg "
               >
-                <GoPlus className="group-hover:visible invisible w-[1.2rem] h-fit  hover:text-red-400 rotate-45" />
-              </button>
-            </div>
-          ))}
-        </div>
-        <div className="border-b border-b-foreground/50 w-full my-2 flex gap-2 items-center">
-          <GoPlus className="w-[1.2rem] h-fit text-red-400 rotate-45" />
-          <span className="font-semibold text-start">Failed</span>
-        </div>
-        <div className="pl-2">
-          {/* FAILED Section */}
+                <GoDotFill className="w-[0.6rem] h-fit text-green-400" />
 
-          {todo.failed.map((todoItem) => (
-            <div
-              key={todoItem.id}
-              className="w-fit flex items-center justify-between gap-2 hover:bg-foreground/10 px-2 group border-b border-b-input_bg "
-            >
-              <GoDotFill className="w-[0.6rem] h-fit text-red-400 rotate-45" />
+                <span className="w-[55ch] 2xl:w-[70ch] text-start">
+                  {todoItem.title}
+                </span>
+                <button
+                  onClick={() => handleRestoreTodo(todoItem.TodoLog[0].id)}
+                >
+                  <MdRestore className="group-hover:visible invisible w-[1.2rem] h-fit  hover:text-blue-400" />
+                </button>
+                <button
+                  onClick={() =>
+                    handleChangeCompleteStatus(todoItem.TodoLog[0].id, false)
+                  }
+                >
+                  <GoPlus className="group-hover:visible invisible w-[1.2rem] h-fit  hover:text-red-400 rotate-45" />
+                </button>
+              </div>
+            ))}
+          </div>
+          <div className="border-b border-b-foreground/50 w-full my-2 flex gap-2 items-center">
+            <GoPlus className="w-[1.2rem] h-fit text-red-400 rotate-45" />
+            <span className="font-semibold text-start">Failed</span>
+          </div>
+          <div className="pl-2">
+            {/* FAILED Section */}
 
-              <span className="w-[55ch] 2xl:w-[70ch] text-start">
-                {todoItem.title}
-              </span>
-              <button onClick={() => handleRestoreTodo(todoItem.TodoLog[0].id)}>
-                <MdRestore className="group-hover:visible invisible w-[1.2rem] h-fit  hover:text-blue-400" />
-              </button>
-              <button
-                onClick={() =>
-                  handleChangeCompleteStatus(todoItem.TodoLog[0].id, true)
-                }
+            {todo.failed.map((todoItem) => (
+              <div
+                key={todoItem.id}
+                className="w-fit flex items-center justify-between gap-2 hover:bg-foreground/10 px-2 group border-b border-b-input_bg "
               >
-                <MdCheck className="group-hover:visible invisible w-[1.2rem] h-fit  hover:text-green-400" />
-              </button>
-            </div>
-          ))}
+                <GoDotFill className="w-[0.6rem] h-fit text-red-400 rotate-45" />
+
+                <span className="w-[55ch] 2xl:w-[70ch] text-start">
+                  {todoItem.title}
+                </span>
+                <button
+                  onClick={() => handleRestoreTodo(todoItem.TodoLog[0].id)}
+                >
+                  <MdRestore className="group-hover:visible invisible w-[1.2rem] h-fit  hover:text-blue-400" />
+                </button>
+                <button
+                  onClick={() =>
+                    handleChangeCompleteStatus(todoItem.TodoLog[0].id, true)
+                  }
+                >
+                  <MdCheck className="group-hover:visible invisible w-[1.2rem] h-fit  hover:text-green-400" />
+                </button>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>

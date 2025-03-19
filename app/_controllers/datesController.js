@@ -42,8 +42,10 @@ export async function getDates() {
   return successReturn(result);
 }
 
-export async function getLatestDates() {
-  const startDate = moment(new Date()).startOf("month");
-  const endDate = moment(new Date()).add(1, "months").endOf("month");
-  return await getDates(startDate, endDate);
+export async function getLatestDates(month) {
+  const result = await prisma.date.findMany({
+    where: { month: month },
+    orderBy: { day: "asc" },
+  });
+  return successReturn(result);
 }

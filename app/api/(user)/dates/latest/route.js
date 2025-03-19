@@ -8,7 +8,9 @@ import { NextRequest } from "next/server";
  * @returns
  */
 export async function GET(request) {
-  let result = await getLatestDates();
+  let result = await getLatestDates(
+    Number(request.nextUrl.searchParams.get("month"))
+  );
   if (!result.success) {
     return errorResponse(result.errorCode);
   }

@@ -6,7 +6,12 @@ import { GoDotFill } from "react-icons/go";
 
 const daysOfTheWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-function CalendarPreview({ initialDate, accentFunc = (f) => false }) {
+function CalendarPreview({
+  initialDate,
+  accentFunc = (f) => false,
+  onChangeDate = (f) => f,
+  singleClickToRestoreToNewDate = false,
+}) {
   const [date, setDate] = useState(initialDate);
   const [calendar, setCalendar] = useState([]);
 
@@ -56,6 +61,7 @@ function CalendarPreview({ initialDate, accentFunc = (f) => false }) {
 
   useEffect(() => {
     setCalendar(getMonthDays(date));
+    onChangeDate(moment(date).toDate());
   }, [date]);
 
   useEffect(() => {
@@ -85,8 +91,16 @@ function CalendarPreview({ initialDate, accentFunc = (f) => false }) {
           </button>
         </div>
         <button
-          onDoubleClick={handleRestoreCurrentMonth}
-          onClick={handleRestoreOriginalMonth}
+          onDoubleClick={
+            !singleClickToRestoreToNewDate
+              ? handleRestoreCurrentMonth
+              : handleRestoreOriginalMonth
+          }
+          onClick={
+            singleClickToRestoreToNewDate
+              ? handleRestoreCurrentMonth
+              : handleRestoreOriginalMonth
+          }
           className="text-foreground hover:text-white"
         >
           <MdRestore className="w-[1.5rem] h-fit " />
