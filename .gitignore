@@ -13,6 +13,7 @@
 # testing
 /coverage
 
+/build-output
 # next.js
 /.next/
 /out/
@@ -39,4 +40,4 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-/prisma/data.db*
+/prisma/data*
