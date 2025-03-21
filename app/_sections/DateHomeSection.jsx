@@ -57,7 +57,7 @@ function DateHomeSection() {
             <GoDotFill className="w-[0.7rem] h-fit" />
             <div className="flex items-center gap-0.5">
               <FiChevronsLeft />
-              <span>{moment(date).format("DD")}</span>
+              <span>{date.day}</span>
               <FiChevronsRight />
             </div>
             <span className="w-[30ch] 2xl:w-[40ch]">{date.title}</span>
