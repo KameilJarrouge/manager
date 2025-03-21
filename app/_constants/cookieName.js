@@ -1,2 +1,2 @@
-const cookieName = "manager_0_1_0_auth_token";
+const cookieName = process.env.COOKIE_NAME;
 export default cookieName;
