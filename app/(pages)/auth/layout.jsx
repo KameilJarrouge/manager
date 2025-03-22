@@ -4,7 +4,7 @@ export const metadata = {
 };
 export default function RootLayout({ children }) {
   return (
-    <div className="absolute top-0 right-0 bg-black/30 backdrop-blur  h-screen w-full flex items-center justify-center ">
+    <div className="absolute top-0 right-0 bg-black/30 backdrop-blur z-20 h-screen w-full flex items-center justify-center ">
       {children}
     </div>
   );
