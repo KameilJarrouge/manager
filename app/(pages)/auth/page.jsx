@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import api from "@/app/_lib/api";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
-// import { useStore } from "@/app/store";
 import TextField from "@/app/_components/Input/TextField";
 import { errorMessages } from "@/app/_constants/constants";
 import SubmitButton from "@/app/_components/Input/SubmitButton";
@@ -30,7 +29,7 @@ export default function Auth() {
   }, []);
 
   let handleSubmitAndClose = async (e) => {
-    if ((e && e.key !== "Enter") || password === "") return;
+    if (password === "") return;
 
     let url = "/auth/login";
     if (!isLogin) url = "/auth/signup";
@@ -54,7 +53,9 @@ export default function Auth() {
   };
   return (
     <div
-      onKeyDown={handleSubmitAndClose}
+      onKeyDown={(e) => {
+        if (e.key === "Enter") handleSubmitAndClose();
+      }}
       className="flex flex-col items-center gap-4 p-2 bg-primary relative"
     >
       {isLoading && <LoadingComponent />}
