@@ -19,7 +19,6 @@ function DateHomeSection() {
     setIsLoading(false);
     if (result.data.success) {
       setLatestDates(result.data.result);
-      console.log(result.data.result);
     }
   };
 

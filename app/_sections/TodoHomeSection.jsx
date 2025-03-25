@@ -34,7 +34,6 @@ function TodoHomeSection() {
 
     if (result.data.success) {
       setTodo(result.data.result);
-      console.log(result.data.result);
     }
   };
 
