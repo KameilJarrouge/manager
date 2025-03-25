@@ -51,12 +51,12 @@ function DateHomeSection() {
         {latestDates.map((date) => (
           <div
             key={date.id}
-            className="flex items-center gap-2 px-2 border-b border-b-input_bg"
+            className="flex items-center gap-1 px-2 border-b border-b-input_bg"
           >
             <GoDotFill className="w-[0.7rem] h-fit" />
             <div className="flex items-center gap-0.5">
               <FiChevronsLeft />
-              <span>{date.day}</span>
+              <span className="w-[2ch] text-center">{date.day}</span>
               <FiChevronsRight />
             </div>
             <span className="w-[30ch] 2xl:w-[40ch]">{date.title}</span>
