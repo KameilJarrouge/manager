@@ -5,7 +5,7 @@ import api from "../_lib/api";
 import moment from "moment";
 import LoadingComponent from "../_components/LoadingComponent";
 import { GoDotFill } from "react-icons/go";
-import { FiChevronsLeft, FiChevronsRight } from "react-icons/fi";
+import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 
 function DateHomeSection() {
   const [viewingDate, setViewingDate] = useState(new Date());
@@ -55,9 +55,9 @@ function DateHomeSection() {
           >
             <GoDotFill className="w-[0.7rem] h-fit" />
             <div className="flex items-center gap-0.5">
-              <FiChevronsLeft />
+              <FiChevronLeft />
               <span className="w-[2ch] text-center">{date.day}</span>
-              <FiChevronsRight />
+              <FiChevronRight />
             </div>
             <span className="w-[30ch] 2xl:w-[40ch]">{date.title}</span>
           </div>

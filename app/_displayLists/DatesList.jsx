@@ -45,10 +45,12 @@ function DatesList({ yearToView, dates, onSelect, selectedDate }) {
                         : "text-foreground/50"
                     } `}
                   />
-                  <FiChevronLeft />
-                  <span>{date.day}</span>
-                  <FiChevronRight />
-                  <span>{date.title}</span>
+                  <div className="flex items-center gap-0.5">
+                    <FiChevronLeft />
+                    <span className="w-[2ch] text-center">{date.day}</span>
+                    <FiChevronRight />
+                    <span>{date.title}</span>
+                  </div>
                 </button>
               ))}
             </div>
