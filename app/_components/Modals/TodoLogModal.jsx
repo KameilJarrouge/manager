@@ -166,10 +166,10 @@ function TodoLogModal({ isOpen, close, id }) {
                       <GoPlus className="w-[1.2rem] h-fit text-red-400 rotate-45" />
                     )}
                   </button>
-                  <span className="text-sm">
+                  <span className="text-sm w-[6ch]">
                     {moment(logEntry.createdAt).format("DD ddd")}
                   </span>
-                  <span className="text-sm">
+                  <span className="text-sm w-[7ch]">
                     {moment(logEntry.createdAt).format("hh:mm a")}
                   </span>
                   <div className="w-[1px] h-full bg-input_bg" />
