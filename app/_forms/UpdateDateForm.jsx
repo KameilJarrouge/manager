@@ -69,6 +69,12 @@ function UpdateDateForm({ afterSubmit = (f) => f, dateObject }) {
         >
           <MdDelete className="w-[1.2rem] h-fit" />
         </button>
+        <button
+          onClick={restore}
+          className="absolute top-0 bottom-0 left-2 my-auto  h-fit p-1 hover:bg-accent rounded transition-colors"
+        >
+          <MdRestore className="w-[1.5rem] h-fit" />
+        </button>
       </span>
       <div className="flex gap-4  py-4 h-[80%]">
         <div className="flex flex-col gap-4 items-center">
@@ -79,12 +85,6 @@ function UpdateDateForm({ afterSubmit = (f) => f, dateObject }) {
             dayState={day}
             setDayState={setDay}
           />
-          <button
-            onClick={restore}
-            className="p-1 hover:bg-accent rounded transition-colors"
-          >
-            <MdRestore className="w-[1.5rem] h-fit" />
-          </button>
         </div>
       </div>
       <SubmitButton title="Update" onSubmit={handleUpdateDate} />

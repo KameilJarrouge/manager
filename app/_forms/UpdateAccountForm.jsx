@@ -106,7 +106,13 @@ function UpdateAccountForm({ account, afterSubmit = (f) => f }) {
           className="absolute top-0 bottom-0 right-2 my-auto  h-fit p-1 hover:bg-red-600 rounded transition-colors"
         >
           <MdDelete className="w-[1.2rem] h-fit" />
-        </button>{" "}
+        </button>
+        <button
+          onClick={restore}
+          className="absolute top-0 bottom-0 left-2 my-auto  h-fit p-1 hover:bg-accent rounded transition-colors"
+        >
+          <MdRestore className="w-[1.5rem] h-fit" />
+        </button>
       </span>
       <div className="flex gap-4  py-4 h-[80%]">
         <div className="flex flex-col gap-4 items-center">
@@ -129,14 +135,6 @@ function UpdateAccountForm({ account, afterSubmit = (f) => f }) {
             placeholder={"Provider"}
           />
           <DateField state={createdAt} setState={setCreatedAt} />
-          <div className="w-full flex justify-center">
-            <button
-              onClick={restore}
-              className="p-1 hover:bg-accent rounded transition-colors"
-            >
-              <MdRestore className="w-[1.5rem] h-fit" />
-            </button>
-          </div>
         </div>
         <div className="h-full w-[1px] bg-input_bg"></div>
 

@@ -64,6 +64,12 @@ function UpdateNoteForm({ afterSubmit = (f) => f, note }) {
         >
           <MdDelete className="w-[1.2rem] h-fit" />
         </button>
+        <button
+          onClick={restore}
+          className="absolute top-0 bottom-0 left-2 my-auto  h-fit p-1 hover:bg-accent rounded transition-colors"
+        >
+          <MdRestore className="w-[1.5rem] h-fit" />
+        </button>
       </span>
       <div className="flex gap-4  py-4 h-[80%]">
         <div className="flex flex-col gap-8 items-start">
@@ -73,12 +79,6 @@ function UpdateNoteForm({ afterSubmit = (f) => f, note }) {
               setState={setTitle}
               placeholder={"Title"}
             />
-            <button
-              onClick={restore}
-              className="p-1 hover:bg-accent rounded transition-colors"
-            >
-              <MdRestore className="w-[1.5rem] h-fit" />
-            </button>
           </div>
           <div className="w-[50ch] 2xl:w-[60ch]  h-[45vh] 2xl:h-[55vh] overflow-y-auto">
             <TipTap editor={editor} />

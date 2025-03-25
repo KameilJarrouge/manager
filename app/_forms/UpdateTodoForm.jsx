@@ -9,7 +9,6 @@ import {
   MdPause,
   MdPlayArrow,
   MdRepeat,
-  MdRepeatOn,
   MdRestore,
 } from "react-icons/md";
 import ToggleInput from "../_components/Input/ToggleInput";
@@ -128,6 +127,12 @@ function UpdateTodoForm({ todo, afterSubmit = (f) => f }) {
         >
           <MdDelete className="w-[1.2rem] h-fit" />
         </button>
+        <button
+          onClick={restore}
+          className="absolute top-0 bottom-0 left-2 my-auto  h-fit p-1 hover:bg-accent rounded transition-colors"
+        >
+          <MdRestore className="w-[1.5rem] h-fit" />
+        </button>
       </span>
       <div className="w-full h-[80%] py-4 flex gap-2">
         <div className="w-fit h-full flex flex-col gap-4 items-center">
@@ -189,12 +194,6 @@ function UpdateTodoForm({ todo, afterSubmit = (f) => f }) {
               )}
             </div>
           )}
-          <button
-            onClick={restore}
-            className="p-1 w-fit hover:bg-accent rounded transition-colors"
-          >
-            <MdRestore className="w-[1.5rem] h-fit" />
-          </button>
         </div>
         <div className="w-[1px] h-full bg-input_bg" />
         <div className="w-fit h-full flex flex-col gap-2 relative">
