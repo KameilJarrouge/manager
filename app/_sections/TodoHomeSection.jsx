@@ -164,22 +164,26 @@ function TodoHomeSection() {
                 <span className="w-[55ch] 2xl:w-[70ch] text-start">
                   {todoItem.title}
                 </span>
-                <button
-                  className="hover:text-green-400"
-                  onClick={() =>
-                    handleCreateTodoLog(true, todoItem.id, todoItem.title)
-                  }
-                >
-                  <MdCheck className="w-[1.2rem] h-fit  " />
-                </button>
-                <button
-                  className="hover:text-red-400 rotate-45"
-                  onClick={() =>
-                    handleCreateTodoLog(false, todoItem.id, todoItem.title)
-                  }
-                >
-                  <GoPlus className="w-[1.2rem] h-fit  " />
-                </button>
+                {todoViewingDate.isSame(moment(), "day") && (
+                  <>
+                    <button
+                      className="hover:text-green-400"
+                      onClick={() =>
+                        handleCreateTodoLog(true, todoItem.id, todoItem.title)
+                      }
+                    >
+                      <MdCheck className="w-[1.2rem] h-fit  " />
+                    </button>
+                    <button
+                      className="hover:text-red-400 rotate-45"
+                      onClick={() =>
+                        handleCreateTodoLog(false, todoItem.id, todoItem.title)
+                      }
+                    >
+                      <GoPlus className="w-[1.2rem] h-fit  " />
+                    </button>
+                  </>
+                )}
               </div>
             ))}
           </div>
@@ -199,18 +203,25 @@ function TodoHomeSection() {
                 <span className="w-[55ch] 2xl:w-[70ch] text-start">
                   {todoItem.title}
                 </span>
-                <button
-                  onClick={() => handleRestoreTodo(todoItem.TodoLog[0].id)}
-                >
-                  <MdRestore className="group-hover:visible invisible w-[1.2rem] h-fit  hover:text-blue-400" />
-                </button>
-                <button
-                  onClick={() =>
-                    handleChangeCompleteStatus(todoItem.TodoLog[0].id, false)
-                  }
-                >
-                  <GoPlus className="group-hover:visible invisible w-[1.2rem] h-fit  hover:text-red-400 rotate-45" />
-                </button>
+                {todoViewingDate.isSame(moment(), "day") && (
+                  <>
+                    <button
+                      onClick={() => handleRestoreTodo(todoItem.TodoLog[0].id)}
+                    >
+                      <MdRestore className="group-hover:visible invisible w-[1.2rem] h-fit  hover:text-blue-400" />
+                    </button>
+                    <button
+                      onClick={() =>
+                        handleChangeCompleteStatus(
+                          todoItem.TodoLog[0].id,
+                          false
+                        )
+                      }
+                    >
+                      <GoPlus className="group-hover:visible invisible w-[1.2rem] h-fit  hover:text-red-400 rotate-45" />
+                    </button>
+                  </>
+                )}
               </div>
             ))}
           </div>
@@ -231,18 +242,22 @@ function TodoHomeSection() {
                 <span className="w-[55ch] 2xl:w-[70ch] text-start">
                   {todoItem.title}
                 </span>
-                <button
-                  onClick={() => handleRestoreTodo(todoItem.TodoLog[0].id)}
-                >
-                  <MdRestore className="group-hover:visible invisible w-[1.2rem] h-fit  hover:text-blue-400" />
-                </button>
-                <button
-                  onClick={() =>
-                    handleChangeCompleteStatus(todoItem.TodoLog[0].id, true)
-                  }
-                >
-                  <MdCheck className="group-hover:visible invisible w-[1.2rem] h-fit  hover:text-green-400" />
-                </button>
+                {todoViewingDate.isSame(moment(), "day") && (
+                  <>
+                    <button
+                      onClick={() => handleRestoreTodo(todoItem.TodoLog[0].id)}
+                    >
+                      <MdRestore className="group-hover:visible invisible w-[1.2rem] h-fit  hover:text-blue-400" />
+                    </button>
+                    <button
+                      onClick={() =>
+                        handleChangeCompleteStatus(todoItem.TodoLog[0].id, true)
+                      }
+                    >
+                      <MdCheck className="group-hover:visible invisible w-[1.2rem] h-fit  hover:text-green-400" />
+                    </button>
+                  </>
+                )}
               </div>
             ))}
           </div>
