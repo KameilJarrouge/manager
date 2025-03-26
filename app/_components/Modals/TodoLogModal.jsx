@@ -169,7 +169,7 @@ function TodoLogModal({ isOpen, close, id }) {
                   <span className="text-sm w-[6ch]">
                     {moment(logEntry.createdAt).format("DD ddd")}
                   </span>
-                  <span className="text-sm w-[7ch]">
+                  <span className="text-sm w-[8ch]">
                     {moment(logEntry.createdAt).format("hh:mm a")}
                   </span>
                   <div className="w-[1px] h-full bg-input_bg" />

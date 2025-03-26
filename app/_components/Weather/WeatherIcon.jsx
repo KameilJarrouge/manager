@@ -85,7 +85,8 @@ function WeatherIcon({ code, time, sunrise, sunset, isDay }) {
 
   // Handle unknown codes gracefully
   if (!IconComponent) {
-    return <div>Unknown Weather</div>;
+    const FallBack = weatherCodeToIcon[dayOrNight][0];
+    return <FallBack className="w-[2rem] h-fit" />;
   }
 
   // Render the corresponding icon

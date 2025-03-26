@@ -5,7 +5,7 @@ import api from "../_lib/api";
 import { toast } from "react-toastify";
 import { MdLogout, MdPassword } from "react-icons/md";
 import UpdatePasswordModal from "../_components/Modals/UpdatePasswordModal";
-import WeatherForecast from "../_components/WeatherForecast";
+import WeatherForecast from "../_components/Weather/WeatherForecast";
 
 function UserSection() {
   const router = useRouter();
