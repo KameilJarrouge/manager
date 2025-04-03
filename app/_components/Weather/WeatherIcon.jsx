@@ -74,7 +74,7 @@ const weatherCodeToIcon = {
   },
 };
 
-function WeatherIcon({ code, time, sunrise, sunset, isDay }) {
+function WeatherIcon({ code, time, sunrise, sunset, isDay = null }) {
   // Determine if it's day or night
 
   const isDaytime = isDay !== null ? isDay : time >= sunrise && time <= sunset;

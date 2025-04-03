@@ -32,7 +32,9 @@ function HourlyDisplay({
         code={
           forecast[selectedDay].hours[value + hourSectionOffset].weatherCode
         }
-        isDay={true}
+        time={forecast[selectedDay].hours[value + hourSectionOffset].time}
+        sunrise={forecast[selectedDay].day.sunrise}
+        sunset={forecast[selectedDay].day.sunset}
       />
       <div className="w-full h-[1px] bg-foreground/10 mb-1"></div>
       <div className="flex flex-col items-start">

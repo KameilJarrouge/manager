@@ -109,6 +109,7 @@ function WeatherForecast() {
   };
 
   const openMenu = () => {
+    if (showDetails) return;
     setInTransition(true);
     setIsCollapsing(false);
     setShowDetails(true);
@@ -226,6 +227,7 @@ function WeatherForecast() {
 
             <HourlyMenu
               changeOffset={changeOffset}
+              setOffset={setHourSectionOffset}
               hourSectionOffset={hourSectionOffset}
             >
               {/* Hour */}
