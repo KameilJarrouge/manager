@@ -32,16 +32,17 @@ function WeatherForecast() {
     setForecast(cachedWeatherData.forecast);
     setUnits(cachedWeatherData.units);
     setUpdatedAt(moment(cachedWeatherData.date));
-    setShouldWarn(moment(cachedWeatherData.date).isBefore(moment(), "hour"));
+    setShouldWarn(isCacheExpired(cachedWeatherData.date));
+  };
+
+  const isCacheExpired = (dateTime) => {
+    return Math.abs(moment().diff(moment(dateTime), "minutes")) >= 15;
   };
 
   const fetchWeatherData = async () => {
     // Check if Cached Data is still valid
     const cachedWeatherData = JSON.parse(localStorage.getItem("weather-data"));
-    if (
-      cachedWeatherData &&
-      moment(cachedWeatherData.date).isSame(moment(), "hour")
-    ) {
+    if (cachedWeatherData && !isCacheExpired(cachedWeatherData.date)) {
       setFromCache(cachedWeatherData);
       return;
     }
@@ -147,7 +148,7 @@ function WeatherForecast() {
     fetchWeatherData();
     const intervalId = setInterval(() => {
       fetchWeatherData();
-    }, 600000);
+    }, 900000);
     return () => clearInterval(intervalId);
   }, []);
 

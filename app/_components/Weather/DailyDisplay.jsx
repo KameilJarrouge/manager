@@ -12,7 +12,7 @@ function DailyDisplay({ setSelectedDay, index, selectedDay, forecast, units }) {
       }`}
     >
       <div className="flex flex-col gap-0.5 items-start">
-        <span className="text-xs">{moment(index).format("DD MMM")}</span>
+        <span className="text-xs">{moment(index).format("D MMM")}</span>
         <WeatherIcon code={forecast[index].day.weatherCode} isDay={true} />
         <div className="flex flex-col">
           <div className="flex items-center gap-0.5">

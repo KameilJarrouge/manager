@@ -24,7 +24,7 @@ function MainWeatherDisplay({
           code={currentWeather.weathercode}
           isDay={currentWeather.is_day}
         />
-        <span className="text-sm">{moment().format("DD MMM")}</span>
+        <span className="text-sm">{moment().format("D MMM")}</span>
       </div>
       <div className="w-[1px] h-full bg-input_bg" />
 
