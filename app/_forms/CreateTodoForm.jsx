@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import api from "../_lib/api";
 import LoadingComponent from "../_components/LoadingComponent";
 import TextField from "../_components/Input/TextField";
-import { MdPause, MdPlayArrow, MdRepeat, MdRepeatOn } from "react-icons/md";
+import { MdPause, MdPlayArrow, MdRepeat, MdWaves } from "react-icons/md";
 import ToggleInput from "../_components/Input/ToggleInput";
 import DaysRepeatInput from "../_components/Input/DaysRepeatInput";
 import IntervalRepeatInput from "../_components/Input/IntervalRepeatInput";
@@ -23,6 +23,7 @@ function CreateTodoForm({ afterSubmit = (f) => f }) {
   const [repeatInterval, setRepeatInterval] = useState(1);
   const [isPaused, setIsPaused] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isFlexible, setIsFlexible] = useState(false);
 
   const clearForm = () => {
     setTitle("");
@@ -31,6 +32,7 @@ function CreateTodoForm({ afterSubmit = (f) => f }) {
     setRepeatType();
     setRepeatDays([]);
     setRepeatInterval(1);
+    setIsFlexible(false);
     setIsPaused(false);
   };
 
@@ -57,6 +59,7 @@ function CreateTodoForm({ afterSubmit = (f) => f }) {
       repeat,
       date: createdAt || new Date(),
       isPaused: isPaused,
+      isFlexible: isFlexible,
     });
 
     setIsLoading(false);
@@ -108,17 +111,32 @@ function CreateTodoForm({ afterSubmit = (f) => f }) {
               position="bottom"
             />
             <button
+              onClick={() => setIsFlexible((isFlexible) => !isFlexible)}
+              className={`w-fit p-1 hover:bg-foreground/10 ${
+                isFlexible ? "text-accent" : "text-foreground"
+              }  rounded flex items-center gap-0.5`}
+            >
+              <MdWaves className="w-[1.5rem] h-fit" />
+            </button>
+
+            <div className="w-[1px] h-full bg-input_bg" />
+
+            <button
+              disabled={isFlexible}
               onClick={() => setShouldRepeat((shouldRepeat) => !shouldRepeat)}
               className={`w-fit p-1 hover:bg-foreground/10 ${
-                shouldRepeat ? "text-accent" : "text-foreground"
+                isFlexible
+                  ? "text-foreground/50"
+                  : shouldRepeat
+                  ? "text-accent"
+                  : "text-foreground"
               }  rounded flex items-center gap-0.5`}
             >
               <MdRepeat className="w-[1.5rem] h-fit" />
-              <span className="pr-1 w-[11ch] text-foreground">
-                {shouldRepeat ? "Repeating" : "Not Repeating"}
-              </span>
             </button>
+
             <div className="w-[1px] h-full bg-input_bg" />
+
             <button
               onClick={() => setIsPaused((isPaused) => !isPaused)}
               className={`w-fit p-1 hover:bg-foreground/10 text-foreground  rounded flex items-center gap-0.5 `}
@@ -128,12 +146,9 @@ function CreateTodoForm({ afterSubmit = (f) => f }) {
               ) : (
                 <MdPlayArrow className="w-[1.5rem] h-fit" />
               )}
-              <span className="pr-1 w-[7ch]">
-                {isPaused ? "Paused" : "Running"}
-              </span>
             </button>
           </div>
-          {shouldRepeat && (
+          {!isFlexible && shouldRepeat && (
             <div className={`flex flex-col gap-2 h-fit w-full`}>
               <ToggleInput
                 value1="Days"

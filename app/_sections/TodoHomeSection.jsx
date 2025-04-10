@@ -3,7 +3,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import moment from "moment";
 import { LuLogs } from "react-icons/lu";
-import { MdCheck, MdRestore } from "react-icons/md";
+import { MdCheck, MdRestore, MdWaves } from "react-icons/md";
 import { GoDotFill, GoPlus } from "react-icons/go";
 import { toast } from "react-toastify";
 import DateField from "../_components/Input/DateField";
@@ -16,6 +16,7 @@ import api from "../_lib/api";
 function TodoHomeSection() {
   const [newTodoTitle, setNewTodoTitle] = useState("");
   const [todoViewingDate, setTodoViewingDate] = useState(moment(new Date()));
+  const [isFlexible, setIsFlexible] = useState(false);
   const [isTodoLogModalOpen, setIsTodoLogModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [todo, setTodo] = useState({ todo: [], completed: [], failed: [] });
@@ -51,24 +52,37 @@ function TodoHomeSection() {
       repeat: undefined,
       date: new Date(),
       isPaused: false,
+      isFlexible: isFlexible,
     });
     setIsLoading(false);
 
     if (result.data.success) {
       toast("Created Todo!");
       setNewTodoTitle("");
+      setIsFlexible(false);
       getTodo();
     }
   };
 
-  const handleCreateTodoLog = async (isCompleted, todoId, title) => {
+  const handleCreateTodoLog = async (
+    isCompleted,
+    todoId,
+    title,
+    isFlexible
+  ) => {
+    const shouldDelete = isFlexible
+      ? confirm(`Do you wish to delete this flexible todo?`)
+      : false;
+
     setIsLoading(true);
     const result = await api.post("/todo-log/create", {
       completed: isCompleted,
       todoId: todoId,
       title: title,
     });
-    setIsLoading(false);
+
+    if (shouldDelete) await api.delete(`/todo/${todoId}/delete`);
+
     if (result.data.success) {
       toast(`${isCompleted ? "Completed " : "Failed"} Task`);
       getTodo();
@@ -85,11 +99,21 @@ function TodoHomeSection() {
     }
   };
 
-  const handleChangeCompleteStatus = async (entryId, isCompleted) => {
+  const handleChangeCompleteStatus = async (
+    entryId,
+    isCompleted,
+    isFlexible,
+    todoId
+  ) => {
+    const shouldDelete = isFlexible
+      ? confirm(`Do you wish to delete this flexible todo?`)
+      : false;
     setIsLoading(true);
     const result = await api.put(`/todo-log/${entryId}/update`, {
       completed: isCompleted,
     });
+    if (shouldDelete) await api.delete(`/todo/${todoId}/delete`);
+
     setIsLoading(false);
     if (result.data.success) {
       getTodo();
@@ -120,6 +144,14 @@ function TodoHomeSection() {
             placeholder={"New Todo"}
             className={"w-[50ch]"}
           />
+          <button
+            onClick={() => setIsFlexible((isFlexible) => !isFlexible)}
+            className={`w-fit p-1 hover:bg-foreground/10 ${
+              isFlexible ? "text-accent" : "text-foreground/80"
+            }  rounded flex items-center gap-0.5`}
+          >
+            <MdWaves className="w-[1.5rem] h-fit" />
+          </button>
           <SubmitButton title="Create" onSubmit={handleCreateSimpleTodo} />
         </div>
         {/* Log and Day View Control */}
@@ -169,7 +201,12 @@ function TodoHomeSection() {
                     <button
                       className="hover:text-green-400"
                       onClick={() =>
-                        handleCreateTodoLog(true, todoItem.id, todoItem.title)
+                        handleCreateTodoLog(
+                          true,
+                          todoItem.id,
+                          todoItem.title,
+                          todoItem.isFlexible
+                        )
                       }
                     >
                       <MdCheck className="w-[1.2rem] h-fit  " />
@@ -177,7 +214,12 @@ function TodoHomeSection() {
                     <button
                       className="hover:text-red-400 rotate-45"
                       onClick={() =>
-                        handleCreateTodoLog(false, todoItem.id, todoItem.title)
+                        handleCreateTodoLog(
+                          false,
+                          todoItem.id,
+                          todoItem.title,
+                          todoItem.isFlexible
+                        )
                       }
                     >
                       <GoPlus className="w-[1.2rem] h-fit  " />
@@ -214,7 +256,9 @@ function TodoHomeSection() {
                       onClick={() =>
                         handleChangeCompleteStatus(
                           todoItem.TodoLog[0].id,
-                          false
+                          false,
+                          todoItem.isFlexible,
+                          todoItem.id
                         )
                       }
                     >
@@ -251,7 +295,12 @@ function TodoHomeSection() {
                     </button>
                     <button
                       onClick={() =>
-                        handleChangeCompleteStatus(todoItem.TodoLog[0].id, true)
+                        handleChangeCompleteStatus(
+                          todoItem.TodoLog[0].id,
+                          true,
+                          todoItem.isFlexible,
+                          todoItem.id
+                        )
                       }
                     >
                       <MdCheck className="group-hover:visible invisible w-[1.2rem] h-fit  hover:text-green-400" />

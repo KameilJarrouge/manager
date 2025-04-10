@@ -9,6 +9,7 @@ function DateField({
   setState,
   placeholder = "Created At",
   position = "top",
+  className,
 }) {
   const [isDateMenuOpen, setIsDateMenuOpen] = useState(false);
 
@@ -39,6 +40,7 @@ function DateField({
         onFocus={() => setIsDateMenuOpen(true)}
         placeholder={placeholder}
         state={moment(state).format("YYYY / MM / DD")}
+        className={className}
         readOnly
       />
       {isDateMenuOpen && (

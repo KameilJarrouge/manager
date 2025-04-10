@@ -11,6 +11,7 @@ import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { GoPlus } from "react-icons/go";
 import { LuLogs } from "react-icons/lu";
+import { MdWaves } from "react-icons/md";
 import { TbRepeat, TbRepeatOff } from "react-icons/tb";
 
 function Todo() {
@@ -23,6 +24,7 @@ function Todo() {
     Intervals: [],
     NonRepeatingPassed: [],
     NonRepeatingUpcoming: [],
+    Flexible: [],
   });
   const [isLoading, setIsLoading] = useState(false);
   const [isTodoLogModalOpen, setIsTodoLogModalOpen] = useState(false);
@@ -30,6 +32,11 @@ function Todo() {
   const preProcessTodo = (todo) => {
     return todo.reduce(
       (prev, curr) => {
+        if (curr.isFlexible) {
+          prev.Flexible.push(curr);
+          return prev;
+        }
+
         if (!curr.shouldRepeat) {
           if (
             moment(curr.date)
@@ -55,6 +62,7 @@ function Todo() {
         Intervals: [],
         NonRepeatingPassed: [],
         NonRepeatingUpcoming: [],
+        Flexible: [],
       }
     );
   };
@@ -66,6 +74,10 @@ function Todo() {
       setTodo(preProcessTodo(result.data.result));
     }
     setIsLoading(false);
+  };
+
+  const handleSetSection = (section) => {
+    setSectionKey(section === sectionKey ? "All" : section);
   };
 
   useEffect(() => {
@@ -92,7 +104,7 @@ function Todo() {
             />
             <button
               onClick={() => {
-                setSectionKey("Days");
+                handleSetSection("Days");
               }}
               className={`p-1 hover:bg-foreground/10 text-foreground ${
                 sectionKey === "Days" && "bg-foreground/10"
@@ -103,7 +115,7 @@ function Todo() {
             </button>
             <button
               onClick={() => {
-                setSectionKey("Intervals");
+                handleSetSection("Intervals");
               }}
               className={`p-1 hover:bg-foreground/10 text-foreground ${
                 sectionKey === "Intervals" && "bg-foreground/10"
@@ -114,7 +126,18 @@ function Todo() {
             </button>
             <button
               onClick={() => {
-                setSectionKey("No Repeat Upcoming");
+                handleSetSection("Flexible");
+              }}
+              className={`p-1 hover:bg-foreground/10 text-foreground ${
+                sectionKey === "Flexible" && "bg-foreground/10"
+              } rounded transition-colors flex gap-1`}
+            >
+              <MdWaves className="w-[1.5rem] h-fit" />
+              <span className="">F</span>
+            </button>
+            <button
+              onClick={() => {
+                handleSetSection("No Repeat Upcoming");
               }}
               className={`p-1 hover:bg-foreground/10 text-foreground ${
                 sectionKey === "No Repeat Upcoming" && "bg-foreground/10"
@@ -125,7 +148,7 @@ function Todo() {
             </button>
             <button
               onClick={() => {
-                setSectionKey("No Repeat Passed");
+                handleSetSection("No Repeat Passed");
               }}
               className={`p-1 hover:bg-foreground/10 text-foreground ${
                 sectionKey === "No Repeat Passed" && "bg-foreground/10"
@@ -138,7 +161,7 @@ function Todo() {
             <button
               onClick={() => {
                 setFilterKey("");
-                setSectionKey("All");
+                handleSetSection("All");
               }}
               className="p-1 hover:bg-red-600  rounded transition-colors"
             >

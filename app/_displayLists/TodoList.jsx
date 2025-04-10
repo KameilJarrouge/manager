@@ -69,6 +69,22 @@ function TodoList({
                 key={todoItem.id}
               />
             ))}
+          {(sectionKey === "All" || sectionKey === "Flexible") && (
+            <span className="font-semibold border-b border-b-foreground/50 w-full text-start my-2">
+              Flexible
+            </span>
+          )}
+          {(sectionKey === "All" || sectionKey === "Flexible") &&
+            todo.Flexible.filter((todoItem) =>
+              todoItem.title.includes(filterKey)
+            ).map((todoItem) => (
+              <TodoRow
+                onTodoSelect={onTodoSelect}
+                selectedTodo={selectedTodo}
+                todoItem={todoItem}
+                key={todoItem.id}
+              />
+            ))}
           {(sectionKey === "All" || sectionKey === "No Repeat Upcoming") && (
             <span className="font-semibold border-b border-b-foreground/50 w-full text-start my-2">
               No Repeat Upcoming

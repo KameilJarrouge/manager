@@ -13,6 +13,7 @@ export async function createTodo(data) {
       isPaused: data.isPaused,
       icon: data.icon,
       date: data.date,
+      isFlexible: data.isFlexible,
     },
   });
 
@@ -32,6 +33,7 @@ export async function updateTodo(id, data) {
       isPaused: data.isPaused,
       icon: data.icon,
       date: data.date,
+      isFlexible: data.isFlexible,
     },
   });
   return successReturn();
@@ -53,6 +55,7 @@ export async function todayTodoList(startOfDay, endOfDay) {
         { isPaused: false },
         {
           OR: [
+            { isFlexible: true }, // get all flexible todo
             { shouldRepeat: true }, // get all repeated todo
             {
               // only today's non repeated todo
@@ -78,7 +81,7 @@ function preProcessTodo(todo, startOfDay) {
   const result = todo.reduce(
     (currentValue, todoItem) => {
       let include = true;
-      if (todoItem.shouldRepeat) {
+      if (todoItem.shouldRepeat && !todoItem.isFlexible) {
         // Check the repeating todo if they should appear today
         // parse the repeat (days: [Wednesday, Friday, ...] or intervals: 4)
         const repeat = JSON.parse(todoItem.repeat);

@@ -52,6 +52,7 @@ model Todo {
   isPaused     Boolean   @default(false)
   icon         Int       @default(0) // hard-coded icons
   date         DateTime  @default(now())
+  isFlexible   Boolean   @default(false)
   TodoLog      TodoLog[]
 }
 

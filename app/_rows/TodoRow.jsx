@@ -5,6 +5,7 @@ import {
   MdPause,
   MdPlayArrow,
   MdRepeat,
+  MdWaves,
 } from "react-icons/md";
 import SelectedDays from "../_components/SelectedDays";
 import moment from "moment";
@@ -41,12 +42,16 @@ function TodoRow({ todoItem, selectedTodo, onTodoSelect, shouldDim = false }) {
             {moment(todoItem.date).format("YYYY-MM-DD")}
           </span>
         </div>
-        <MdRepeat
-          className={`${
-            todoItem.shouldRepeat ? "text-foreground" : "text-foreground/30"
-          }`}
-        />
-        {todoItem.shouldRepeat && (
+        {todoItem.isFlexible ? (
+          <MdWaves className="text-foreground" />
+        ) : (
+          <MdRepeat
+            className={`${
+              todoItem.shouldRepeat ? "text-foreground" : "text-foreground/30"
+            }`}
+          />
+        )}
+        {todoItem.shouldRepeat && !todoItem.isFlexible && (
           <>
             {todoItem.repeatType === "Days" ? (
               <SelectedDays selectedDaysList={JSON.parse(todoItem.repeat)} />
