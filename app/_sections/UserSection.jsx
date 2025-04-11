@@ -21,7 +21,9 @@ function UserSection() {
   };
 
   const handleBackup = async () => {
-    const response = await fetch("http://localhost:3000/api/backup");
+    const response = await fetch(
+      `http://localhost:${process.env.NEXT_PUBLIC_PORT}/api/backup`
+    );
     if (response.ok) {
       const blob = await response.blob();
       const url = window.URL.createObjectURL(blob);
