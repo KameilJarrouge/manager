@@ -2,7 +2,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import moment from "moment";
-import { LuLogs } from "react-icons/lu";
+import { LuFeather, LuLogs } from "react-icons/lu";
 import { MdCheck, MdRestore, MdWaves } from "react-icons/md";
 import { GoDotFill, GoPlus } from "react-icons/go";
 import { toast } from "react-toastify";
@@ -191,7 +191,11 @@ function TodoHomeSection() {
                 key={todoItem.id}
                 className={`w-fit flex items-center justify-between gap-2 hover:bg-foreground/10 px-2 border-b border-b-input_bg `}
               >
-                <GoDotFill className="w-[0.6rem] h-fit " />
+                {todoItem.isFlexible ? (
+                  <LuFeather className="w-[0.6rem] h-fit " />
+                ) : (
+                  <GoDotFill className="w-[0.6rem] h-fit " />
+                )}
 
                 <span className="w-[55ch] 2xl:w-[70ch] text-start">
                   {todoItem.title}
@@ -240,7 +244,11 @@ function TodoHomeSection() {
                 key={todoItem.id}
                 className="w-fit flex items-center justify-between gap-2 hover:bg-foreground/10 px-2 group border-b border-b-input_bg "
               >
-                <GoDotFill className="w-[0.6rem] h-fit text-green-400" />
+                {todoItem.isFlexible ? (
+                  <LuFeather className="w-[0.6rem] h-fit text-green-400" />
+                ) : (
+                  <GoDotFill className="w-[0.6rem] h-fit text-green-400" />
+                )}
 
                 <span className="w-[55ch] 2xl:w-[70ch] text-start">
                   {todoItem.title}
@@ -281,8 +289,11 @@ function TodoHomeSection() {
                 key={todoItem.id}
                 className="w-fit flex items-center justify-between gap-2 hover:bg-foreground/10 px-2 group border-b border-b-input_bg "
               >
-                <GoDotFill className="w-[0.6rem] h-fit text-red-400 rotate-45" />
-
+                {todoItem.isFlexible ? (
+                  <LuFeather className="w-[0.6rem] h-fit text-red-400" />
+                ) : (
+                  <GoDotFill className="w-[0.6rem] h-fit text-red-400" />
+                )}
                 <span className="w-[55ch] 2xl:w-[70ch] text-start">
                   {todoItem.title}
                 </span>
