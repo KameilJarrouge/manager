@@ -66,6 +66,9 @@ export async function todayTodoList(startOfDay, endOfDay) {
         },
       ],
     },
+    orderBy: {
+      isFlexible: "asc",
+    },
     include: {
       TodoLog: {
         where: {
