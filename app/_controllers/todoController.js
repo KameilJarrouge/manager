@@ -143,3 +143,12 @@ export async function allTodo() {
   });
   return successReturn(result);
 }
+
+export async function deleteByIndices(indices) {
+  await prisma.todo.deleteMany({
+    where: {
+      id: { in: indices },
+    },
+  });
+  return successReturn();
+}

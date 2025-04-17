@@ -13,6 +13,7 @@ import { GoPlus } from "react-icons/go";
 import { LuLogs } from "react-icons/lu";
 import { MdWaves } from "react-icons/md";
 import { TbRepeat, TbRepeatOff } from "react-icons/tb";
+import { toast } from "react-toastify";
 
 function Todo() {
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
@@ -74,6 +75,23 @@ function Todo() {
       setTodo(preProcessTodo(result.data.result));
     }
     setIsLoading(false);
+  };
+
+  const handleDeletePassedNonRepeating = async () => {
+    if (!confirm(`do you wish to delete all the passed non-repeating todo?`))
+      return;
+
+    let indicesToDelete = todo.NonRepeatingPassed.map((todo) => todo.id);
+    setIsLoading(true);
+    const result = await api.post("/todo/delete-npr", {
+      indices: indicesToDelete,
+    });
+
+    setIsLoading(false);
+    if (result.data.success) {
+      toast("Deleted all NPRs!");
+      getTodo();
+    }
   };
 
   const handleSetSection = (section) => {
@@ -203,6 +221,7 @@ function Todo() {
               setSelectedTodo(selectedTodo);
               if (openMenu) setIsSideMenuOpen(true);
             }}
+            onDeleteNPR={handleDeletePassedNonRepeating}
           />
         </div>
       </div>

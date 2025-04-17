@@ -3,6 +3,7 @@ import React from "react";
 import CalendarPreview from "../_components/CalendarPreview";
 import { IoMdEyeOff } from "react-icons/io";
 import TodoRow from "../_rows/TodoRow";
+import { MdDelete } from "react-icons/md";
 
 function TodoList({
   todo,
@@ -10,6 +11,7 @@ function TodoList({
   selectedTodo,
   filterKey,
   sectionKey,
+  onDeleteNPR,
 }) {
   const handleAccentDate = (date) => {
     if (moment(date).isBefore(selectedTodo?.date || new Date(), "day"))
@@ -102,9 +104,17 @@ function TodoList({
               />
             ))}
           {(sectionKey === "All" || sectionKey === "No Repeat Passed") && (
-            <span className="font-semibold border-b border-b-foreground/50 w-full text-start my-2">
-              No Repeat Passed
-            </span>
+            <div className="font-semibold border-b border-b-foreground/50 w-full text-start my-2 flex gap-2">
+              <span>No Repeat Passed</span>
+              {todo.NonRepeatingPassed.length !== 0 && (
+                <button
+                  onClick={onDeleteNPR}
+                  className="h-fit p-1 hover:bg-red-600 rounded transition-colors"
+                >
+                  <MdDelete className="w-[1rem] h-fit" />
+                </button>
+              )}
+            </div>
           )}
           {(sectionKey === "All" || sectionKey === "No Repeat Passed") &&
             todo.NonRepeatingPassed.filter((todoItem) =>
