@@ -142,9 +142,12 @@ function TodoHomeSection() {
             state={newTodoTitle}
             setState={setNewTodoTitle}
             placeholder={"New Todo"}
-            className={"w-[50ch]"}
+            className={"w-[47ch] 2xl:w-[50ch]"}
           />
           <button
+            data-tooltip-id="my-tooltip"
+            data-tooltip-content="Flexible TODO"
+            data-tooltip-place="bottom"
             onClick={() => setIsFlexible((isFlexible) => !isFlexible)}
             className={`w-fit p-1 hover:bg-foreground/10 ${
               isFlexible ? "text-accent" : "text-foreground/80"
