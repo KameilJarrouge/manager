@@ -14,7 +14,7 @@ import { MdOutlineChangeCircle, MdRestore, MdWarning } from "react-icons/md";
 import { WiDaySunnyOvercast } from "react-icons/wi";
 import LocationModal from "../Modals/LocationModal";
 
-function WeatherForecast() {
+function WeatherForecastTest() {
   const [weatherInformation, setWeatherInformation] = useState(
     JSON.parse(localStorage.getItem("weather-info")) || {}
   );
@@ -63,11 +63,7 @@ function WeatherForecast() {
       setIsLoading(true);
 
       const response = await fetch(
-        `https://api.open-meteo.com/v1/forecast?latitude=${String(
-          weatherInformation[selectedLocation].latitude
-        ).trim()}&longitude=${String(
-          weatherInformation[selectedLocation].longitude
-        ).trim()}&current_weather=true&hourly=temperature_2m,precipitation,windspeed_10m,winddirection_10m,weathercode&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,windspeed_10m_max,weathercode,sunrise,sunset&timezone=auto`
+        `https://api.open-meteo.com/v1/forecast?latitude=${weatherInformation[selectedLocation].latitude}&longitude=${weatherInformation[selectedLocation].longitude}&current_weather=true&hourly=temperature_2m,precipitation,windspeed_10m,winddirection_10m,weathercode&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,windspeed_10m_max,weathercode,sunrise,sunset&timezone=auto`
       );
 
       const data = await response.json();
@@ -301,4 +297,4 @@ function WeatherForecast() {
     </div>
   );
 }
-export default WeatherForecast;
+export default WeatherForecastTest;
