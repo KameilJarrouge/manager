@@ -15,12 +15,8 @@ import { WiDaySunnyOvercast } from "react-icons/wi";
 import LocationModal from "../Modals/LocationModal";
 
 function WeatherForecast() {
-  const [weatherInformation, setWeatherInformation] = useState(
-    JSON.parse(localStorage.getItem("weather-info")) || {}
-  );
-  const [selectedLocation, setSelectedLocation] = useState(
-    JSON.parse(localStorage.getItem("last-selected-location"))
-  );
+  const [weatherInformation, setWeatherInformation] = useState({});
+  const [selectedLocation, setSelectedLocation] = useState();
 
   const [showDetails, setShowDetails] = useState(false);
   const [isCollapsing, setIsCollapsing] = useState(false);
@@ -44,7 +40,7 @@ function WeatherForecast() {
 
   const isCacheExpired = (dateTime) => {
     if (!dateTime) return true;
-    return Math.abs(moment().diff(moment(dateTime), "minutes")) >= 2;
+    return Math.abs(moment().diff(moment(dateTime), "minutes")) >= 15;
   };
 
   const fetchWeatherData = async () => {
@@ -145,6 +141,12 @@ function WeatherForecast() {
   };
 
   useEffect(() => {
+    setWeatherInformation(
+      JSON.parse(localStorage.getItem("weather-info")) || {}
+    );
+    setSelectedLocation(
+      JSON.parse(localStorage.getItem("last-selected-location"))
+    );
     const body = document.getElementById("body");
     if (!body) return;
 
@@ -159,7 +161,7 @@ function WeatherForecast() {
     fetchWeatherData();
     const intervalId = setInterval(() => {
       fetchWeatherData();
-    }, 20000);
+    }, 900000);
     return () => clearInterval(intervalId);
   }, [selectedLocation, weatherInformation]);
 
