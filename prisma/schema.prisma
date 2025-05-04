@@ -71,3 +71,31 @@ model Date {
   month Int
   day   Int
 }
+
+model Book {
+  id       Int       @id @default(autoincrement())
+  title    String?
+  // relations
+  Chapters Chapter[]
+}
+
+model Chapter {
+  id       Int       @id @default(autoincrement())
+  title    String?
+  order    Int
+  // relations
+  Book     Book      @relation(fields: [bookId], references: [id], onDelete: Cascade)
+  bookId   Int
+  Sections Section[]
+}
+
+model Section {
+  id        Int     @id @default(autoincrement())
+  order     Int
+  WPM       Int?
+  accuracy  Int?
+  text      String
+  // relations
+  Chapter   Chapter @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+  chapterId Int
+}

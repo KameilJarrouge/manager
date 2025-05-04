@@ -8,6 +8,7 @@ import {
   MdOutlineCheckCircle,
   MdOutlineDateRange,
   MdOutlineHome,
+  MdOutlineKeyboard,
   MdOutlineNote,
 } from "react-icons/md";
 import { GoDotFill } from "react-icons/go";
@@ -29,7 +30,7 @@ function NavigationSection() {
   }, [pathname]);
 
   return (
-    <div className="h-full flex flex-col gap-6  py-2">
+    <div className="h-full flex flex-col gap-4 2xl:gap-6  py-2">
       <Link
         data-tooltip-id="my-tooltip"
         data-tooltip-content="Home"
@@ -95,6 +96,19 @@ function NavigationSection() {
         } rounded-r-full w-full py-2 px-4 hover:bg-secondary transition-colors border-l-4 border-transparent `}
       >
         <MdOutlineDateRange className="w-[1.8rem] h-fit " />
+      </Link>
+      <Link
+        data-tooltip-id="my-tooltip"
+        data-tooltip-content="Typing"
+        data-tooltip-place="top-start"
+        href={"/typing"}
+        className={`${
+          pathname === "/typing"
+            ? "bg-secondary border-l-accent"
+            : " hover:border-secondary "
+        } rounded-r-full w-full py-2 px-4 hover:bg-secondary transition-colors border-l-4 border-transparent`}
+      >
+        <MdOutlineKeyboard className="w-[1.8rem] h-fit  " />
       </Link>
       <Link
         data-tooltip-id="my-tooltip"

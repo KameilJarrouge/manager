@@ -145,7 +145,9 @@ function WeatherForecast() {
       JSON.parse(localStorage.getItem("weather-info")) || {}
     );
     setSelectedLocation(
-      JSON.parse(localStorage.getItem("last-selected-location"))
+      localStorage.getItem("last-selected-location") !== "undefined"
+        ? JSON.parse(localStorage.getItem("last-selected-location"))
+        : ""
     );
     const body = document.getElementById("body");
     if (!body) return;
