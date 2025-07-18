@@ -8,7 +8,6 @@ function SearchSection() {
   const [isCollapsing, setIsCollapsing] = useState(false);
   const handleKeyPress = (e) => {
     if (e.key === "/") {
-      console.log(e);
       if (e.target.nodeName === "INPUT" || e.target.id.startsWith("input-"))
         return;
       const searchBar = document.getElementById("search-input");

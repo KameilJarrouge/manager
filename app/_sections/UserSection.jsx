@@ -7,6 +7,7 @@ import { MdLogout, MdPassword } from "react-icons/md";
 import UpdatePasswordModal from "../_components/Modals/UpdatePasswordModal";
 import WeatherForecast from "../_components/Weather/WeatherForecast";
 import { LuDatabaseBackup } from "react-icons/lu";
+import CaloriesDisplay from "../_components/Calories/CaloriesDisplay";
 
 function UserSection() {
   const router = useRouter();
@@ -42,8 +43,10 @@ function UserSection() {
 
   return (
     <div className="w-full flex gap-2 justify-between items-center   ">
-      <div className="pl-4 flex">
+      <div className="pl-4  flex gap-4">
         <WeatherForecast />
+        <div className="w-[1px]  bg-foreground/20 my-2"></div>
+        <CaloriesDisplay />
       </div>
       <div className="flex gap-2 items-start p-4">
         <UpdatePasswordModal

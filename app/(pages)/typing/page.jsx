@@ -39,7 +39,6 @@ const Typing = ({}) => {
     setIsLoading(false);
     if (result.data.success) {
       setBooks(result.data.result);
-      console.log(result.data.result);
     }
   };
 

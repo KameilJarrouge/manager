@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { NextRequest } from "next/server";
 import { verifyToken } from "./app/_lib/tokenHandler";
 import cookieName from "./app/_constants/cookieName";
-const DEBUG = false;
+const DEBUG = true;
 
 export async function middleware(request: NextRequest) {
   // Set the DEBUG variable true to skip this middleware

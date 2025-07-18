@@ -99,3 +99,32 @@ model Section {
   Chapter   Chapter @relation(fields: [chapterId], references: [id], onDelete: Cascade)
   chapterId Int
 }
+
+model FoodItem {
+  id       Int            @id @default(autoincrement())
+  name     String
+  portions String
+  calories Decimal
+  meals    MealFoodItem[]
+}
+
+model MealFoodItem {
+  id         Int      @id @default(autoincrement())
+  foodItem   FoodItem @relation(fields: [foodItemId], references: [id], onDelete: Cascade)
+  foodItemId Int
+  meal       Meal     @relation(fields: [mealId], references: [id], onDelete: Cascade)
+  mealId     Int
+}
+
+model Meal {
+  id        Int            @id @default(autoincrement())
+  name      String
+  foodItems MealFoodItem[]
+}
+
+model Activity {
+  id                    Int     @id @default(autoincrement())
+  name                  String
+  unit                  String
+  caloriesBurnedPerUnit Decimal
+}
