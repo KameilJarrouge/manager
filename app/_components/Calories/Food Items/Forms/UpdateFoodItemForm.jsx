@@ -106,7 +106,7 @@ function UpdateFoodItemForm({
           <h2 className="text-sm text-foreground/70 w-[35ch] flex justify-between items-center underline underline-offset-4">
             Portions:
             <button
-              className="text-xs text-foreground/70 hover:text-foreground/90"
+              className="text-foreground/70 hover:text-foreground/90"
               onClick={addDefaultPortions}
             >
               (add default portions)
