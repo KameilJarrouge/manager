@@ -128,3 +128,14 @@ model Activity {
   unit                  String
   caloriesBurnedPerUnit Decimal
 }
+
+model PersonalInformation {
+  id          Int      @id @default(autoincrement())
+  yearOfBirth String
+  height      Decimal
+  weight      Decimal
+  neck        Decimal
+  waist       Decimal
+  sex         String
+  hip         Decimal?
+}
