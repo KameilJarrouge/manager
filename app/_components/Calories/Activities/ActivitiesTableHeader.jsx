@@ -1,5 +1,5 @@
 import React from "react";
-import TableHeader from "../TableHeader";
+import TableHeader from "../Table/TableHeader";
 
 function ActivitiesTableHeader() {
   return (

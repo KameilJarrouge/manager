@@ -7,7 +7,7 @@ import FoodItemModal from "@/app/_components/Calories/Food Items/Modals/FoodItem
 import MealsTable from "@/app/_components/Calories/Meals/MealsTable";
 import MealModal from "@/app/_components/Calories/Meals/Modals/MealModal";
 import PersonalInfoForm from "@/app/_components/Calories/PersonalInfoForm";
-import TableNav from "@/app/_components/Calories/TableNav";
+import TableNav from "@/app/_components/Calories/Table/TableNav";
 import TextField from "@/app/_components/Input/TextField";
 import LoadingComponent from "@/app/_components/LoadingComponent";
 import api from "@/app/_lib/api";
