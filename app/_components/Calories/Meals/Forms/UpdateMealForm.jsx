@@ -120,10 +120,7 @@ function UpdateMealForm({
         </div>
         <div className="flex flex-col gap-1 min-h-[10ch]">
           <h2 className="text-sm text-foreground/50 w-[35ch] underline underline-offset-4">
-            Food Items:{" "}
-            <span className="text-xs text-foreground/30">
-              (updated on change)
-            </span>
+            Food Items:
           </h2>
           <DisplayFoodItems foodItems={foodItems} deleteById={deleteById} />
         </div>{" "}
