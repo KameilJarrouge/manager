@@ -9,6 +9,7 @@ import PortionInput from "../Input/PortionInput";
 import DisplayPortions from "../DisplayPortions";
 import SubmitButton from "@/app/_components/Input/SubmitButton";
 import { toast } from "react-toastify";
+import { DefaultPortions } from "../../Constants/defaultPortions";
 
 function UpdateFoodItemForm({
   foodItem = { name: "test", portions: "{large:1, medium:0.75}", calories: 22 },
@@ -76,6 +77,12 @@ function UpdateFoodItemForm({
     closeModal(true);
   };
 
+  const addDefaultPortions = () => {
+    setPortions((portions) => {
+      return { ...portions, ...DefaultPortions };
+    });
+  };
+
   useEffect(() => {
     handleRestore();
   }, [foodItem]);
@@ -96,8 +103,14 @@ function UpdateFoodItemForm({
           <PortionInput addPortion={addPortion} />
         </div>
         <div className="flex flex-col gap-1 ">
-          <h2 className="text-sm text-foreground/50 w-[35ch] underline underline-offset-4">
+          <h2 className="text-sm text-foreground/70 w-[35ch] flex justify-between items-center underline underline-offset-4">
             Portions:
+            <button
+              className="text-xs text-foreground/70 hover:text-foreground/90"
+              onClick={addDefaultPortions}
+            >
+              (add default portions)
+            </button>
           </h2>
           <DisplayPortions
             portions={portions}

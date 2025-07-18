@@ -8,6 +8,7 @@ import DisplayPortions from "../DisplayPortions";
 import FormContainer from "../../FormContainer";
 import LoadingComponent from "@/app/_components/LoadingComponent";
 import api from "@/app/_lib/api";
+import { DefaultPortions } from "../../Constants/defaultPortions";
 
 function NewFoodItemForm({ closeModal = (f) => f }) {
   const [name, setName] = useState("");
@@ -50,6 +51,12 @@ function NewFoodItemForm({ closeModal = (f) => f }) {
     });
   };
 
+  const addDefaultPortions = () => {
+    setPortions((portions) => {
+      return { ...portions, ...DefaultPortions };
+    });
+  };
+
   return (
     <FormContainer>
       {isLoading && <LoadingComponent />}
@@ -67,8 +74,14 @@ function NewFoodItemForm({ closeModal = (f) => f }) {
           <PortionInput addPortion={addPortion} />
         </div>
         <div className="flex flex-col gap-1 ">
-          <h2 className="text-sm text-foreground/50 w-[35ch] underline underline-offset-4">
+          <h2 className="text-sm text-foreground/70 w-[35ch] flex justify-between items-center underline underline-offset-4">
             Portions:
+            <button
+              className=" text-foreground/70 hover:text-foreground/90"
+              onClick={addDefaultPortions}
+            >
+              (add default portions)
+            </button>
           </h2>
           <DisplayPortions
             portions={portions}
