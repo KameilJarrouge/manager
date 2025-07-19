@@ -10,6 +10,7 @@ function TextField({
   placeholder,
   hidden,
   className,
+  withHandle = true,
   ...props
 }) {
   const [isHidden, setIsHidden] = useState(hidden);
@@ -37,21 +38,23 @@ function TextField({
         }}
         {...props}
       />
-      <div
-        onClick={() => {
-          if (!hidden) setShowTitle(true);
-        }}
-        className={` bg-input_bg flex items-center bg-[radial-gradient(#eeeeee33_1px,transparent_1px)] hover:bg-[radial-gradient(#eeeeee88_1px,transparent_1px)] bg-[size:5px_5px]`}
-      >
-        <button
-          onClick={() => setIsHidden((isHidden) => !isHidden)}
-          className={`${
-            !hidden ? "invisible" : "visible"
-          }  flex items-center px-1 hover:text-white `}
+      {withHandle && (
+        <div
+          onClick={() => {
+            if (!hidden) setShowTitle(true);
+          }}
+          className={` bg-input_bg flex items-center bg-[radial-gradient(#eeeeee33_1px,transparent_1px)] hover:bg-[radial-gradient(#eeeeee88_1px,transparent_1px)] bg-[size:5px_5px]`}
         >
-          {isHidden ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
-        </button>
-      </div>
+          <button
+            onClick={() => setIsHidden((isHidden) => !isHidden)}
+            className={`${
+              !hidden ? "invisible" : "visible"
+            }  flex items-center px-1 hover:text-white `}
+          >
+            {isHidden ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
+          </button>
+        </div>
+      )}
     </div>
   );
 }

@@ -81,3 +81,11 @@ export const DAYS_COUNT = {
   11: 30,
   12: 31,
 };
+
+export const DefaultPersonalInformation = {
+  weight: 70,
+  neck: 40,
+  waist: 100,
+  hip: 100,
+  sex: "Male"
+};

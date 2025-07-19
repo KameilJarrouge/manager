@@ -106,6 +106,7 @@ model FoodItem {
   portions String
   calories Decimal
   meals    MealFoodItem[]
+  intake   Intake[]
 }
 
 model MealFoodItem {
@@ -127,6 +128,7 @@ model Activity {
   name                  String
   unit                  String
   caloriesBurnedPerUnit Decimal
+  burn                  Burn[]
 }
 
 model PersonalInformation {
@@ -138,4 +140,38 @@ model PersonalInformation {
   waist       Decimal
   sex         String
   hip         Decimal?
+}
+
+model Day {
+  id     Int      @id @default(autoincrement())
+  date   DateTime @unique
+  weight Decimal
+  neck   Decimal
+  waist  Decimal
+  hip    Decimal?
+  sex    String
+  intake Intake[]
+  burn   Burn[]
+}
+
+model Intake {
+  id Int @id @default(autoincrement())
+
+  foodItem   FoodItem? @relation(fields: [foodItemId], references: [id], onDelete: Cascade)
+  foodItemId Int?
+  Day        Day?      @relation(fields: [dayId], references: [id], onDelete: Cascade)
+  dayId      Int?
+
+  factor Decimal
+}
+
+model Burn {
+  id Int @id @default(autoincrement())
+
+  activity   Activity? @relation(fields: [activityId], references: [id])
+  activityId Int?
+  Day        Day?      @relation(fields: [dayId], references: [id])
+  dayId      Int?
+
+  factor Decimal
 }
