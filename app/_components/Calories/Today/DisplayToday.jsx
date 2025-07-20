@@ -22,14 +22,14 @@ function DisplayToday() {
   }, []);
 
   return (
-    <div className="flex gap-2 p-1 w-[85vw] 2xl:w-[75vw] h-[33rem] 2xl:h-[50rem] relative">
+    <div className="flex gap-2 p-1 w-[90vw] 2xl:w-[80vw] h-[33rem] 2xl:h-[50rem] relative">
       {isLoading && <LoadingComponent />}
-      <div className="w-[20%] h-full bg-secondary rounded p-2 relative">
+      <div className="w-[25%] h-full bg-secondary rounded p-2 relative">
         <UpdateTodayPersonalInfo today={today} triggerRefresh={getToday} />
       </div>
-      <div className="w-[40%] h-full relative"></div>
+      <div className="w-[37.5%] h-full relative"></div>
       <div className="w-[1px] bg-foreground/10" />
-      <div className="w-[40%] h-full relative"></div>
+      <div className="w-[37.5%] h-full relative"></div>
     </div>
   );
 }
