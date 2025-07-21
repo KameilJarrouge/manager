@@ -2,30 +2,25 @@ import LoadingComponent from "@/app/_components/LoadingComponent";
 import React, { useEffect, useMemo, useState } from "react";
 import { MdRestore } from "react-icons/md";
 import moment from "moment";
-import getBodyStats from "@/app/_lib/caloriesHelper";
 import { toast } from "react-toastify";
 import NumberField from "@/app/_components/Input/NumberField";
 import SubmitButton from "@/app/_components/Input/SubmitButton";
 import BodyStats from "../../BodyStats";
 import api from "@/app/_lib/api";
+import { TbDelta } from "react-icons/tb";
 
-function UpdateTodayPersonalInfo({ today, triggerRefresh = (f) => f }) {
+function UpdateTodayPersonalInfo({
+  today,
+  triggerRefresh = (f) => f,
+  totals,
+  difference,
+  stats,
+}) {
   const [weight, setWeight] = useState(today.weight);
   const [neck, setNeck] = useState(today.neck);
   const [hip, setHip] = useState(today.hip);
   const [waist, setWaist] = useState(today.waist);
-  const [stats, setStats] = useState({ BMI: "?", BMR: "?", bodyFat: "?" });
   const [isLoading, setIsLoading] = useState(false);
-  const [personalInformation, setPersonalInformation] = useState({});
-
-  const getPersonalInformation = async () => {
-    setIsLoading(true);
-    const result = await api.get(`/calories/personal-information`);
-    setIsLoading(false);
-    if (result.data.success) {
-      setPersonalInformation(result.data.result);
-    }
-  };
 
   const handleRestore = () => {
     setWeight(today.weight);
@@ -35,26 +30,8 @@ function UpdateTodayPersonalInfo({ today, triggerRefresh = (f) => f }) {
   };
 
   useEffect(() => {
-    getPersonalInformation();
-  }, []);
-
-  useEffect(() => {
     handleRestore();
   }, [today]);
-
-  const handleGetBodyStats = () => {
-    setStats(
-      getBodyStats(
-        personalInformation.yearOfBirth || 2000,
-        personalInformation.height || 170,
-        weight || 70,
-        neck || 38.1,
-        waist || 96,
-        hip || 97,
-        personalInformation.sex || "Male"
-      )
-    );
-  };
 
   const updateDayPersonalInformation = async () => {
     setIsLoading(true);
@@ -68,7 +45,6 @@ function UpdateTodayPersonalInfo({ today, triggerRefresh = (f) => f }) {
 
     if (result.data.success) {
       toast("Personal Information for this day is updated!");
-      getPersonalInformation();
       triggerRefresh();
     }
   };
@@ -86,9 +62,9 @@ function UpdateTodayPersonalInfo({ today, triggerRefresh = (f) => f }) {
     }
   };
 
-  useMemo(() => {
-    handleGetBodyStats();
-  }, [weight, neck, waist, hip]);
+  // useMemo(() => {
+  //   handleGetBodyStats();
+  // }, [weight, neck, waist, hip]);
 
   return (
     <div className="flex flex-col gap-4">
@@ -141,8 +117,39 @@ function UpdateTodayPersonalInfo({ today, triggerRefresh = (f) => f }) {
           <MdRestore className="w-[1.5rem] h-fit text-foreground" />
         </button>
       </div>
-      <div className="w-full bg-input_prefix_bg">
-        <BodyStats stats={stats} />
+      <BodyStats stats={stats} />
+      <div className="w-full h-[1px]  bg-foreground/50 relative">
+        <span className="bg-secondary px-1 w-fit  absolute right-0 left-0 mx-auto -translate-y-[0.75rem]  ">
+          Day's Stats
+        </span>
+      </div>
+      <div className="text-sm text-foreground/80  gap-1 flex flex-col">
+        <div className="flex justify-between items-center border-b-[1px] border-foreground/30 ">
+          <h1 className="font-semibold">Total Intake:</h1>
+          <span>{totals.intake.toLocaleString()} kcal</span>
+        </div>
+        <div className="flex justify-between items-center border-b-[1px] border-foreground/30 ">
+          <h1 className="font-semibold">Total Burn:</h1>
+          <span>
+            {`(${Number(
+              stats.BMR
+            ).toLocaleString()} + ${totals.burn.toLocaleString()}) ${(
+              Number(stats.BMR) + Number(totals.burn)
+            ).toLocaleString()}`}{" "}
+            kcal
+          </span>
+        </div>
+        <div className="flex justify-between items-center border-b-[1px] border-foreground/30 ">
+          <h1 className="font-semibold">Difference:</h1>
+          <div className="flex gap-1 items-center">
+            <TbDelta
+              className={`${
+                difference > 0 ? "text-red-400" : "text-green-400"
+              }`}
+            />
+            <span>{difference.toLocaleString()} kcal</span>
+          </div>
+        </div>
       </div>
     </div>
   );

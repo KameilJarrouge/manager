@@ -3,7 +3,14 @@ import { MdChevronRight } from "react-icons/md";
 
 import React, { useState } from "react";
 
-function NumberField({ state, setState, placeholder, className, ...props }) {
+function NumberField({
+  state,
+  setState,
+  placeholder,
+  className,
+  withHandle = true,
+  ...props
+}) {
   const [showTitle, setShowTitle] = useState(false);
   return (
     <div className="flex w-fit group relative ">
@@ -28,12 +35,14 @@ function NumberField({ state, setState, placeholder, className, ...props }) {
         }}
         {...props}
       />
-      <div
-        onClick={() => {
-          setShowTitle(true);
-        }}
-        className={`w-[2.4ch] bg-input_bg flex items-center bg-[radial-gradient(#eeeeee33_1px,transparent_1px)] hover:bg-[radial-gradient(#eeeeee88_1px,transparent_1px)] bg-[size:5px_5px]`}
-      ></div>
+      {withHandle && (
+        <div
+          onClick={() => {
+            setShowTitle(true);
+          }}
+          className={`w-[2.4ch] bg-input_bg flex items-center bg-[radial-gradient(#eeeeee33_1px,transparent_1px)] hover:bg-[radial-gradient(#eeeeee88_1px,transparent_1px)] bg-[size:5px_5px]`}
+        ></div>
+      )}
     </div>
   );
 }

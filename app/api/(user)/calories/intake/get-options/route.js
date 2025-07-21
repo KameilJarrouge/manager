@@ -1,16 +1,14 @@
 import { NextRequest } from "next/server";
+
 import { errorResponse, successResponse } from "@/app/_lib/responseGenerator";
-import { addBurn } from "@/app/_controllers/dayController";
+import { getIntakeOptions } from "@/app/_controllers/intakeController";
 /**
  *
  * @param {NextRequest} request
  * @returns
  */
-export async function POST(request, { params }) {
-  const paramsSync = await params;
-
-  let body = await request.json();
-  let result = await addBurn({ id: Number(paramsSync.id), burn: body });
+export async function GET(request) {
+  let result = await getIntakeOptions();
   if (!result.success) {
     return errorResponse(result.errorCode);
   }

@@ -2,7 +2,15 @@ import Modal from "@/app/_components/Modals/Modal";
 import React from "react";
 import DisplayToday from "./DisplayToday";
 
-function TodayModal({ isOpen, close }) {
+function TodayModal({
+  isOpen,
+  close,
+  today,
+  totals,
+  triggerRefresh,
+  difference,
+  stats,
+}) {
   return (
     <Modal
       key={"Today_Modal"}
@@ -12,7 +20,13 @@ function TodayModal({ isOpen, close }) {
       title={`Today's Calories Information`}
       className={"gap-4 relative"}
     >
-      <DisplayToday />
+      <DisplayToday
+        today={today}
+        triggerRefresh={triggerRefresh}
+        totals={totals}
+        difference={difference}
+        stats={stats}
+      />
     </Modal>
   );
 }

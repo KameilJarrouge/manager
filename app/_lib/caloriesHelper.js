@@ -24,7 +24,7 @@ export default function getBodyStats(
 
 function calculateBMI(weight, height) {
   const result = Number(weight) / Math.pow(Number(height) / 100, 2);
-  return result.toFixed(2) + ` (${bmiIndex(result)})`;
+  return Math.round(result) + ` (${bmiIndex(result)})`;
 }
 
 function bmiIndex(value) {
@@ -38,19 +38,19 @@ function bmiIndex(value) {
 
 function calculateBMR(weight, height, sex, age) {
   if (sex === "Male")
-    return (
+    return Math.round(
       13.397 * Number(weight) +
-      4.799 * Number(height) -
-      5.677 * Number(age) +
-      88.362
-    ).toFixed(2);
+        4.799 * Number(height) -
+        5.677 * Number(age) +
+        88.362
+    );
 
-  return (
+  return Math.round(
     9.247 * Number(weight) +
-    3.098 * Number(height) -
-    4.33 * Number(age) +
-    447.593
-  ).toFixed(2);
+      3.098 * Number(height) -
+      4.33 * Number(age) +
+      447.593
+  );
 }
 
 function calculateBodyFat(
@@ -61,16 +61,16 @@ function calculateBodyFat(
   sex
 ) {
   if (sex === "Male")
-    return (
+    return Math.round(
       495 /
         (1.0324 -
           0.19077 *
             Math.log10(Number(waistCircumference) - Number(neckCircumference)) +
           0.15456 * Math.log10(Number(height))) -
-      450
-    ).toFixed(2);
+        450
+    );
 
-  return (
+  return Math.round(
     495 /
       (1.29579 -
         0.35004 *
@@ -80,6 +80,6 @@ function calculateBodyFat(
               Number(neckCircumference)
           ) +
         0.221 * Math.log10(height)) -
-    450
-  ).toFixed(2);
+      450
+  );
 }

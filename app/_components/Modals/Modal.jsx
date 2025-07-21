@@ -5,7 +5,7 @@ function Modal({
   close,
   title,
   children,
-  onEnter,
+  onEnter = (f) => f,
   className,
   id = "",
 }) {
