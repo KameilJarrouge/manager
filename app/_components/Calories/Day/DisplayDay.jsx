@@ -1,11 +1,11 @@
 import api from "@/app/_lib/api";
 import React, { useEffect, useState } from "react";
 import LoadingComponent from "../../LoadingComponent";
-import UpdateTodayPersonalInfo from "./Forms/UpdateTodayPersonalInfo";
+import UpdateDayPersonalInfo from "./Forms/UpdateDayPersonalInfo";
 import IntakeList from "./IntakeList";
 import BurnList from "./BurnList";
 
-function DisplayToday({ today, totals, triggerRefresh, difference, stats }) {
+function DisplayDay({ day, totals, triggerRefresh, difference, stats }) {
   const [intakeOptions, setIntakeOptions] = useState([]);
   const [burnOptions, setBurnOptions] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -41,8 +41,8 @@ function DisplayToday({ today, totals, triggerRefresh, difference, stats }) {
     <div className="flex gap-2 p-1 w-[90vw] 2xl:w-[80vw] h-[33rem] 2xl:h-[50rem] relative">
       {isLoading && <LoadingComponent />}
       <div className="w-[25%] h-full bg-secondary rounded p-2 relative shadow shadow-black">
-        <UpdateTodayPersonalInfo
-          today={today}
+        <UpdateDayPersonalInfo
+          day={day}
           triggerRefresh={triggerRefresh}
           totals={totals}
           difference={difference}
@@ -53,7 +53,7 @@ function DisplayToday({ today, totals, triggerRefresh, difference, stats }) {
         <IntakeList
           intakeOptions={intakeOptions}
           total={totals.intake}
-          today={today}
+          day={day}
           triggerRefresh={triggerRefresh}
         />
       </div>
@@ -62,7 +62,7 @@ function DisplayToday({ today, totals, triggerRefresh, difference, stats }) {
         <BurnList
           burnOptions={burnOptions}
           total={totals.burn}
-          today={today}
+          day={day}
           triggerRefresh={triggerRefresh}
         />
       </div>
@@ -70,4 +70,4 @@ function DisplayToday({ today, totals, triggerRefresh, difference, stats }) {
   );
 }
 
-export default DisplayToday;
+export default DisplayDay;

@@ -39,10 +39,13 @@ export function successLogoutResponse() {
 
 export function successResponse(result) {
   return new Response(
-    JSON.stringify({
-      success: true,
-      result: result,
-    })
+    JSON.stringify(
+      {
+        success: true,
+        result: result,
+      },
+      (key, value) => (typeof value === "bigint" ? Number(value) : value)
+    )
   );
 }
 

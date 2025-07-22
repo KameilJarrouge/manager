@@ -9,33 +9,33 @@ import BodyStats from "../../BodyStats";
 import api from "@/app/_lib/api";
 import { TbDelta } from "react-icons/tb";
 
-function UpdateTodayPersonalInfo({
-  today,
+function UpdateDayPersonalInfo({
+  day,
   triggerRefresh = (f) => f,
   totals,
   difference,
   stats,
 }) {
-  const [weight, setWeight] = useState(today.weight);
-  const [neck, setNeck] = useState(today.neck);
-  const [hip, setHip] = useState(today.hip);
-  const [waist, setWaist] = useState(today.waist);
+  const [weight, setWeight] = useState(day.weight);
+  const [neck, setNeck] = useState(day.neck);
+  const [hip, setHip] = useState(day.hip);
+  const [waist, setWaist] = useState(day.waist);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleRestore = () => {
-    setWeight(today.weight);
-    setNeck(today.neck);
-    setWaist(today.waist);
-    setHip(today.hip);
+    setWeight(day.weight);
+    setNeck(day.neck);
+    setWaist(day.waist);
+    setHip(day.hip);
   };
 
   useEffect(() => {
     handleRestore();
-  }, [today]);
+  }, [day]);
 
   const updateDayPersonalInformation = async () => {
     setIsLoading(true);
-    const result = await api.put(`/calories/days/${today.id}/update`, {
+    const result = await api.put(`/calories/days/${day.id}/update`, {
       weight,
       neck,
       waist,
@@ -52,7 +52,7 @@ function UpdateTodayPersonalInfo({
   const matchTodayPersonalInformationWithCurrent = async () => {
     setIsLoading(true);
     const result = await api.put(
-      `/calories/days/${today.id}/update-to-match-current-pi`
+      `/calories/days/${day.id}/update-to-match-current-pi`
     );
     setIsLoading(false);
     if (result.data.success) {
@@ -71,9 +71,7 @@ function UpdateTodayPersonalInfo({
       {isLoading && <LoadingComponent />}
       <div className="w-full flex justify-between items-center">
         <h1 className="underline underline-offset-4">Personal Information</h1>
-        <h1 className=" text-sm">
-          ({moment(today.date).format("YYYY-MM-DD")})
-        </h1>
+        <h1 className=" text-sm">({moment(day.date).format("YYYY-MM-DD")})</h1>
       </div>
       <div className="flex flex-col gap-2">
         <NumberField
@@ -155,4 +153,4 @@ function UpdateTodayPersonalInfo({
   );
 }
 
-export default UpdateTodayPersonalInfo;
+export default UpdateDayPersonalInfo;

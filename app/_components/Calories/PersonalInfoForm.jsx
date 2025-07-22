@@ -10,8 +10,13 @@ import LoadingComponent from "../LoadingComponent";
 import api from "@/app/_lib/api";
 import { toast } from "react-toastify";
 
-function PersonalInfoForm() {
-  const [personalInformation, setPersonalInformation] = useState(null);
+function PersonalInfoForm({
+  isLogMenuOpen,
+  setIsLogMenuOpen,
+  personalInformation,
+  triggerRefresh,
+}) {
+  // const [personalInformation, setPersonalInformation] = useState(null);
   const [yearOfBirth, setYearOfBirth] = useState(null);
   const [height, setHeight] = useState(null);
   const [weight, setWeight] = useState(null);
@@ -21,23 +26,6 @@ function PersonalInfoForm() {
   const [sex, setSex] = useState("Male");
   const [stats, setStats] = useState({ BMI: "?", BMR: "?", bodyFat: "?" });
   const [isLoading, setIsLoading] = useState(false);
-
-  const handleGetPersonalInformation = async () => {
-    setIsLoading(true);
-    const result = await api.get("/calories/personal-information");
-    setIsLoading(false);
-    if (result.data.success && result.data.result) {
-      const personalInformation = result.data.result;
-      setPersonalInformation(personalInformation);
-      setYearOfBirth(personalInformation.yearOfBirth);
-      setWeight(personalInformation.weight);
-      setHeight(personalInformation.height);
-      setNeck(personalInformation.neck);
-      setHip(personalInformation.hip);
-      setWaist(personalInformation.waist);
-      setSex(personalInformation.sex);
-    }
-  };
 
   const handleRestore = () => {
     setYearOfBirth(personalInformation.yearOfBirth);
@@ -91,13 +79,13 @@ function PersonalInfoForm() {
     setIsLoading(false);
     if (result.data.success) {
       toast("Personal Information Saved!");
-      handleGetPersonalInformation();
+      triggerRefresh();
     }
   };
 
   useEffect(() => {
-    handleGetPersonalInformation();
-  }, []);
+    if (personalInformation) handleRestore();
+  }, [personalInformation]);
 
   const handleGetBodyStats = () => {
     setStats(
@@ -123,8 +111,10 @@ function PersonalInfoForm() {
       <div className="flex items-center justify-between">
         <h1 className="underline underline-offset-4">Personal Information</h1>
         <button
-          onClick={(f) => f}
-          className=" p-1 hover:bg-blue-600  rounded transition-colors"
+          onClick={() => setIsLogMenuOpen((value) => !value)}
+          className={` p-1 hover:bg-blue-600 ${
+            isLogMenuOpen ? "bg-blue-600" : ""
+          }  rounded transition-colors`}
         >
           <LuLogs className="w-[1.2rem] h-fit" />
         </button>

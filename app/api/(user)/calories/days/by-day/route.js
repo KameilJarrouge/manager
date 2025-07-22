@@ -8,7 +8,9 @@ import { getDayCalories } from "@/app/_controllers/dayController";
  * @returns
  */
 export async function GET(request) {
-  let result = await getDayCalories();
+  let result = await getDayCalories(
+    new Date(request.nextUrl.searchParams.get("date"))
+  );
   if (!result.success) {
     return errorResponse(result.errorCode);
   }

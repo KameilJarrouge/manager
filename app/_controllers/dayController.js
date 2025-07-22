@@ -63,10 +63,10 @@ export async function deleteDay(id) {
   return successReturn();
 }
 
-export async function getTodayCalories() {
-  const [start, end] = getDayBoundaries();
+export async function getDayCalories(day = new Date()) {
+  const [start, end] = getDayBoundaries(day);
 
-  async function getToday() {
+  async function getDay() {
     return await prisma.day.findFirst({
       where: {
         date: {
@@ -88,11 +88,11 @@ export async function getTodayCalories() {
       },
     });
   }
-  let result = await getToday();
+  let result = await getDay();
 
   if (!result) {
-    await createDay();
-    result = await getToday();
+    await createDay({ date: day });
+    result = await getDay();
   }
 
   return successReturn(result);
@@ -128,4 +128,26 @@ export async function addBurn(data) {
 export async function removeBurn(id) {
   await prisma.burn.delete({ where: { id } });
   return successReturn();
+}
+
+export async function daysList(date) {
+  const result = await prisma.$queryRaw`
+    SELECT
+      d.*,
+      CAST(SUM(i.factor * fi.calories) AS INT) AS total_intake,
+      CAST(SUM(b.factor * a.caloriesBurnedPerUnit) AS INT) AS total_burn
+    FROM Day as d
+    LEFT JOIN Intake as i ON i.dayId = d.id
+    LEFT JOIN FoodItem as fi ON fi.id = i.foodItemId
+    LEFT JOIN Burn as b ON b.dayId = d.id
+    LEFT JOIN Activity as a ON a.id = b.activityId
+    WHERE d.date BETWEEN ${moment(date).startOf("month").toDate()} AND ${moment(
+    date
+  )
+    .endOf("month")
+    .toDate()}
+    GROUP BY d.id, d.date
+    ORDER BY d.date ASC;
+  `;
+  return successReturn(result);
 }

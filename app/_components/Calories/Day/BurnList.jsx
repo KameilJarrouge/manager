@@ -4,7 +4,7 @@ import NewBurnForm from "./Forms/NewBurnForm";
 import BurnRow from "./BurnRow";
 import ListHeader from "./ListHeader";
 
-function BurnList({ total, burnOptions, triggerRefresh, today }) {
+function BurnList({ total, burnOptions, triggerRefresh, day }) {
   return (
     <div className="h-full w-full flex flex-col gap-2 ">
       <div className="w-full flex justify-between items-center  border-b border-b-foreground/50">
@@ -19,11 +19,11 @@ function BurnList({ total, burnOptions, triggerRefresh, today }) {
       <NewBurnForm
         options={burnOptions}
         triggerRefresh={triggerRefresh}
-        dayId={today.id}
+        dayId={day.id}
       />
       <div className="overflow-y-auto flex flex-col gap-0.5 py-0.5 relative">
         <ListHeader />
-        {(today.burn || []).map((burn) => (
+        {(day.burn || []).map((burn) => (
           <BurnRow key={burn.id} burn={burn} triggerRefresh={triggerRefresh} />
         ))}
       </div>

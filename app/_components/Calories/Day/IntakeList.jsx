@@ -4,7 +4,7 @@ import NewIntakeForm from "./Forms/NewIntakeForm";
 import IntakeRow from "./IntakeRow";
 import ListHeader from "./ListHeader";
 
-function IntakeList({ total, intakeOptions, triggerRefresh, today }) {
+function IntakeList({ total, intakeOptions, triggerRefresh, day }) {
   return (
     <div className="h-full w-full flex flex-col gap-2 ">
       <div className="w-full flex justify-between items-center  border-b border-b-foreground/50">
@@ -19,11 +19,11 @@ function IntakeList({ total, intakeOptions, triggerRefresh, today }) {
       <NewIntakeForm
         options={intakeOptions}
         triggerRefresh={triggerRefresh}
-        dayId={today.id}
+        dayId={day.id}
       />
       <div className="overflow-y-auto flex flex-col gap-0.5 py-0.5 relative">
         <ListHeader />
-        {(today.intake || []).map((intake) => (
+        {(day.intake || []).map((intake) => (
           <IntakeRow
             key={intake.id}
             intake={intake}

@@ -36,7 +36,7 @@ function bmiIndex(value) {
   if (value > 40) return "Obesity 3";
 }
 
-function calculateBMR(weight, height, sex, age) {
+export function calculateBMR(weight, height, sex, age) {
   if (sex === "Male")
     return Math.round(
       13.397 * Number(weight) +

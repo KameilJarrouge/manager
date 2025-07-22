@@ -2,10 +2,9 @@ import React, { useEffect, useMemo, useState } from "react";
 import {
   MdArrowDownward,
   MdArrowUpward,
-  MdDifference,
   MdOutlineLocalFireDepartment,
 } from "react-icons/md";
-import TodayModal from "./Today/TodayModal";
+import TodayModal from "./Day/TodayModal";
 import api from "@/app/_lib/api";
 import LoadingComponent from "../LoadingComponent";
 import getBodyStats from "@/app/_lib/caloriesHelper";
