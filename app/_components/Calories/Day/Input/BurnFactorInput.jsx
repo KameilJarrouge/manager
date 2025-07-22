@@ -1,5 +1,5 @@
 import NumberField from "@/app/_components/Input/NumberField";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { GoDotFill } from "react-icons/go";
 
 function BurnFactorInput({ activity, setFactor }) {
@@ -15,9 +15,9 @@ function BurnFactorInput({ activity, setFactor }) {
         <span>{activity.caloriesBurnedPerUnit.toLocaleString()}</span>
         <span>{"kcal"}</span>
         {activity.factor && (
-          <span className="text-xs text-foreground/80">{`(${
+          <span className="text-xs text-foreground/80">{`(${(
             activity.caloriesBurnedPerUnit * activity.factor
-          })`}</span>
+          ).toLocaleString()})`}</span>
         )}
       </div>
       <NumberField

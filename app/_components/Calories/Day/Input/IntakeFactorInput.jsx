@@ -19,9 +19,9 @@ function IntakeFactorInput({ foodItem, setFactor }) {
           <span>{foodItem.calories.toLocaleString()}</span>
           <span>{"kcal"}</span>
           {foodItem.factor && (
-            <span className="text-xs text-foreground/80">{`(${
+            <span className="text-xs text-foreground/80">{`(${(
               foodItem.calories * foodItem.factor
-            })`}</span>
+            ).toLocaleString()})`}</span>
           )}
         </div>
         <NumberField

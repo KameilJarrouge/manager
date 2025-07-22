@@ -1,9 +1,7 @@
-import SubmitButton from "@/app/_components/Input/SubmitButton";
 import TextField from "@/app/_components/Input/TextField";
 import React, { useState } from "react";
 import { GoPlus } from "react-icons/go";
-import { MdOutlineFastfood, MdSports } from "react-icons/md";
-import { PiCarrotLight } from "react-icons/pi";
+import { MdSports } from "react-icons/md";
 
 function BurnSelectionField({ options, onSelect }) {
   const [filterKey, setFilterKey] = useState("");
@@ -14,7 +12,8 @@ function BurnSelectionField({ options, onSelect }) {
     setFilterKey("");
   };
 
-  const nameFilter = (item) => item.name.includes(filterKey);
+  const nameFilter = (item) =>
+    item.name.toLowerCase().includes(filterKey.toLowerCase());
 
   return (
     <div className="relative w-fit h-fit">

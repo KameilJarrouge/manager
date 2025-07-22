@@ -1,4 +1,3 @@
-import SubmitButton from "@/app/_components/Input/SubmitButton";
 import TextField from "@/app/_components/Input/TextField";
 import React, { useState } from "react";
 import { GoPlus } from "react-icons/go";
@@ -17,7 +16,8 @@ function IntakeSelectionField({ options, onSelect }) {
     setFilterKey("");
   };
 
-  const nameFilter = (item) => item.name.includes(filterKey);
+  const nameFilter = (item) =>
+    item.name.toLowerCase().includes(filterKey.toLowerCase());
 
   return (
     <div className="relative w-fit h-fit">
