@@ -19,7 +19,7 @@ function DayDisplay({
       day.weight,
       personalInformation.height,
       day.sex,
-      new Date().getFullYear() - personalInformation.yearOfBirth
+      new Date().getFullYear() - personalInformation?.yearOfBirth || 2000
     );
   }, [day, personalInformation]);
 

@@ -41,13 +41,13 @@ function CaloriesDisplay() {
   const handleGetBodyStats = () => {
     setStats(
       getBodyStats(
-        personalInformation.yearOfBirth || 2000,
-        personalInformation.height || 170,
-        today.weight || 70,
-        today.neck || 38.1,
-        today.waist || 96,
-        today.hip || 97,
-        personalInformation.sex || "Male"
+        personalInformation?.yearOfBirth || 2000,
+        personalInformation?.height || 170,
+        today?.weight || 70,
+        today?.neck || 38.1,
+        today?.waist || 96,
+        today?.hip || 97,
+        personalInformation?.sex || "Male"
       )
     );
   };
@@ -80,7 +80,7 @@ function CaloriesDisplay() {
   }, [isTodayModalOpen]);
 
   return (
-    <div className="relative">
+    <div className="relative pt-3">
       {isLoading && <LoadingComponent />}
       <TodayModal
         isOpen={isTodayModalOpen}
