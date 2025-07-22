@@ -30,7 +30,7 @@ function IntakeRow({ intake, triggerRefresh }) {
         {intake.foodItem.name}
       </button>
       <span className="bg-input_bg/80 p-0.5 col-span-1 text-center">
-        {intake.foodItem.calories + "0"}
+        {intake.foodItem.calories}
       </span>
       <span className="bg-input_bg/50 p-0.5 col-span-3 text-center">
         {intake.factor}
