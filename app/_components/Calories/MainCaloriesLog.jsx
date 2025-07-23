@@ -19,8 +19,21 @@ function MainCaloriesLog({ personalInformation }) {
     setIsLoading(false);
     if (result.data.success) {
       setDays(
-        result.data.result.reduce((prev, day) => {
-          prev[moment(day.date).format("DD")] = day;
+        result.data.result.days.reduce((prev, day) => {
+          const intake = result.data.result.total_intakes.find(
+            (value, index) => value.id === day.id
+          ).total_intake;
+
+          const burn = result.data.result.total_burns.find(
+            (value, index) => value.id === day.id
+          ).total_burn;
+
+          prev[moment(day.date).format("DD")] = {
+            ...day,
+            total_intake: Number(intake || 0),
+            total_burn: Number(burn || 0),
+          };
+
           return prev;
         }, {})
       );

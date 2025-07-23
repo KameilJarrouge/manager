@@ -79,6 +79,11 @@ function CaloriesDisplay() {
     getPersonalInformation();
   }, [isTodayModalOpen]);
 
+  useEffect(() => {
+    getToday();
+    getPersonalInformation();
+  }, []);
+
   return (
     <div className="relative pt-3">
       {isLoading && <LoadingComponent />}

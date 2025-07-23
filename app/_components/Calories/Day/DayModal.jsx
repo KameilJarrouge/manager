@@ -40,13 +40,13 @@ function DayModal({ isOpen, close, selectedDay, personalInformation }) {
   const handleGetBodyStats = () => {
     setStats(
       getBodyStats(
-        personalInformation.yearOfBirth || 2000,
-        personalInformation.height || 170,
+        personalInformation?.yearOfBirth || 2000,
+        personalInformation?.height || 170,
         day.weight || 70,
         day.neck || 38.1,
         day.waist || 96,
         day.hip || 97,
-        personalInformation.sex || "Male"
+        personalInformation?.sex || "Male"
       )
     );
   };
@@ -58,6 +58,10 @@ function DayModal({ isOpen, close, selectedDay, personalInformation }) {
   useEffect(() => {
     getDay();
   }, [selectedDay]);
+
+  useEffect(() => {
+    getDay();
+  }, []);
 
   useMemo(() => {
     setDifference(

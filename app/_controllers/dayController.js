@@ -131,14 +131,36 @@ export async function removeBurn(id) {
 }
 
 export async function daysList(date) {
-  const result = await prisma.$queryRaw`
+  const days = await prisma.day.findMany({
+    where: {
+      date: {
+        gte: moment(date).startOf("month").toDate(),
+        lte: moment(date).endOf("month").toDate(),
+      },
+    },
+  });
+
+  const total_intakes = await prisma.$queryRaw`
     SELECT
-      d.*,
-      CAST(SUM(i.factor * fi.calories) AS INT) AS total_intake,
-      CAST(SUM(b.factor * a.caloriesBurnedPerUnit) AS INT) AS total_burn
+      d.id,
+      CAST(SUM(i.factor * fi.calories) AS INT) AS total_intake
     FROM Day as d
     LEFT JOIN Intake as i ON i.dayId = d.id
     LEFT JOIN FoodItem as fi ON fi.id = i.foodItemId
+    WHERE d.date BETWEEN ${moment(date).startOf("month").toDate()} AND ${moment(
+    date
+  )
+    .endOf("month")
+    .toDate()}
+    GROUP BY d.id, d.date
+    ORDER BY d.date ASC;
+  `;
+
+  const total_burns = await prisma.$queryRaw`
+    SELECT
+      d.id,
+      CAST(SUM(b.factor * a.caloriesBurnedPerUnit) AS INT) AS total_burn
+    FROM Day as d
     LEFT JOIN Burn as b ON b.dayId = d.id
     LEFT JOIN Activity as a ON a.id = b.activityId
     WHERE d.date BETWEEN ${moment(date).startOf("month").toDate()} AND ${moment(
@@ -149,5 +171,6 @@ export async function daysList(date) {
     GROUP BY d.id, d.date
     ORDER BY d.date ASC;
   `;
-  return successReturn(result);
+
+  return successReturn({ days, total_intakes, total_burns });
 }
