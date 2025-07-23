@@ -19,19 +19,27 @@ function NewIntakeForm({ options, triggerRefresh = (f) => f, dayId }) {
     });
   };
 
-  const doesAllSelectedHaveFactor = () => {
-    return selectedOptions.filter((option) => !!!option.factor).length === 0;
+  // const doesAllSelectedHaveFactor = () => {
+  //   return selectedOptions.filter((option) => !!!option.factor).length === 0;
+  // };
+
+  const filterEmptyAndZeroFactor = () => {
+    return selectedOptions.filter(
+      (option) => option.hasOwnProperty("factor") && option.factor > 0
+    );
   };
 
   const addToTotalIntake = async () => {
-    if (!doesAllSelectedHaveFactor()) {
-      toast.error("All items must have a factor!");
+    const filteredSelectedOption = filterEmptyAndZeroFactor();
+
+    if (filteredSelectedOption.length === 0) {
+      toast.error("Please Provide one factor at least or cancel intake!");
       return;
     }
     setIsLoading(true);
     const result = await api.post(
       `/calories/days/${dayId}/add-intake`,
-      selectedOptions.map((option) => ({
+      filteredSelectedOption.map((option) => ({
         foodItemId: option.id,
         factor: option.factor,
       }))

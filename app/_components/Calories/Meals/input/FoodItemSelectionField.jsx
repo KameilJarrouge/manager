@@ -30,7 +30,8 @@ function FoodItemSelectionField({ addFoodItem, selectedFoodItems }) {
       (selectedFoodItem) => foodItem.id === selectedFoodItem.id
     );
 
-  const nameFilter = (foodItem) => foodItem.name.includes(filterKey);
+  const nameFilter = (foodItem) =>
+    foodItem.name.toLowerCase().includes(filterKey.toLowerCase());
 
   return (
     <div className="relative w-fit h-fit">

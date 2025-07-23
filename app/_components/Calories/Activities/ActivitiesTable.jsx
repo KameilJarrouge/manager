@@ -8,7 +8,9 @@ function ActivitiesTable({ filterKey, activities, setSelected = (f) => f }) {
       <ActivitiesTableHeader />
       {/*  */}
       {activities
-        .filter((activity) => activity.name.includes(filterKey))
+        .filter((activity) =>
+          activity.name.toLowerCase().includes(filterKey.toLowerCase())
+        )
         .map((activity, index) => (
           <ActivitiesTableRow
             key={activity.id}

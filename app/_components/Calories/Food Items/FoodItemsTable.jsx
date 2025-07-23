@@ -15,7 +15,9 @@ function FoodItemsTable({
       <FoodItemsTableHeader />
       {/*  */}
       {foodItems
-        .filter((foodItem) => foodItem.name.includes(filterKey))
+        .filter((foodItem) =>
+          foodItem.name.toLowerCase().includes(filterKey.toLowerCase())
+        )
         .map((foodItem, index) => (
           <FoodItemTableRow
             key={index}

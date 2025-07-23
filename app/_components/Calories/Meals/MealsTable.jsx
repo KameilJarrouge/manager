@@ -8,7 +8,9 @@ function MealsTable({ meals, filterKey, setSelected }) {
       <MealsTableHeader />
       {/*  */}
       {meals
-        .filter((meal) => meal.name.includes(filterKey))
+        .filter((meal) =>
+          meal.name.toLowerCase().includes(filterKey.toLowerCase())
+        )
         .map((meal, index) => (
           <MealsTableRow
             key={index}
