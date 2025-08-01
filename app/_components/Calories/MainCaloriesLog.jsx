@@ -28,7 +28,7 @@ function MainCaloriesLog({ personalInformation }) {
             (value, index) => value.id === day.id
           ).total_burn;
 
-          prev[moment(day.date).format("DD")] = {
+          prev[moment(day.date).format("D")] = {
             ...day,
             total_intake: Number(intake || 0),
             total_burn: Number(burn || 0),

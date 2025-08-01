@@ -13,7 +13,7 @@ function DayDisplay({
   setSelectedDay,
   handleDeleteDay,
 }) {
-  const dayStats = useMemo(() => {
+  const BMR = useMemo(() => {
     if (!day) return 0;
     return calculateBMR(
       day.weight,
@@ -65,13 +65,13 @@ function DayDisplay({
           <MdArrowDownward className="text-red-400" />
 
           <span>
-            {(dayStats + Number(day?.total_burn || 0)).toLocaleString() || "?"}
+            {(BMR + Number(day?.total_burn || 0)).toLocaleString() || "?"}
           </span>
         </div>
         <div className="flex w-full justify-between bg-input_prefix_bg/10 border-b-[1px] border-b-foreground/10 items-center">
           <TbDelta
             className={`${
-              dayStats +
+              BMR +
                 Number(day?.total_burn || 0) -
                 Number(day?.total_intake || 0) >
               0
@@ -81,7 +81,7 @@ function DayDisplay({
           />
           <span>
             {Math.abs(
-              dayStats +
+              BMR +
                 Number(day?.total_burn || 0) -
                 Number(day?.total_intake || 0)
             ).toLocaleString() || "?"}
