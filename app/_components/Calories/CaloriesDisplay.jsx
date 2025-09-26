@@ -130,6 +130,23 @@ function CaloriesDisplay() {
           <span className="text-sm text-foreground/80">
             {Math.abs(difference).toLocaleString()}
           </span>
+          <div className="mx-2 text-xs flex text-start flex-col text-foreground/80">
+            <div className="flex gap-1">
+              <span className="w-[4ch]">
+                {(difference - 550).toLocaleString()}{" "}
+              </span>
+              <span>|</span>
+              <span>0.5 kg</span>
+            </div>
+            <div className="h-[1px] bg-foreground/20"></div>
+            <div className="flex gap-1">
+              <span className="w-[4ch]">
+                {(difference - 1100).toLocaleString()}{" "}
+              </span>
+              <span>|</span>
+              <span>1 kg</span>
+            </div>
+          </div>
           )
         </div>
       </button>
