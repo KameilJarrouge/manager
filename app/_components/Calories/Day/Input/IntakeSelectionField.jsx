@@ -38,11 +38,11 @@ function IntakeSelectionField({ options, onSelect }) {
       </div>
 
       {filterKey !== "" && (
-        <div className="absolute z-50 top-full left-0 w-full max-h-[10rem] overflow-y-auto min-h-[1rem] bg-secondary  shadow shadow-black  flex flex-col ">
+        <div className="absolute z-50 top-full left-0 w-full max-h-[20rem] overflow-y-auto min-h-[1rem] bg-secondary  shadow shadow-black  flex flex-col ">
           {options.filter(nameFilter).map((item, index, arr) => (
             <button
               onClick={() => handleClickOnIntakeItem(item)}
-              key={item.isMeal ? "meal-" : "foodItem-" + item.id}
+              key={(item.isMeal ? "meal-" : "foodItem-") + item.id}
               className={`border-b ${
                 index === arr.length - 1
                   ? "border-b-transparent"
