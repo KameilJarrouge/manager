@@ -52,7 +52,7 @@ function UpdateDayPersonalInfo({
   const matchTodayPersonalInformationWithCurrent = async () => {
     setIsLoading(true);
     const result = await api.put(
-      `/calories/days/${day.id}/update-to-match-current-pi`
+      `/calories/days/${day.id}/update-to-match-current-pi`,
     );
     setIsLoading(false);
     if (result.data.success) {
@@ -130,7 +130,7 @@ function UpdateDayPersonalInfo({
           <h1 className="font-semibold">Total Burn:</h1>
           <span>
             {`(${Number(
-              stats.BMR
+              stats.BMR,
             ).toLocaleString()} + ${totals.burn.toLocaleString()}) ${(
               Number(stats.BMR) + Number(totals.burn)
             ).toLocaleString()}`}{" "}
@@ -140,6 +140,9 @@ function UpdateDayPersonalInfo({
         <div className="flex justify-between items-center border-b-[1px] border-foreground/30 ">
           <h1 className="font-semibold">Difference:</h1>
           <div className="flex gap-1 items-center">
+            <span className="text-xs ">
+              [ {difference - 1100} | {difference - 550} ]
+            </span>
             <TbDelta
               className={`${
                 difference > 0 ? "text-red-400" : "text-green-400"
